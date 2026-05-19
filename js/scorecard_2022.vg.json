@@ -1,0 +1,439 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/state_2022.csv"
+  },
+  "title": {
+    "text": "Final scorecard: highest vulnerability combines lower income and higher poverty",
+    "subtitle": "States sorted by 2022 vulnerability score; higher score means higher vulnerability"
+  },
+  "hconcat": [
+    {
+      "width": 150,
+      "height": {
+        "step": 24
+      },
+      "title": "State",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "sort": {
+            "field": "vulnerability_score",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelLimit": 140
+          }
+        },
+        "text": {
+          "field": "state_geo",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          }
+        ]
+      }
+    },
+    {
+      "width": 115,
+      "height": {
+        "step": 24
+      },
+      "title": "Median income",
+      "layer": [
+        {
+          "mark": {
+            "type": "rect",
+            "height": 20
+          },
+          "encoding": {
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": null
+            },
+            "color": {
+              "field": "income_median",
+              "type": "quantitative",
+              "scale": {
+                "scheme": "blues"
+              },
+              "legend": null
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "baseline": "middle",
+            "fontSize": 11,
+            "color": "#1f2933"
+          },
+          "encoding": {
+            "x": {
+              "value": 58
+            },
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": null
+            },
+            "text": {
+              "field": "income_median",
+              "type": "quantitative",
+              "format": ","
+            },
+            "tooltip": [
+              {
+                "field": "income_median",
+                "type": "quantitative",
+                "title": "Median income (RM)",
+                "format": ","
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 105,
+      "height": {
+        "step": 24
+      },
+      "title": "Abs. poverty",
+      "layer": [
+        {
+          "mark": {
+            "type": "rect",
+            "height": 20
+          },
+          "encoding": {
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": null
+            },
+            "color": {
+              "field": "poverty_absolute",
+              "type": "quantitative",
+              "scale": {
+                "scheme": "oranges"
+              },
+              "legend": null
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "baseline": "middle",
+            "fontSize": 11,
+            "color": "#1f2933"
+          },
+          "encoding": {
+            "x": {
+              "value": 52
+            },
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": null
+            },
+            "text": {
+              "field": "poverty_absolute",
+              "type": "quantitative",
+              "format": ".1f"
+            },
+            "tooltip": [
+              {
+                "field": "poverty_absolute",
+                "type": "quantitative",
+                "title": "Absolute poverty (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 105,
+      "height": {
+        "step": 24
+      },
+      "title": "Rel. poverty",
+      "layer": [
+        {
+          "mark": {
+            "type": "rect",
+            "height": 20
+          },
+          "encoding": {
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": null
+            },
+            "color": {
+              "field": "poverty_relative",
+              "type": "quantitative",
+              "scale": {
+                "scheme": "purples"
+              },
+              "legend": null
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "baseline": "middle",
+            "fontSize": 11,
+            "color": "#1f2933"
+          },
+          "encoding": {
+            "x": {
+              "value": 52
+            },
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": null
+            },
+            "text": {
+              "field": "poverty_relative",
+              "type": "quantitative",
+              "format": ".1f"
+            },
+            "tooltip": [
+              {
+                "field": "poverty_relative",
+                "type": "quantitative",
+                "title": "Relative poverty (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 120,
+      "height": {
+        "step": 24
+      },
+      "title": "Vulnerability",
+      "layer": [
+        {
+          "mark": {
+            "type": "rect",
+            "height": 20
+          },
+          "encoding": {
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": null
+            },
+            "color": {
+              "field": "vulnerability_score",
+              "type": "quantitative",
+              "scale": {
+                "domainMid": 0,
+                "scheme": "redyellowgreen",
+                "reverse": true
+              },
+              "legend": null
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "baseline": "middle",
+            "fontSize": 11,
+            "fontWeight": 700,
+            "color": "#1f2933"
+          },
+          "encoding": {
+            "x": {
+              "value": 60
+            },
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": null
+            },
+            "text": {
+              "field": "vulnerability_score",
+              "type": "quantitative",
+              "format": ".2f"
+            },
+            "tooltip": [
+              {
+                "field": "vulnerability_rank",
+                "type": "quantitative",
+                "title": "Vulnerability rank"
+              },
+              {
+                "field": "vulnerability_score",
+                "type": "quantitative",
+                "title": "Score",
+                "format": ".2f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 170,
+      "height": {
+        "step": 24
+      },
+      "title": "Category",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "fontSize": 11,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {
+          "value": 2
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "sort": {
+            "field": "vulnerability_score",
+            "order": "descending"
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "vulnerability_group",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "vulnerability_group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Highest vulnerability",
+              "Watch closely",
+              "Lower vulnerability"
+            ],
+            "range": [
+              "#b45309",
+              "#9a6a2d",
+              "#2f7d59"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "vulnerability_group",
+            "type": "nominal",
+            "title": "Category"
+          }
+        ]
+      }
+    }
+  ],
+  "spacing": 4,
+  "config": {
+    "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#6b7280",
+      "anchor": "start",
+      "color": "#1f2933"
+    },
+    "axis": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "gridColor": "#ece7df",
+      "domainColor": "#e6ded3",
+      "tickColor": "#e6ded3"
+    },
+    "legend": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}
