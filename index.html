@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Income and Poverty Across Malaysian States</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="hero">
+      <p class="kicker">FIT2179 Data Visualisation 2</p>
+      <h1>Malaysia’s income rose, but recovery has been uneven across states</h1>
+      <p class="subtitle">
+        Household income and poverty across Malaysian states, 2007–2022,
+        with a 1970–2022 national context.
+      </p>
+      <p class="note">
+        Income values are nominal RM per month and are not adjusted for inflation.
+      </p>
+    </header>
+
+    <section class="section">
+      <div class="section-text">
+        <h2>1. Long-term progress: the national picture</h2>
+        <p>
+          Malaysia’s long-term story is one of rising household income and a sharp
+          fall in absolute poverty. But national averages hide differences between states.
+        </p>
+      </div>
+      <div class="chart-card">
+        <div id="national_context"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-text">
+        <h2>2. The 2022 map: income and poverty do not fall evenly</h2>
+        <p>
+          The maps show where income is highest and where poverty remains concentrated.
+        </p>
+      </div>
+      <div class="grid two">
+        <div class="chart-card"><div id="map_income_2022"></div></div>
+        <div class="chart-card"><div id="map_poverty_2022"></div></div>
+      </div>
+      <div class="chart-card">
+        <div id="map_bivariate_2022"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-text">
+        <h2>3. Ranking the gap between states</h2>
+        <p>
+          Maps show geography. Ranked charts make exact comparison easier.
+        </p>
+      </div>
+      <div class="grid two">
+        <div class="chart-card"><div id="rank_income_2022"></div></div>
+        <div class="chart-card"><div id="rank_poverty_2022"></div></div>
+      </div>
+      <div class="chart-card">
+        <div id="dumbbell_mean_median_2022"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-text">
+        <h2>4. Income, poverty and recovery</h2>
+        <p>
+          The relationship between income and poverty is clear, but some states remain
+          more vulnerable than others even after recovery.
+        </p>
+      </div>
+      <div class="chart-card"><div id="scatter_income_poverty_2022"></div></div>
+      <div class="chart-card"><div id="heatmap_2007_2022"></div></div>
+      <div class="chart-card"><div id="slope_2007_2022"></div></div>
+      <div class="chart-card"><div id="recovery_2019_2022"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-text">
+        <h2>5. Final scorecard: where vulnerability remains highest</h2>
+        <p>
+          The scorecard combines low median income, absolute poverty and relative poverty
+          to summarise which states remain most vulnerable in 2022.
+        </p>
+      </div>
+      <div class="chart-card"><div id="scorecard_2022"></div></div>
+    </section>
+
+    <footer class="footer">
+      <h2>Sources and notes</h2>
+      <p>
+        Data: Department of Statistics Malaysia via data.gov.my.
+        Boundary data: geoBoundaries or SimpleMaps Malaysia ADM1 boundaries.
+        Author: YOUR NAME. Date: May 2026.
+      </p>
+      <p>
+        AI acknowledgement: Generative AI was used to help plan the narrative,
+        refine wording and debug code. Final design decisions, data checking and
+        implementation were reviewed and edited by the author.
+      </p>
+    </footer>
+
+  </main>
+
+  <script src="js/vega_lite_vis.js"></script>
+</body>
+</html>
