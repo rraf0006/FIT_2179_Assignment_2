@@ -1,0 +1,136 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 420,
+  "data": {
+    "url": "data/processed/state_2022.csv"
+  },
+  "title": {
+    "text": "The 2022 income gap between states is large",
+    "subtitle": "Sorted by median monthly household income, nominal RM"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "income_median",
+          "type": "quantitative",
+          "title": "Median income (RM/month)",
+          "axis": {
+            "format": ","
+          }
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "income_median",
+            "order": "descending"
+          }
+        },
+        "color": {
+          "condition": {
+            "test": "datum.highlight_income",
+            "value": "#8a4b2a"
+          },
+          "value": "#d8c7b2"
+        },
+        "tooltip": [
+          {
+            "field": "income_rank",
+            "type": "quantitative",
+            "title": "Income rank"
+          },
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ","
+          },
+          {
+            "field": "poverty_absolute",
+            "type": "quantitative",
+            "title": "Absolute poverty (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 4,
+        "fontSize": 11,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "sort": {
+            "field": "income_median",
+            "order": "descending"
+          }
+        },
+        "text": {
+          "field": "income_median",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#6b7280",
+      "anchor": "start",
+      "color": "#1f2933"
+    },
+    "axis": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "gridColor": "#ece7df",
+      "domainColor": "#e6ded3",
+      "tickColor": "#e6ded3"
+    },
+    "legend": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}
