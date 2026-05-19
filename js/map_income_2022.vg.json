@@ -1,0 +1,124 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 430,
+  "title": {
+    "text": "Median household income is highest around the Klang Valley",
+    "subtitle": "Median monthly household income by state, nominal RM, 2022"
+  },
+  "projection": {
+    "type": "equalEarth"
+  },
+  "data": {
+    "url": "data/maps/malaysia_states.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "geoBoundaries-MYS-ADM1"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.shapeName",
+      "from": {
+        "data": {
+          "url": "data/processed/state_2022.csv"
+        },
+        "key": "state_geo",
+        "fields": [
+          "state",
+          "state_geo",
+          "income_median",
+          "income_mean",
+          "poverty_absolute",
+          "poverty_hardcore",
+          "poverty_relative",
+          "bivariate_class",
+          "vulnerability_score",
+          "vulnerability_group",
+          "income_rank",
+          "poverty_rank"
+        ]
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 0.9
+  },
+  "encoding": {
+    "color": {
+      "field": "income_median",
+      "type": "quantitative",
+      "title": "Median income (RM/month)",
+      "scale": {
+        "scheme": "blues"
+      },
+      "legend": {
+        "format": ","
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state_geo",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "income_median",
+        "type": "quantitative",
+        "title": "Median income (RM)",
+        "format": ","
+      },
+      {
+        "field": "income_mean",
+        "type": "quantitative",
+        "title": "Mean income (RM)",
+        "format": ","
+      },
+      {
+        "field": "poverty_absolute",
+        "type": "quantitative",
+        "title": "Absolute poverty (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#6b7280",
+      "anchor": "start",
+      "color": "#1f2933"
+    },
+    "axis": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "gridColor": "#ece7df",
+      "domainColor": "#e6ded3",
+      "tickColor": "#e6ded3"
+    },
+    "legend": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}
