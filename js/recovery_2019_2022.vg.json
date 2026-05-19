@@ -1,0 +1,212 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/processed/recovery_2019_2022.csv"
+  },
+  "title": {
+    "text": "Most states recovered by 2022, but the gap remained",
+    "subtitle": "Median income indexed to 2019 = 100; use the dropdown to highlight one state"
+  },
+  "params": [
+    {
+      "name": "State_selection",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Perak",
+          "Perlis",
+          "Pulau Pinang",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu",
+          "Kuala Lumpur",
+          "Labuan",
+          "Putrajaya"
+        ],
+        "labels": [
+          "Show all",
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Perak",
+          "Perlis",
+          "Pulau Pinang",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu",
+          "Kuala Lumpur",
+          "Labuan",
+          "Putrajaya"
+        ],
+        "name": "Highlight state: "
+      }
+    }
+  ],
+  "facet": {
+    "column": {
+      "field": "vulnerability_group",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Highest vulnerability",
+        "Watch closely",
+        "Lower vulnerability"
+      ],
+      "header": {
+        "labelFontSize": 12,
+        "labelFontWeight": 700,
+        "labelColor": "#1f2933"
+      }
+    }
+  },
+  "spec": {
+    "width": 250,
+    "height": 260,
+    "layer": [
+      {
+        "mark": {
+          "type": "line",
+          "point": true
+        },
+        "encoding": {
+          "x": {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          "y": {
+            "field": "income_index_2019",
+            "type": "quantitative",
+            "title": "Median income index",
+            "scale": {
+              "zero": false
+            }
+          },
+          "detail": {
+            "field": "state_geo",
+            "type": "nominal"
+          },
+          "color": {
+            "field": "state_geo",
+            "type": "nominal",
+            "legend": null
+          },
+          "opacity": {
+            "condition": {
+              "test": "State_selection == null || datum.state_geo == State_selection",
+              "value": 0.95
+            },
+            "value": 0.18
+          },
+          "strokeWidth": {
+            "condition": {
+              "test": "State_selection != null && datum.state_geo == State_selection",
+              "value": 3.3
+            },
+            "value": 1.4
+          },
+          "tooltip": [
+            {
+              "field": "state_geo",
+              "type": "nominal",
+              "title": "State"
+            },
+            {
+              "field": "year",
+              "type": "ordinal",
+              "title": "Year"
+            },
+            {
+              "field": "income_median",
+              "type": "quantitative",
+              "title": "Median income (RM)",
+              "format": ","
+            },
+            {
+              "field": "income_index_2019",
+              "type": "quantitative",
+              "title": "Index, 2019=100",
+              "format": ".1f"
+            },
+            {
+              "field": "poverty_absolute",
+              "type": "quantitative",
+              "title": "Absolute poverty (%)",
+              "format": ".1f"
+            }
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "rule",
+          "strokeDash": [
+            4,
+            4
+          ],
+          "color": "#6b7280"
+        },
+        "encoding": {
+          "y": {
+            "datum": 100
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "y": "shared"
+    }
+  },
+  "config": {
+    "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#6b7280",
+      "anchor": "start",
+      "color": "#1f2933"
+    },
+    "axis": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "gridColor": "#ece7df",
+      "domainColor": "#e6ded3",
+      "tickColor": "#e6ded3"
+    },
+    "legend": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}
