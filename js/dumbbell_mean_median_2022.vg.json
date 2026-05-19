@@ -1,0 +1,177 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 470,
+  "data": {
+    "url": "data/processed/state_2022.csv"
+  },
+  "title": {
+    "text": "Mean income sits above median income in every state",
+    "subtitle": "Dumbbell chart of mean and median monthly household income, nominal RM, 2022"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2,
+        "color": "#c9b9a5"
+      },
+      "encoding": {
+        "x": {
+          "field": "income_median",
+          "type": "quantitative",
+          "title": "Monthly household income (RM)",
+          "axis": {
+            "format": ","
+          }
+        },
+        "x2": {
+          "field": "income_mean"
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "income_median",
+            "order": "descending"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ","
+          },
+          {
+            "field": "income_mean",
+            "type": "quantitative",
+            "title": "Mean income (RM)",
+            "format": ","
+          },
+          {
+            "field": "mean_median_gap",
+            "type": "quantitative",
+            "title": "Mean-median gap (RM)",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "income_median",
+            "income_mean"
+          ],
+          "as": [
+            "income_type",
+            "income_value"
+          ]
+        },
+        {
+          "calculate": "datum.income_type == 'income_median' ? 'Median' : 'Mean'",
+          "as": "Income measure"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "filled": true,
+        "size": 95,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "income_value",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "sort": {
+            "field": "income_median",
+            "order": "descending"
+          }
+        },
+        "color": {
+          "field": "Income measure",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Median",
+              "Mean"
+            ],
+            "range": [
+              "#1f78b4",
+              "#b45309"
+            ]
+          },
+          "title": "Measure"
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "Income measure",
+            "type": "nominal",
+            "title": "Measure"
+          },
+          {
+            "field": "income_value",
+            "type": "quantitative",
+            "title": "Income (RM)",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#6b7280",
+      "anchor": "start",
+      "color": "#1f2933"
+    },
+    "axis": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "gridColor": "#ece7df",
+      "domainColor": "#e6ded3",
+      "tickColor": "#e6ded3"
+    },
+    "legend": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}
