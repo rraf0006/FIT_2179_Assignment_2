@@ -1,0 +1,231 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 500,
+  "data": {
+    "url": "data/processed/slope_2007_2022.csv"
+  },
+  "title": {
+    "text": "Every state recorded higher nominal median income than in 2007",
+    "subtitle": "Slope chart of median monthly household income, 2007 and 2022; hover a line for details"
+  },
+  "params": [
+    {
+      "name": "hover_state",
+      "select": {
+        "type": "point",
+        "fields": [
+          "state_geo"
+        ],
+        "on": "pointerover",
+        "clear": "pointerout"
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": false
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null
+        },
+        "y": {
+          "field": "income_median",
+          "type": "quantitative",
+          "title": "Median income (RM/month)",
+          "axis": {
+            "format": ","
+          }
+        },
+        "detail": {
+          "field": "state_geo",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.highlight_slope",
+            "value": "#8a4b2a"
+          },
+          "value": "#cfc6ba"
+        },
+        "opacity": {
+          "condition": [
+            {
+              "param": "hover_state",
+              "empty": false,
+              "value": 1
+            },
+            {
+              "test": "datum.highlight_slope",
+              "value": 0.9
+            }
+          ],
+          "value": 0.35
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover_state",
+            "empty": false,
+            "value": 3.5
+          },
+          "value": 1.4
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ","
+          },
+          {
+            "field": "income_change_pct_2007_2022",
+            "type": "quantitative",
+            "title": "2007-2022 change (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "filled": true,
+        "size": 55
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "state_geo",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.highlight_slope",
+            "value": "#8a4b2a"
+          },
+          "value": "#cfc6ba"
+        },
+        "opacity": {
+          "condition": [
+            {
+              "param": "hover_state",
+              "empty": false,
+              "value": 1
+            },
+            {
+              "test": "datum.highlight_slope",
+              "value": 0.9
+            }
+          ],
+          "value": 0.35
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2022 && datum.highlight_slope"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state_geo",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#6b7280",
+      "anchor": "start",
+      "color": "#1f2933"
+    },
+    "axis": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "gridColor": "#ece7df",
+      "domainColor": "#e6ded3",
+      "tickColor": "#e6ded3"
+    },
+    "legend": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}
