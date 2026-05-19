@@ -1,0 +1,149 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 470,
+  "title": {
+    "text": "Low income and high poverty combine into a vulnerability pattern",
+    "subtitle": "Bivariate classes combine 2022 median income tertiles and absolute poverty tertiles"
+  },
+  "projection": {
+    "type": "equalEarth"
+  },
+  "data": {
+    "url": "data/maps/malaysia_states.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "geoBoundaries-MYS-ADM1"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.shapeName",
+      "from": {
+        "data": {
+          "url": "data/processed/state_2022.csv"
+        },
+        "key": "state_geo",
+        "fields": [
+          "state",
+          "state_geo",
+          "income_median",
+          "income_mean",
+          "poverty_absolute",
+          "poverty_hardcore",
+          "poverty_relative",
+          "bivariate_class",
+          "vulnerability_score",
+          "vulnerability_group",
+          "income_rank",
+          "poverty_rank"
+        ]
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 0.9
+  },
+  "encoding": {
+    "color": {
+      "field": "bivariate_class",
+      "type": "nominal",
+      "title": "Income + poverty class",
+      "scale": {
+        "domain": [
+          "Low income + Low poverty",
+          "Low income + Middle poverty",
+          "Low income + High poverty",
+          "Middle income + Low poverty",
+          "Middle income + Middle poverty",
+          "Middle income + High poverty",
+          "High income + Low poverty",
+          "High income + Middle poverty",
+          "High income + High poverty"
+        ],
+        "range": [
+          "#e8e1d4",
+          "#d5a373",
+          "#9c5a2e",
+          "#c6d8c4",
+          "#c79a74",
+          "#8f3f2b",
+          "#6fb08a",
+          "#9d7b64",
+          "#6f2e23"
+        ]
+      },
+      "legend": {
+        "columns": 1
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state_geo",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "bivariate_class",
+        "type": "nominal",
+        "title": "Class"
+      },
+      {
+        "field": "income_median",
+        "type": "quantitative",
+        "title": "Median income (RM)",
+        "format": ","
+      },
+      {
+        "field": "poverty_absolute",
+        "type": "quantitative",
+        "title": "Absolute poverty (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "vulnerability_group",
+        "type": "nominal",
+        "title": "Scorecard group"
+      }
+    ]
+  },
+  "config": {
+    "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 17,
+      "fontWeight": 700,
+      "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#6b7280",
+      "anchor": "start",
+      "color": "#1f2933"
+    },
+    "axis": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "gridColor": "#ece7df",
+      "domainColor": "#e6ded3",
+      "tickColor": "#e6ded3"
+    },
+    "legend": {
+      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#1f2933",
+      "titleColor": "#1f2933",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}
