@@ -13,12 +13,12 @@
     "url": "data/maps/malaysia_states.topojson",
     "format": {
       "type": "topojson",
-      "feature": "geoBoundaries-MYS-ADM1"
+      "feature": "my"
     }
   },
   "transform": [
     {
-      "lookup": "properties.shapeName",
+      "lookup": "properties.name",
       "from": {
         "data": {
           "url": "data/processed/state_2022.csv"
