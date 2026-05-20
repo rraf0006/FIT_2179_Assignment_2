@@ -7,20 +7,23 @@
   },
   "title": {
     "text": "Sabah, Kelantan and Sarawak remain high-poverty outliers",
-    "subtitle": "Sorted by absolute poverty rate, percentage of households, 2022"
+    "subtitle": "Sorted by absolute poverty rate, percentage of households, 2022",
+    "anchor": "start"
   },
   "layer": [
     {
       "mark": {
-        "type": "rule",
-        "strokeWidth": 2
+        "type": "bar",
+        "cornerRadiusEnd": 3
       },
       "encoding": {
         "x": {
-          "datum": 0
-        },
-        "x2": {
-          "field": "poverty_absolute"
+          "field": "poverty_absolute",
+          "type": "quantitative",
+          "title": "Absolute poverty (%)",
+          "scale": {
+            "domain": [0, 22]
+          }
         },
         "y": {
           "field": "state_geo",
@@ -33,36 +36,7 @@
         },
         "color": {
           "condition": {
-            "test": "datum.highlight_poverty",
-            "value": "#b45309"
-          },
-          "value": "#dccfc0"
-        }
-      }
-    },
-    {
-      "mark": {
-        "type": "circle",
-        "filled": true,
-        "size": 115
-      },
-      "encoding": {
-        "x": {
-          "field": "poverty_absolute",
-          "type": "quantitative",
-          "title": "Absolute poverty (%)"
-        },
-        "y": {
-          "field": "state_geo",
-          "type": "nominal",
-          "sort": {
-            "field": "poverty_absolute",
-            "order": "descending"
-          }
-        },
-        "color": {
-          "condition": {
-            "test": "datum.highlight_poverty",
+            "test": "indexof(['Sabah', 'Kelantan', 'Sarawak', 'Kedah'], datum.state_geo) >= 0",
             "value": "#b45309"
           },
           "value": "#dccfc0"
@@ -98,7 +72,7 @@
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "dx": 7,
+        "dx": 5,
         "fontSize": 11,
         "color": "#1f2933"
       },
@@ -148,13 +122,7 @@
       "tickColor": "#e6ded3"
     },
     "legend": {
-      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "labelFontSize": 11,
-      "titleFontSize": 12,
-      "labelColor": "#1f2933",
-      "titleColor": "#1f2933",
-      "orient": "right"
+      "disable": true
     },
     "view": {
       "stroke": null
