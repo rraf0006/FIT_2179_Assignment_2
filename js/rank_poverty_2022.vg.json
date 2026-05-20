@@ -22,7 +22,10 @@
           "type": "quantitative",
           "title": "Absolute poverty (%)",
           "scale": {
-            "domain": [0, 22]
+            "domain": [
+              0,
+              22
+            ]
           }
         },
         "y": {

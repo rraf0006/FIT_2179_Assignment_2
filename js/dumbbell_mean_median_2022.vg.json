@@ -22,7 +22,8 @@
           "type": "quantitative",
           "title": "Monthly household income (RM)",
           "axis": {
-            "format": ","
+            "labelExpr": "format(datum.value, ',.0f')",
+            "tickCount": 7
           }
         },
         "x2": {
@@ -91,7 +92,11 @@
       "encoding": {
         "x": {
           "field": "income_value",
-          "type": "quantitative"
+          "type": "quantitative",
+          "title": "Monthly household income (RM)",
+          "axis": {
+          "labelExpr": "format(datum.value, ',.0f')",
+          "tickCount": 7}
         },
         "y": {
           "field": "state_geo",

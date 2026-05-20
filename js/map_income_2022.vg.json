@@ -55,7 +55,7 @@
         "scheme": "blues"
       },
       "legend": {
-        "format": ","
+        "labelExpr": "format(datum.value, ',.0f')"
       }
     },
     "tooltip": [

@@ -227,7 +227,7 @@ write("map_income_2022.vg.json", {
             "type": "quantitative",
             "title": "Median income (RM/month)",
             "scale": {"scheme": "blues"},
-            "legend": {"format": ","}
+            "legend": {"labelExpr": "format(datum.value, ',.0f')"}
         },
         "tooltip": [
             {"field": "state_geo", "type": "nominal", "title": "State"},
@@ -326,7 +326,7 @@ write("rank_income_2022.vg.json", {
         {
             "mark": {"type": "bar", "cornerRadiusEnd": 3},
             "encoding": {
-                "x": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "axis": {"format": ","}},
+                "x": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "axis": {"labelExpr": "format(datum.value, ',.0f')", "tickCount": 6}},
                 "y": {"field": "state_geo", "type": "nominal", "title": None, "sort": {"field": "income_median", "order": "descending"}},
                 "color": {
                     "condition": {"test": "datum.highlight_income", "value": ACCENT},
@@ -383,7 +383,7 @@ write("rank_poverty_2022.vg.json", {
         "y": {
           "field": "state_geo",
           "type": "nominal",
-          "title": null,
+          "title": None,
           "sort": {
             "field": "poverty_absolute",
             "order": "descending"
@@ -477,10 +477,10 @@ write("rank_poverty_2022.vg.json", {
       "tickColor": "#e6ded3"
     },
     "legend": {
-      "disable": true
+      "disable": True
     },
     "view": {
-      "stroke": null
+      "stroke": None
     }
   }
 })
@@ -499,7 +499,7 @@ write("dumbbell_mean_median_2022.vg.json", {
         {
             "mark": {"type": "rule", "strokeWidth": 2, "color": "#c9b9a5"},
             "encoding": {
-                "x": {"field": "income_median", "type": "quantitative", "title": "Monthly household income (RM)", "axis": {"format": ","}},
+                "x": {"field": "income_median", "type": "quantitative", "title": "Monthly household income (RM)", "axis": {"labelExpr": "format(datum.value, ',.0f')", "tickCount":7}},
                 "x2": {"field": "income_mean"},
                 "y": {"field": "state_geo", "type": "nominal", "title": None, "sort": {"field": "income_median", "order": "descending"}},
                 "tooltip": [

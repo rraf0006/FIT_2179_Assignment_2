@@ -21,7 +21,8 @@
           "type": "quantitative",
           "title": "Median income (RM/month)",
           "axis": {
-            "format": ","
+            "labelExpr": "format(datum.value, ',.0f')",
+            "tickCount": 6
           }
         },
         "y": {
@@ -78,7 +79,10 @@
       "encoding": {
         "x": {
           "field": "income_median",
-          "type": "quantitative"
+          "type": "quantitative",
+          "axis": {
+          "labelExpr": "format(datum.value, ',.0f')",
+          "tickCount": 6}
         },
         "y": {
           "field": "state_geo",
