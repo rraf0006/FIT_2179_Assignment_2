@@ -43,6 +43,12 @@ MALAYSIA_PROJECTION = {
     "scale": 1550,
     "translate": [260, 145]
 }
+VULNERABILITY_MAP_PROJECTION = {
+    "type": "mercator",
+    "center": [109.5, 4],
+    "scale": 1600,
+    "translate": [520, 150]
+}
 STATE_NAME_FIX = {
     "W.P. Kuala Lumpur": "Kuala Lumpur",
     "Wilayah Persekutuan Kuala Lumpur": "Kuala Lumpur",
@@ -438,13 +444,13 @@ write("map_poverty_2022.vg.json", {
 write("map_bivariate_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "autosize": {"type": "pad", "contains": "padding"},
-    "width": 620,
-    "height": 340,
+    "width": 1040,
+    "height": 330,
     "title": {
         "text": "Vulnerability is unevenly distributed",
         "subtitle": "The combined score highlights where lower income and higher poverty overlap."
     },
-    "projection": MALAYSIA_PROJECTION,
+    "projection": VULNERABILITY_MAP_PROJECTION,
     "data": {"url": MAP_URL, "format": {"type": "topojson", "feature": feature_name}},
     "transform": MAP_LOOKUP_TRANSFORM,
     "layer": [
@@ -621,7 +627,7 @@ write("rank_poverty_2022.vg.json", {
           }
         },
         "text": {
-          "value": "main outlier"
+          "value": "outlier"
         }
       }
     }
