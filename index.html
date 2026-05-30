@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Income and Poverty Across Malaysian States</title>
+  <title>Malaysia&rsquo;s Uneven Recovery</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css" />
 
@@ -17,11 +21,10 @@
   <main class="page">
 
     <header class="hero">
-      <p class="kicker">FIT2179 Data Visualisation 2</p>
-      <h1>Malaysia’s income rose, but recovery has been uneven across states</h1>
+      <p class="kicker">HOUSEHOLD INCOME &amp; POVERTY &middot; MALAYSIA &middot; 2007&ndash;2022</p>
+      <h1>Malaysia&rsquo;s Uneven Recovery</h1>
       <p class="subtitle">
-        Household income and poverty across Malaysian states, 2007–2022,
-        with a 1970–2022 national context.
+        Income rose nationally, but poverty and vulnerability remained concentrated across states, 2007&ndash;2022.
       </p>
       <p class="note">
         Income values are nominal RM per month and are not adjusted for inflation.
@@ -30,10 +33,11 @@
 
     <section class="section">
       <div class="section-text">
-        <h2>1. Long-term progress: The national picture</h2>
+        <p class="section-kicker">SECTION 1</p>
+        <h2>National progress</h2>
         <p>
-          Malaysia’s long-term story is one of rising household income and a sharp
-          fall in absolute poverty. But national averages hide differences between states.
+          Malaysia&rsquo;s long-term story is one of rising household income and falling absolute poverty.
+          But national averages hide important differences between states.
         </p>
       </div>
       <div class="chart-card">
@@ -43,9 +47,11 @@
 
     <section class="section">
       <div class="section-text">
-        <h2>2. The 2022 map: Income and poverty do not fall evenly</h2>
+        <p class="section-kicker">SECTION 2</p>
+        <h2>The 2022 geography</h2>
         <p>
-          The maps show where income is highest and where poverty remains concentrated.
+          The maps show where income is highest, where poverty remains concentrated,
+          and where lower income and higher poverty overlap.
         </p>
       </div>
       <div class="grid two">
@@ -59,9 +65,10 @@
 
     <section class="section">
       <div class="section-text">
-        <h2>3. Ranking the gap between states</h2>
+        <p class="section-kicker">SECTION 3</p>
+        <h2>Ranking the state gap</h2>
         <p>
-          Maps show geography. Ranked charts make exact comparison easier.
+          Maps show geography, but ranked charts make the size of the gap easier to compare.
         </p>
       </div>
       <div class="grid two">
@@ -75,10 +82,11 @@
 
     <section class="section">
       <div class="section-text">
-        <h2>4. Income, poverty and recovery</h2>
+        <p class="section-kicker">SECTION 4</p>
+        <h2>Recovery and persistence</h2>
         <p>
-          The relationship between income and poverty is clear, but some states remain
-          more vulnerable than others even after recovery.
+          The relationship between income and poverty is clear, but recovery has not removed
+          the deeper state-level divide.
         </p>
       </div>
       <div class="chart-card"><div id="scatter_income_poverty_2022"></div></div>
@@ -87,25 +95,13 @@
       <div class="chart-card"><div id="recovery_2019_2022"></div></div>
     </section>
 
-    <section class="section">
-      <div class="section-text">
-        <h2>5. Final scorecard: Where vulnerability remains highest</h2>
-        <p>
-          The scorecard combines low median income, absolute poverty and relative poverty
-          to summarise which states remain most vulnerable in 2022.
-        </p>
-      </div>
-      <div class="chart-card"><div id="scorecard_2022"></div></div>
-    </section>
-
     <footer class="footer">
-      <h2>Sources and notes</h2>
-      <p> Data: Department of Statistics Malaysia via data.gov.my.</p>
-      <p>Boundary data: geoBoundaries or SimpleMaps Malaysia ADM1 boundaries.</p> 
-      <p>Author: Riely Hariri Bin Rafliz. </p>
-      <p>Date: 19 May 2026.</p>
-      
-      
+      <p><strong>Data:</strong> Department of Statistics Malaysia via data.gov.my.</p>
+      <p><strong>Boundary data:</strong> Malaysia state boundaries from <code>malaysia-states.topojson</code>.</p>
+      <p><strong>Author:</strong> Riely Hariri Bin Rafliz.</p>
+      <p><strong>Date:</strong> 19 May 2026.</p>
+      <p><strong>Note:</strong> Income values are nominal and not adjusted for inflation.</p>
+      <p><strong>AI acknowledgement:</strong> Generative AI was used to assist with wording, layout and code refinement. Data interpretation and final design decisions are by the author.</p>
     </footer>
 
   </main>
