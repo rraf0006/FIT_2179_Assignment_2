@@ -9,8 +9,12 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 STATE_NAME_FIX = {
     "W.P. Kuala Lumpur": "Kuala Lumpur",
+    "Wilayah Persekutuan Kuala Lumpur": "Kuala Lumpur",
     "W.P. Labuan": "Labuan",
+    "Wilayah Persekutuan Labuan": "Labuan",
     "W.P. Putrajaya": "Putrajaya",
+    "Wilayah Persekutuan Putrajaya": "Putrajaya",
+    "Penang": "Pulau Pinang",
 }
 
 STATE_ORDER = [
@@ -114,12 +118,12 @@ state_2022["poverty_rank"] = state_2022["poverty_absolute"].rank(ascending=False
 state_2022["vulnerability_rank"] = state_2022["vulnerability_score"].rank(ascending=False, method="first").astype(int)
 state_2022["vulnerability_order"] = state_2022["vulnerability_rank"]
 
-# Three scorecard categories using ranks, not hidden statistical jargon.
+# Three vulnerability categories using ranks, not hidden statistical jargon.
 def vulnerability_group(rank: int) -> str:
     if rank <= 5:
-        return "Highest vulnerability"
+        return "High vulnerability"
     if rank <= 10:
-        return "Watch closely"
+        return "Moderate vulnerability"
     return "Lower vulnerability"
 
 state_2022["vulnerability_group"] = state_2022["vulnerability_rank"].apply(vulnerability_group)

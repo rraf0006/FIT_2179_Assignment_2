@@ -10,7 +10,7 @@ const charts = [
   ["#heatmap_2007_2022", "js/heatmap_2007_2022.vg.json"],
   ["#slope_2007_2022", "js/slope_2007_2022.vg.json"],
   ["#recovery_2019_2022", "js/recovery_2019_2022.vg.json"],
-  ["#scorecard_2022", "js/scorecard_2022.vg.json"]
+  ["#vulnerability_rank_2022", "js/vulnerability_rank_2022.vg.json"]
 ];
 
 charts.forEach(([selector, spec]) => {

@@ -8,25 +8,30 @@
   "width": "container",
   "height": 430,
   "title": {
-    "text": "Vulnerability is unevenly distributed across Malaysian states",
-    "subtitle": [
-      "Vulnerability is unevenly distributed.",
-      "The score highlights where income and poverty pressures overlap."
-    ]
+    "text": "Vulnerability is unevenly distributed",
+    "subtitle": "The combined score highlights where lower income and higher poverty overlap."
   },
   "projection": {
-    "type": "equalEarth"
+    "type": "azimuthalEqualArea",
+    "center": [
+      109.5,
+      4
+    ]
   },
   "data": {
-    "url": "data/maps/malaysia_states.topojson",
+    "url": "data/maps/malaysia-states.topojson",
     "format": {
       "type": "topojson",
-      "feature": "my"
+      "feature": "states"
     }
   },
   "transform": [
     {
-      "lookup": "properties.name",
+      "calculate": "datum.properties.Name == 'Pulau Pinang' ? 'Pulau Pinang' : datum.properties.Name == 'Penang' ? 'Pulau Pinang' : datum.properties.Name == 'Wilayah Persekutuan Labuan' ? 'Labuan' : datum.properties.Name == 'W.P. Labuan' ? 'Labuan' : datum.properties.Name == 'Wilayah Persekutuan Putrajaya' ? 'Putrajaya' : datum.properties.Name == 'W.P. Putrajaya' ? 'Putrajaya' : datum.properties.Name == 'Wilayah Persekutuan Kuala Lumpur' ? 'Kuala Lumpur' : datum.properties.Name == 'W.P. Kuala Lumpur' ? 'Kuala Lumpur' : datum.properties.Name",
+      "as": "map_state_geo"
+    },
+    {
+      "lookup": "map_state_geo",
       "from": {
         "data": {
           "url": "data/processed/state_2022.csv"
@@ -64,13 +69,13 @@
           "scale": {
             "domain": [
               "Lower vulnerability",
-              "Watch closely",
-              "Highest vulnerability"
+              "Moderate vulnerability",
+              "High vulnerability"
             ],
             "range": [
-              "#eee9f7",
-              "#b9a7d8",
-              "#5f3c99"
+              "#e4edf3",
+              "#8da9bf",
+              "#1f4e79"
             ]
           },
           "legend": {
@@ -143,7 +148,7 @@
         "type": "text",
         "fontSize": 12,
         "fontWeight": 700,
-        "color": "#1f2933",
+        "color": "#111827",
         "dx": 7,
         "dy": -4
       },
@@ -161,40 +166,40 @@
     }
   ],
   "config": {
-    "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "font": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     "background": "transparent",
     "title": {
-      "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "font": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       "fontSize": 19,
       "fontWeight": 700,
       "lineHeight": 23,
-      "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "subtitleFontSize": 13,
-      "subtitleColor": "#6b7280",
-      "subtitleLineHeight": 18,
-      "subtitlePadding": 7,
-      "offset": 18,
+      "subtitleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#5b6472",
+      "subtitleLineHeight": 19,
+      "subtitlePadding": 8,
+      "offset": 20,
       "anchor": "start",
-      "color": "#1f2933"
+      "color": "#111827"
     },
     "axis": {
-      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "labelFontSize": 11,
+      "labelFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 12,
       "titleFontSize": 12,
-      "labelColor": "#1f2933",
-      "titleColor": "#1f2933",
-      "gridColor": "#ece7df",
-      "domainColor": "#e6ded3",
-      "tickColor": "#e6ded3"
+      "labelColor": "#111827",
+      "titleColor": "#111827",
+      "gridColor": "#eef2f6",
+      "domainColor": "#e5e7eb",
+      "tickColor": "#e5e7eb"
     },
     "legend": {
-      "labelFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "titleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       "labelFontSize": 11,
       "titleFontSize": 12,
-      "labelColor": "#1f2933",
-      "titleColor": "#1f2933",
+      "labelColor": "#111827",
+      "titleColor": "#111827",
       "orient": "right"
     },
     "view": {

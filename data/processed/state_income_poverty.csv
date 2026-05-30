@@ -1,44 +1,44 @@
 state,income_mean,income_median,year,state_geo,poverty_absolute,poverty_hardcore,poverty_relative,mean_median_gap,mean_median_ratio,state_order,vulnerability_order,vulnerability_group,vulnerability_rank,highlight_slope
-Johor,3457,2726.0,2007,Johor,1.5,0.2,14.2,731.0,1.2681584739545122,0,6,Watch closely,6,False
-Johor,3835,2958.0,2009,Johor,1.3,0.1,17.2,877.0,1.2964841108857337,0,6,Watch closely,6,False
-Johor,4658,3650.0,2012,Johor,0.9,0.1,16.1,1008.0,1.2761643835616439,0,6,Watch closely,6,False
-Johor,6207,5197.0,2014,Johor,0.0,0.0,10.2,1010.0,1.1943428901289206,0,6,Watch closely,6,False
-Johor,6928,5652.0,2016,Johor,0.0,0.0,13.5,1276.0,1.2257607926397736,0,6,Watch closely,6,False
-Johor,8013,6427.0,2019,Johor,3.9,0.2,15.3,1586.0,1.2467714330169597,0,6,Watch closely,6,False
-Johor,7264,5690.0,2020,Johor,5.9,0.6,13.9,1574.0,1.2766256590509666,0,6,Watch closely,6,False
-Johor,8517,6879.0,2022,Johor,4.6,0.1,15.9,1638.0,1.2381160052333189,0,6,Watch closely,6,False
-Kedah,2408,1756.0,2007,Kedah,3.1,0.3,11.8,652.0,1.3712984054669703,1,5,Highest vulnerability,5,False
-Kedah,2667,1966.0,2009,Kedah,5.3,0.8,16.0,701.0,1.356561546286877,1,5,Highest vulnerability,5,False
-Kedah,3425,2633.0,2012,Kedah,1.7,0.1,16.5,792.0,1.3007975693125713,1,5,Highest vulnerability,5,False
-Kedah,4478,3451.0,2014,Kedah,0.3,0.0,12.1,1027.0,1.297594900028977,1,5,Highest vulnerability,5,False
-Kedah,4971,3811.0,2016,Kedah,0.2,0.0,15.9,1160.0,1.3043820519548674,1,5,Highest vulnerability,5,False
-Kedah,5522,4325.0,2019,Kedah,8.8,0.5,10.9,1197.0,1.2767630057803467,1,5,Highest vulnerability,5,False
-Kedah,5005,3829.0,2020,Kedah,12.7,1.5,10.0,1176.0,1.3071297989031079,1,5,Highest vulnerability,5,False
-Kedah,5550,4402.0,2022,Kedah,9.0,0.3,11.9,1148.0,1.2607905497501135,1,5,Highest vulnerability,5,False
-Kelantan,2143,1510.0,2007,Kelantan,7.2,1.5,10.2,633.0,1.419205298013245,2,3,Highest vulnerability,3,True
-Kelantan,2536,1713.0,2009,Kelantan,4.8,1.0,11.4,823.0,1.4804436660828955,2,3,Highest vulnerability,3,True
-Kelantan,3168,2276.0,2012,Kelantan,2.7,0.3,14.3,892.0,1.3919156414762741,2,3,Highest vulnerability,3,True
-Kelantan,3715,2716.0,2014,Kelantan,0.9,0.2,12.4,999.0,1.367820324005891,2,3,Highest vulnerability,3,True
-Kelantan,4214,3079.0,2016,Kelantan,0.4,0.1,12.1,1135.0,1.3686261773303021,2,3,Highest vulnerability,3,True
-Kelantan,4874,3563.0,2019,Kelantan,12.4,1.0,9.9,1311.0,1.3679483581251755,2,3,Highest vulnerability,3,True
-Kelantan,4411,3010.0,2020,Kelantan,21.2,4.1,11.4,1401.0,1.4654485049833887,2,3,Highest vulnerability,3,True
-Kelantan,4885,3614.0,2022,Kelantan,13.2,0.8,12.2,1271.0,1.3516878804648589,2,3,Highest vulnerability,3,True
-Melaka,3421,2717.0,2007,Melaka,1.8,0.2,16.5,704.0,1.2591093117408907,3,10,Watch closely,10,False
-Melaka,4184,3005.0,2009,Melaka,0.5,0.1,14.8,1179.0,1.3923460898502495,3,10,Watch closely,10,False
-Melaka,4759,3923.0,2012,Melaka,0.1,0.0,15.4,836.0,1.213102217690543,3,10,Watch closely,10,False
-Melaka,6046,5029.0,2014,Melaka,0.1,0.0,8.8,1017.0,1.2022270829190693,3,10,Watch closely,10,False
-Melaka,6849,5588.0,2016,Melaka,0.0,0.0,10.7,1261.0,1.2256621331424482,3,10,Watch closely,10,False
-Melaka,7741,6054.0,2019,Melaka,3.9,0.3,17.0,1687.0,1.2786587380244467,3,10,Watch closely,10,False
-Melaka,7186,5447.0,2020,Melaka,6.1,1.1,14.4,1739.0,1.3192583073251332,3,10,Watch closely,10,False
-Melaka,8057,6210.0,2022,Melaka,4.2,0.1,13.2,1847.0,1.2974235104669887,3,10,Watch closely,10,False
-Negeri Sembilan,3336,2556.0,2007,Negeri Sembilan,1.3,0.1,15.3,780.0,1.3051643192488263,4,7,Watch closely,7,False
-Negeri Sembilan,3540,2711.0,2009,Negeri Sembilan,0.7,0.1,12.7,829.0,1.3057912209516784,4,7,Watch closely,7,False
-Negeri Sembilan,4576,3575.0,2012,Negeri Sembilan,0.5,0.1,15.5,1001.0,1.28,4,7,Watch closely,7,False
-Negeri Sembilan,5271,4128.0,2014,Negeri Sembilan,0.4,0.1,13.0,1143.0,1.276889534883721,4,7,Watch closely,7,False
-Negeri Sembilan,5887,4579.0,2016,Negeri Sembilan,0.2,0.0,15.5,1308.0,1.2856518890587465,4,7,Watch closely,7,False
-Negeri Sembilan,6707,5005.0,2019,Negeri Sembilan,4.3,0.4,11.6,1702.0,1.34005994005994,4,7,Watch closely,7,False
-Negeri Sembilan,6184,4478.0,2020,Negeri Sembilan,6.5,1.2,10.5,1706.0,1.3809736489504243,4,7,Watch closely,7,False
-Negeri Sembilan,6788,5226.0,2022,Negeri Sembilan,4.4,0.1,13.3,1562.0,1.2988901645618063,4,7,Watch closely,7,False
+Johor,3457,2726.0,2007,Johor,1.5,0.2,14.2,731.0,1.2681584739545122,0,6,Moderate vulnerability,6,False
+Johor,3835,2958.0,2009,Johor,1.3,0.1,17.2,877.0,1.2964841108857337,0,6,Moderate vulnerability,6,False
+Johor,4658,3650.0,2012,Johor,0.9,0.1,16.1,1008.0,1.2761643835616439,0,6,Moderate vulnerability,6,False
+Johor,6207,5197.0,2014,Johor,0.0,0.0,10.2,1010.0,1.1943428901289206,0,6,Moderate vulnerability,6,False
+Johor,6928,5652.0,2016,Johor,0.0,0.0,13.5,1276.0,1.2257607926397736,0,6,Moderate vulnerability,6,False
+Johor,8013,6427.0,2019,Johor,3.9,0.2,15.3,1586.0,1.2467714330169597,0,6,Moderate vulnerability,6,False
+Johor,7264,5690.0,2020,Johor,5.9,0.6,13.9,1574.0,1.2766256590509666,0,6,Moderate vulnerability,6,False
+Johor,8517,6879.0,2022,Johor,4.6,0.1,15.9,1638.0,1.2381160052333189,0,6,Moderate vulnerability,6,False
+Kedah,2408,1756.0,2007,Kedah,3.1,0.3,11.8,652.0,1.3712984054669703,1,5,High vulnerability,5,False
+Kedah,2667,1966.0,2009,Kedah,5.3,0.8,16.0,701.0,1.356561546286877,1,5,High vulnerability,5,False
+Kedah,3425,2633.0,2012,Kedah,1.7,0.1,16.5,792.0,1.3007975693125713,1,5,High vulnerability,5,False
+Kedah,4478,3451.0,2014,Kedah,0.3,0.0,12.1,1027.0,1.297594900028977,1,5,High vulnerability,5,False
+Kedah,4971,3811.0,2016,Kedah,0.2,0.0,15.9,1160.0,1.3043820519548674,1,5,High vulnerability,5,False
+Kedah,5522,4325.0,2019,Kedah,8.8,0.5,10.9,1197.0,1.2767630057803467,1,5,High vulnerability,5,False
+Kedah,5005,3829.0,2020,Kedah,12.7,1.5,10.0,1176.0,1.3071297989031079,1,5,High vulnerability,5,False
+Kedah,5550,4402.0,2022,Kedah,9.0,0.3,11.9,1148.0,1.2607905497501135,1,5,High vulnerability,5,False
+Kelantan,2143,1510.0,2007,Kelantan,7.2,1.5,10.2,633.0,1.419205298013245,2,3,High vulnerability,3,True
+Kelantan,2536,1713.0,2009,Kelantan,4.8,1.0,11.4,823.0,1.4804436660828955,2,3,High vulnerability,3,True
+Kelantan,3168,2276.0,2012,Kelantan,2.7,0.3,14.3,892.0,1.3919156414762741,2,3,High vulnerability,3,True
+Kelantan,3715,2716.0,2014,Kelantan,0.9,0.2,12.4,999.0,1.367820324005891,2,3,High vulnerability,3,True
+Kelantan,4214,3079.0,2016,Kelantan,0.4,0.1,12.1,1135.0,1.3686261773303021,2,3,High vulnerability,3,True
+Kelantan,4874,3563.0,2019,Kelantan,12.4,1.0,9.9,1311.0,1.3679483581251755,2,3,High vulnerability,3,True
+Kelantan,4411,3010.0,2020,Kelantan,21.2,4.1,11.4,1401.0,1.4654485049833887,2,3,High vulnerability,3,True
+Kelantan,4885,3614.0,2022,Kelantan,13.2,0.8,12.2,1271.0,1.3516878804648589,2,3,High vulnerability,3,True
+Melaka,3421,2717.0,2007,Melaka,1.8,0.2,16.5,704.0,1.2591093117408907,3,10,Moderate vulnerability,10,False
+Melaka,4184,3005.0,2009,Melaka,0.5,0.1,14.8,1179.0,1.3923460898502495,3,10,Moderate vulnerability,10,False
+Melaka,4759,3923.0,2012,Melaka,0.1,0.0,15.4,836.0,1.213102217690543,3,10,Moderate vulnerability,10,False
+Melaka,6046,5029.0,2014,Melaka,0.1,0.0,8.8,1017.0,1.2022270829190693,3,10,Moderate vulnerability,10,False
+Melaka,6849,5588.0,2016,Melaka,0.0,0.0,10.7,1261.0,1.2256621331424482,3,10,Moderate vulnerability,10,False
+Melaka,7741,6054.0,2019,Melaka,3.9,0.3,17.0,1687.0,1.2786587380244467,3,10,Moderate vulnerability,10,False
+Melaka,7186,5447.0,2020,Melaka,6.1,1.1,14.4,1739.0,1.3192583073251332,3,10,Moderate vulnerability,10,False
+Melaka,8057,6210.0,2022,Melaka,4.2,0.1,13.2,1847.0,1.2974235104669887,3,10,Moderate vulnerability,10,False
+Negeri Sembilan,3336,2556.0,2007,Negeri Sembilan,1.3,0.1,15.3,780.0,1.3051643192488263,4,7,Moderate vulnerability,7,False
+Negeri Sembilan,3540,2711.0,2009,Negeri Sembilan,0.7,0.1,12.7,829.0,1.3057912209516784,4,7,Moderate vulnerability,7,False
+Negeri Sembilan,4576,3575.0,2012,Negeri Sembilan,0.5,0.1,15.5,1001.0,1.28,4,7,Moderate vulnerability,7,False
+Negeri Sembilan,5271,4128.0,2014,Negeri Sembilan,0.4,0.1,13.0,1143.0,1.276889534883721,4,7,Moderate vulnerability,7,False
+Negeri Sembilan,5887,4579.0,2016,Negeri Sembilan,0.2,0.0,15.5,1308.0,1.2856518890587465,4,7,Moderate vulnerability,7,False
+Negeri Sembilan,6707,5005.0,2019,Negeri Sembilan,4.3,0.4,11.6,1702.0,1.34005994005994,4,7,Moderate vulnerability,7,False
+Negeri Sembilan,6184,4478.0,2020,Negeri Sembilan,6.5,1.2,10.5,1706.0,1.3809736489504243,4,7,Moderate vulnerability,7,False
+Negeri Sembilan,6788,5226.0,2022,Negeri Sembilan,4.4,0.1,13.3,1562.0,1.2988901645618063,4,7,Moderate vulnerability,7,False
 Pahang,2995,2235.0,2007,Pahang,1.7,0.4,9.4,760.0,1.3400447427293065,5,11,Lower vulnerability,11,False
 Pahang,3279,2479.0,2009,Pahang,2.1,0.3,12.0,800.0,1.3227107704719645,5,11,Lower vulnerability,11,False
 Pahang,3745,3067.0,2012,Pahang,1.3,0.2,12.7,678.0,1.2210629279426148,5,11,Lower vulnerability,11,False
@@ -47,46 +47,46 @@ Pahang,5012,3979.0,2016,Pahang,0.2,0.0,8.2,1033.0,1.2596129680824328,5,11,Lower 
 Pahang,5667,4440.0,2019,Pahang,4.3,0.1,6.0,1227.0,1.2763513513513514,5,11,Lower vulnerability,11,False
 Pahang,5144,4033.0,2020,Pahang,8.8,1.0,7.3,1111.0,1.27547731217456,5,11,Lower vulnerability,11,False
 Pahang,5777,4753.0,2022,Pahang,6.3,0.1,7.7,1024.0,1.2154428781822006,5,11,Lower vulnerability,11,False
-Perak,2545,1905.0,2007,Perak,3.4,0.7,14.3,640.0,1.3359580052493438,6,4,Highest vulnerability,4,False
-Perak,2809,2094.0,2009,Perak,3.5,0.5,13.3,715.0,1.3414517669531996,6,4,Highest vulnerability,4,False
-Perak,3548,2665.0,2012,Perak,1.5,0.2,18.6,883.0,1.3313320825515949,6,4,Highest vulnerability,4,False
-Perak,4268,3451.0,2014,Perak,0.7,0.1,16.0,817.0,1.2367429730512896,6,4,Highest vulnerability,4,False
-Perak,5065,4006.0,2016,Perak,0.2,0.0,14.1,1059.0,1.264353469795307,6,4,Highest vulnerability,4,False
-Perak,5645,4273.0,2019,Perak,7.3,0.5,11.3,1372.0,1.3210858881348,6,4,Highest vulnerability,4,False
-Perak,5081,3759.0,2020,Perak,11.4,1.5,11.1,1322.0,1.3516892790635808,6,4,Highest vulnerability,4,False
-Perak,5779,4494.0,2022,Perak,7.5,0.2,13.5,1285.0,1.2859368046283934,6,4,Highest vulnerability,4,False
-Perlis,2541,1746.0,2007,Perlis,6.8,1.4,18.9,795.0,1.4553264604810996,7,8,Watch closely,8,False
-Perlis,2617,1832.0,2009,Perlis,6.0,0.8,17.0,785.0,1.4284934497816595,7,8,Watch closely,8,False
-Perlis,3538,2387.0,2012,Perlis,1.9,0.5,19.2,1151.0,1.482195224130708,7,8,Watch closely,8,False
-Perlis,4445,3500.0,2014,Perlis,0.2,0.0,10.1,945.0,1.27,7,8,Watch closely,8,False
-Perlis,4998,4204.0,2016,Perlis,0.1,0.0,12.0,794.0,1.1888677450047573,7,8,Watch closely,8,False
-Perlis,5476,4594.0,2019,Perlis,3.9,0.3,12.0,882.0,1.191989551589029,7,8,Watch closely,8,False
-Perlis,4971,4043.0,2020,Perlis,9.9,1.4,14.3,928.0,1.229532525352461,7,8,Watch closely,8,False
-Perlis,5664,4713.0,2022,Perlis,4.0,0.1,12.6,951.0,1.2017823042647995,7,8,Watch closely,8,False
-Pulau Pinang,4004,2902.0,2007,Pulau Pinang,1.4,0.1,15.2,1102.0,1.3797381116471399,8,9,Watch closely,9,False
-Pulau Pinang,4407,3200.0,2009,Pulau Pinang,1.2,0.1,15.4,1207.0,1.3771875,8,9,Watch closely,9,False
-Pulau Pinang,5055,4039.0,2012,Pulau Pinang,0.6,0.0,16.5,1016.0,1.2515474127259223,8,9,Watch closely,9,False
-Pulau Pinang,5993,4702.0,2014,Pulau Pinang,0.3,0.0,12.4,1291.0,1.274564015312633,8,9,Watch closely,9,False
-Pulau Pinang,6771,5409.0,2016,Pulau Pinang,0.1,0.0,6.6,1362.0,1.2518025513033832,8,9,Watch closely,9,False
-Pulau Pinang,7774,6169.0,2019,Pulau Pinang,1.9,0.1,13.2,1605.0,1.2601718268763171,8,9,Watch closely,9,False
-Pulau Pinang,6850,5474.0,2020,Pulau Pinang,3.3,0.3,12.2,1376.0,1.2513701132626964,8,9,Watch closely,9,False
-Pulau Pinang,8267,6502.0,2022,Pulau Pinang,2.0,0.1,15.3,1765.0,1.2714549369424792,8,9,Watch closely,9,False
-Sabah,2837,1189.0,2007,Sabah,16.4,3.8,15.8,1648.0,2.3860386879730866,9,1,Highest vulnerability,1,True
-Sabah,3102,2066.0,2009,Sabah,19.7,4.8,19.5,1036.0,1.5014520813165537,9,1,Highest vulnerability,1,True
-Sabah,4013,2860.0,2012,Sabah,8.1,1.6,18.6,1153.0,1.4031468531468532,9,1,Highest vulnerability,1,True
-Sabah,4879,3745.0,2014,Sabah,4.0,0.6,16.3,1134.0,1.302803738317757,9,1,Highest vulnerability,1,True
-Sabah,5354,4110.0,2016,Sabah,2.9,0.2,17.6,1244.0,1.302676399026764,9,1,Highest vulnerability,1,True
-Sabah,5745,4235.0,2019,Sabah,19.5,1.5,14.7,1510.0,1.3565525383707202,9,1,Highest vulnerability,1,True
-Sabah,5215,3773.0,2020,Sabah,25.3,2.7,13.2,1442.0,1.3821892393320965,9,1,Highest vulnerability,1,True
-Sabah,6171,4577.0,2022,Sabah,19.7,1.2,14.5,1594.0,1.348263054402447,9,1,Highest vulnerability,1,True
-Sarawak,3349,2250.0,2007,Sarawak,4.2,0.7,13.6,1099.0,1.4884444444444445,10,2,Highest vulnerability,2,True
-Sarawak,3581,2394.0,2009,Sarawak,5.3,1.0,16.4,1187.0,1.4958228905597326,10,2,Highest vulnerability,2,True
-Sarawak,4293,3047.0,2012,Sarawak,2.4,0.3,19.6,1246.0,1.4089268132589432,10,2,Highest vulnerability,2,True
-Sarawak,4934,3778.0,2014,Sarawak,0.9,0.1,17.1,1156.0,1.3059820010587613,10,2,Highest vulnerability,2,True
-Sarawak,5387,4163.0,2016,Sarawak,0.6,0.1,16.8,1224.0,1.2940187364881095,10,2,Highest vulnerability,2,True
-Sarawak,5959,4544.0,2019,Sarawak,9.0,0.4,15.2,1415.0,1.311399647887324,10,2,Highest vulnerability,2,True
-Sarawak,5087,3831.0,2020,Sarawak,12.9,0.9,12.3,1256.0,1.3278517358392066,10,2,Highest vulnerability,2,True
-Sarawak,6457,4978.0,2022,Sarawak,10.8,0.4,16.2,1479.0,1.2971072719967858,10,2,Highest vulnerability,2,True
+Perak,2545,1905.0,2007,Perak,3.4,0.7,14.3,640.0,1.3359580052493438,6,4,High vulnerability,4,False
+Perak,2809,2094.0,2009,Perak,3.5,0.5,13.3,715.0,1.3414517669531996,6,4,High vulnerability,4,False
+Perak,3548,2665.0,2012,Perak,1.5,0.2,18.6,883.0,1.3313320825515949,6,4,High vulnerability,4,False
+Perak,4268,3451.0,2014,Perak,0.7,0.1,16.0,817.0,1.2367429730512896,6,4,High vulnerability,4,False
+Perak,5065,4006.0,2016,Perak,0.2,0.0,14.1,1059.0,1.264353469795307,6,4,High vulnerability,4,False
+Perak,5645,4273.0,2019,Perak,7.3,0.5,11.3,1372.0,1.3210858881348,6,4,High vulnerability,4,False
+Perak,5081,3759.0,2020,Perak,11.4,1.5,11.1,1322.0,1.3516892790635808,6,4,High vulnerability,4,False
+Perak,5779,4494.0,2022,Perak,7.5,0.2,13.5,1285.0,1.2859368046283934,6,4,High vulnerability,4,False
+Perlis,2541,1746.0,2007,Perlis,6.8,1.4,18.9,795.0,1.4553264604810996,7,8,Moderate vulnerability,8,False
+Perlis,2617,1832.0,2009,Perlis,6.0,0.8,17.0,785.0,1.4284934497816595,7,8,Moderate vulnerability,8,False
+Perlis,3538,2387.0,2012,Perlis,1.9,0.5,19.2,1151.0,1.482195224130708,7,8,Moderate vulnerability,8,False
+Perlis,4445,3500.0,2014,Perlis,0.2,0.0,10.1,945.0,1.27,7,8,Moderate vulnerability,8,False
+Perlis,4998,4204.0,2016,Perlis,0.1,0.0,12.0,794.0,1.1888677450047573,7,8,Moderate vulnerability,8,False
+Perlis,5476,4594.0,2019,Perlis,3.9,0.3,12.0,882.0,1.191989551589029,7,8,Moderate vulnerability,8,False
+Perlis,4971,4043.0,2020,Perlis,9.9,1.4,14.3,928.0,1.229532525352461,7,8,Moderate vulnerability,8,False
+Perlis,5664,4713.0,2022,Perlis,4.0,0.1,12.6,951.0,1.2017823042647995,7,8,Moderate vulnerability,8,False
+Pulau Pinang,4004,2902.0,2007,Pulau Pinang,1.4,0.1,15.2,1102.0,1.3797381116471399,8,9,Moderate vulnerability,9,False
+Pulau Pinang,4407,3200.0,2009,Pulau Pinang,1.2,0.1,15.4,1207.0,1.3771875,8,9,Moderate vulnerability,9,False
+Pulau Pinang,5055,4039.0,2012,Pulau Pinang,0.6,0.0,16.5,1016.0,1.2515474127259223,8,9,Moderate vulnerability,9,False
+Pulau Pinang,5993,4702.0,2014,Pulau Pinang,0.3,0.0,12.4,1291.0,1.274564015312633,8,9,Moderate vulnerability,9,False
+Pulau Pinang,6771,5409.0,2016,Pulau Pinang,0.1,0.0,6.6,1362.0,1.2518025513033832,8,9,Moderate vulnerability,9,False
+Pulau Pinang,7774,6169.0,2019,Pulau Pinang,1.9,0.1,13.2,1605.0,1.2601718268763171,8,9,Moderate vulnerability,9,False
+Pulau Pinang,6850,5474.0,2020,Pulau Pinang,3.3,0.3,12.2,1376.0,1.2513701132626964,8,9,Moderate vulnerability,9,False
+Pulau Pinang,8267,6502.0,2022,Pulau Pinang,2.0,0.1,15.3,1765.0,1.2714549369424792,8,9,Moderate vulnerability,9,False
+Sabah,2837,1189.0,2007,Sabah,16.4,3.8,15.8,1648.0,2.3860386879730866,9,1,High vulnerability,1,True
+Sabah,3102,2066.0,2009,Sabah,19.7,4.8,19.5,1036.0,1.5014520813165537,9,1,High vulnerability,1,True
+Sabah,4013,2860.0,2012,Sabah,8.1,1.6,18.6,1153.0,1.4031468531468532,9,1,High vulnerability,1,True
+Sabah,4879,3745.0,2014,Sabah,4.0,0.6,16.3,1134.0,1.302803738317757,9,1,High vulnerability,1,True
+Sabah,5354,4110.0,2016,Sabah,2.9,0.2,17.6,1244.0,1.302676399026764,9,1,High vulnerability,1,True
+Sabah,5745,4235.0,2019,Sabah,19.5,1.5,14.7,1510.0,1.3565525383707202,9,1,High vulnerability,1,True
+Sabah,5215,3773.0,2020,Sabah,25.3,2.7,13.2,1442.0,1.3821892393320965,9,1,High vulnerability,1,True
+Sabah,6171,4577.0,2022,Sabah,19.7,1.2,14.5,1594.0,1.348263054402447,9,1,High vulnerability,1,True
+Sarawak,3349,2250.0,2007,Sarawak,4.2,0.7,13.6,1099.0,1.4884444444444445,10,2,High vulnerability,2,True
+Sarawak,3581,2394.0,2009,Sarawak,5.3,1.0,16.4,1187.0,1.4958228905597326,10,2,High vulnerability,2,True
+Sarawak,4293,3047.0,2012,Sarawak,2.4,0.3,19.6,1246.0,1.4089268132589432,10,2,High vulnerability,2,True
+Sarawak,4934,3778.0,2014,Sarawak,0.9,0.1,17.1,1156.0,1.3059820010587613,10,2,High vulnerability,2,True
+Sarawak,5387,4163.0,2016,Sarawak,0.6,0.1,16.8,1224.0,1.2940187364881095,10,2,High vulnerability,2,True
+Sarawak,5959,4544.0,2019,Sarawak,9.0,0.4,15.2,1415.0,1.311399647887324,10,2,High vulnerability,2,True
+Sarawak,5087,3831.0,2020,Sarawak,12.9,0.9,12.3,1256.0,1.3278517358392066,10,2,High vulnerability,2,True
+Sarawak,6457,4978.0,2022,Sarawak,10.8,0.4,16.2,1479.0,1.2971072719967858,10,2,High vulnerability,2,True
 Selangor,5580,4046.0,2007,Selangor,0.7,0.1,16.0,1534.0,1.3791398912506179,11,13,Lower vulnerability,13,True
 Selangor,5962,4306.0,2009,Selangor,0.7,0.1,16.2,1656.0,1.384579656293544,11,13,Lower vulnerability,13,True
 Selangor,7023,5353.0,2012,Selangor,0.4,0.0,15.6,1670.0,1.3119745936857836,11,13,Lower vulnerability,13,True
