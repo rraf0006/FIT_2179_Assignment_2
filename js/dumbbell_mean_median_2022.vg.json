@@ -7,7 +7,10 @@
   },
   "title": {
     "text": "Mean income sits above median income in every state",
-    "subtitle": "Dumbbell chart of mean and median monthly household income, nominal RM, 2022"
+    "subtitle": [
+      "The gap shows how high-income households",
+      "can pull state averages upward."
+    ]
   },
   "layer": [
     {

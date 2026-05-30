@@ -7,8 +7,33 @@
   },
   "title": {
     "text": "Lower-income states tend to face higher absolute poverty",
-    "subtitle": "Bubble size shows relative poverty; hover a state for details"
+    "subtitle": [
+      "States in the low-income, high-poverty area",
+      "are the clearest signs of vulnerability."
+    ]
   },
+  "params": [
+    {
+      "name": "Scatter_group_filter",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Highest vulnerability",
+          "Watch closely",
+          "Lower vulnerability"
+        ],
+        "labels": [
+          "Show all",
+          "Highest vulnerability",
+          "Watch closely",
+          "Lower vulnerability"
+        ],
+        "name": "Highlight group: "
+      }
+    }
+  ],
   "layer": [
     {
       "mark": {
@@ -66,7 +91,11 @@
           }
         },
         "opacity": {
-          "value": 0.82
+          "condition": {
+            "test": "Scatter_group_filter == null || datum.vulnerability_group == Scatter_group_filter",
+            "value": 0.86
+          },
+          "value": 0.18
         },
         "tooltip": [
           {
@@ -98,6 +127,38 @@
             "title": "Scorecard group"
           }
         ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "income_median": 4200,
+            "poverty_absolute": 17.2,
+            "label": "Low income + high poverty = highest concern"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
       }
     },
     {

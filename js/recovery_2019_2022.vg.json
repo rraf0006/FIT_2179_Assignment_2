@@ -5,7 +5,10 @@
   },
   "title": {
     "text": "Most states recovered by 2022, but the gap remained",
-    "subtitle": "Median income indexed to 2019 = 100; use the dropdown to highlight one state"
+    "subtitle": [
+      "Recovery is not uniform.",
+      "Compare which regions catch up and which remain behind."
+    ]
   },
   "params": [
     {

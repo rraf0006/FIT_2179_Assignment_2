@@ -9,7 +9,10 @@
   "height": 430,
   "title": {
     "text": "Vulnerability remains concentrated in Sabah, Sarawak and Kelantan",
-    "subtitle": "Score combines low median income, absolute poverty and relative poverty, 2022"
+    "subtitle": [
+      "Vulnerability is unevenly distributed.",
+      "The score highlights where income and poverty pressures overlap."
+    ]
   },
   "projection": {
     "type": "equalEarth"
@@ -46,73 +49,117 @@
       }
     }
   ],
-  "mark": {
-    "type": "geoshape",
-    "stroke": "white",
-    "strokeWidth": 1
-  },
-  "encoding": {
-    "color": {
-      "field": "vulnerability_group",
-      "type": "nominal",
-      "title": "2022 vulnerability group",
-      "scale": {
-        "domain": [
-          "Highest vulnerability",
-          "Watch closely",
-          "Lower vulnerability"
-        ],
-        "range": [
-          "#6f4aa2",
-          "#d8a21b",
-          "#4c78a8"
-        ]
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1
       },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "columns": 3,
-        "titleLimit": 260,
-        "labelLimit": 180
+      "encoding": {
+        "color": {
+          "field": "vulnerability_group",
+          "type": "ordinal",
+          "title": "2022 vulnerability group",
+          "scale": {
+            "domain": [
+              "Lower vulnerability",
+              "Watch closely",
+              "Highest vulnerability"
+            ],
+            "range": [
+              "#eee9f7",
+              "#b9a7d8",
+              "#5f3c99"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 3,
+            "titleLimit": 260,
+            "labelLimit": 180
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "vulnerability_group",
+            "type": "nominal",
+            "title": "Vulnerability group"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ",.0f"
+          },
+          {
+            "field": "poverty_absolute",
+            "type": "quantitative",
+            "title": "Absolute poverty (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "poverty_relative",
+            "type": "quantitative",
+            "title": "Relative poverty (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "vulnerability_score",
+            "type": "quantitative",
+            "title": "Vulnerability score",
+            "format": ".2f"
+          }
+        ]
       }
     },
-    "tooltip": [
-      {
-        "field": "state_geo",
-        "type": "nominal",
-        "title": "State"
+    {
+      "data": {
+        "values": [
+          {
+            "state_geo": "Sabah",
+            "lon": 117.0,
+            "lat": 5.5
+          },
+          {
+            "state_geo": "Sarawak",
+            "lon": 113.3,
+            "lat": 2.4
+          },
+          {
+            "state_geo": "Kelantan",
+            "lon": 102.2,
+            "lat": 5.7
+          }
+        ]
       },
-      {
-        "field": "vulnerability_group",
-        "type": "nominal",
-        "title": "Vulnerability group"
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933",
+        "dx": 7,
+        "dy": -4
       },
-      {
-        "field": "income_median",
-        "type": "quantitative",
-        "title": "Median income (RM)",
-        "format": ",.0f"
-      },
-      {
-        "field": "poverty_absolute",
-        "type": "quantitative",
-        "title": "Absolute poverty (%)",
-        "format": ".1f"
-      },
-      {
-        "field": "poverty_relative",
-        "type": "quantitative",
-        "title": "Relative poverty (%)",
-        "format": ".1f"
-      },
-      {
-        "field": "vulnerability_score",
-        "type": "quantitative",
-        "title": "Vulnerability score",
-        "format": ".2f"
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "state_geo"
+        }
       }
-    ]
-  },
+    }
+  ],
   "config": {
     "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     "background": "transparent",

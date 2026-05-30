@@ -12,7 +12,10 @@
       "Median household income is highest",
       "around the Klang Valley"
     ],
-    "subtitle": "Median monthly household income by state, nominal RM, 2022"
+    "subtitle": [
+      "Income is geographically uneven.",
+      "Higher values cluster around urban and administrative centres."
+    ]
   },
   "projection": {
     "type": "equalEarth"
@@ -47,54 +50,174 @@
           "poverty_rank"
         ]
       }
+    },
+    {
+      "calculate": "datum.income_median < 5000 ? 'Low (< RM5k)' : datum.income_median < 6500 ? 'Lower-middle (RM5k-6.5k)' : datum.income_median < 8500 ? 'Upper-middle (RM6.5k-8.5k)' : datum.income_median < 10000 ? 'High (RM8.5k-10k)' : 'Very high (RM10k+)'",
+      "as": "income_class_label"
     }
   ],
-  "mark": {
-    "type": "geoshape",
-    "stroke": "white",
-    "strokeWidth": 0.9
-  },
-  "encoding": {
-    "color": {
-      "field": "income_median",
-      "type": "quantitative",
-      "title": "Median income (RM/month)",
-      "scale": {
-        "scheme": "blues"
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.9
       },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "gradientLength": 230,
-        "format": ",.0f"
+      "encoding": {
+        "color": {
+          "field": "income_class_label",
+          "type": "ordinal",
+          "title": "Median income class",
+          "scale": {
+            "domain": [
+              "Low (< RM5k)",
+              "Lower-middle (RM5k-6.5k)",
+              "Upper-middle (RM6.5k-8.5k)",
+              "High (RM8.5k-10k)",
+              "Very high (RM10k+)"
+            ],
+            "range": [
+              "#eff6ff",
+              "#cfe3f6",
+              "#9fc5e8",
+              "#5f93c5",
+              "#315f9b"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "columns": 3,
+            "labelLimit": 190
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "income_class_label",
+            "type": "ordinal",
+            "title": "Income class"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ",.0f"
+          },
+          {
+            "field": "income_mean",
+            "type": "quantitative",
+            "title": "Mean income (RM)",
+            "format": ",.0f"
+          },
+          {
+            "field": "poverty_absolute",
+            "type": "quantitative",
+            "title": "Absolute poverty (%)",
+            "format": ".1f"
+          }
+        ]
       }
     },
-    "tooltip": [
-      {
-        "field": "state_geo",
-        "type": "nominal",
-        "title": "State"
+    {
+      "data": {
+        "values": [
+          {
+            "state_geo": "Perlis",
+            "lon": 100.2,
+            "lat": 6.45
+          },
+          {
+            "state_geo": "Pulau Pinang",
+            "lon": 100.33,
+            "lat": 5.42
+          },
+          {
+            "state_geo": "Kuala Lumpur",
+            "lon": 101.69,
+            "lat": 3.14
+          },
+          {
+            "state_geo": "Putrajaya",
+            "lon": 101.69,
+            "lat": 2.93
+          },
+          {
+            "state_geo": "Labuan",
+            "lon": 115.24,
+            "lat": 5.28
+          }
+        ]
       },
-      {
-        "field": "income_median",
-        "type": "quantitative",
-        "title": "Median income (RM)",
-        "format": ","
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 18,
+        "color": "#1f2933",
+        "opacity": 0.75
       },
-      {
-        "field": "income_mean",
-        "type": "quantitative",
-        "title": "Mean income (RM)",
-        "format": ","
-      },
-      {
-        "field": "poverty_absolute",
-        "type": "quantitative",
-        "title": "Absolute poverty (%)",
-        "format": ".1f"
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        }
       }
-    ]
-  },
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state_geo": "Perlis",
+            "lon": 100.2,
+            "lat": 6.45
+          },
+          {
+            "state_geo": "Pulau Pinang",
+            "lon": 100.33,
+            "lat": 5.42
+          },
+          {
+            "state_geo": "Kuala Lumpur",
+            "lon": 101.69,
+            "lat": 3.14
+          },
+          {
+            "state_geo": "Putrajaya",
+            "lon": 101.69,
+            "lat": 2.93
+          },
+          {
+            "state_geo": "Labuan",
+            "lon": 115.24,
+            "lat": 5.28
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "dx": 5,
+        "dy": -5,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "state_geo"
+        }
+      }
+    }
+  ],
   "config": {
     "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     "background": "transparent",

@@ -9,7 +9,10 @@
   "height": 300,
   "title": {
     "text": "Absolute poverty remains concentrated in several states",
-    "subtitle": "Absolute poverty rate by state, percentage of households, 2022"
+    "subtitle": [
+      "Poverty is more visible in selected states.",
+      "Income growth has not been evenly shared."
+    ]
   },
   "projection": {
     "type": "equalEarth"
@@ -44,54 +47,174 @@
           "poverty_rank"
         ]
       }
+    },
+    {
+      "calculate": "datum.poverty_absolute < 2 ? 'Very low (0-2%)' : datum.poverty_absolute < 5 ? 'Low (2-5%)' : datum.poverty_absolute < 10 ? 'Moderate (5-10%)' : datum.poverty_absolute < 15 ? 'High (10-15%)' : 'Very high (15%+)'",
+      "as": "poverty_class_label"
     }
   ],
-  "mark": {
-    "type": "geoshape",
-    "stroke": "white",
-    "strokeWidth": 0.9
-  },
-  "encoding": {
-    "color": {
-      "field": "poverty_absolute",
-      "type": "quantitative",
-      "title": "Absolute poverty (%)",
-      "scale": {
-        "scheme": "purples"
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.9
       },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "gradientLength": 230,
-        "format": ".1f"
+      "encoding": {
+        "color": {
+          "field": "poverty_class_label",
+          "type": "ordinal",
+          "title": "Absolute poverty class",
+          "scale": {
+            "domain": [
+              "Very low (0-2%)",
+              "Low (2-5%)",
+              "Moderate (5-10%)",
+              "High (10-15%)",
+              "Very high (15%+)"
+            ],
+            "range": [
+              "#f7f3fb",
+              "#ddd2ec",
+              "#b9a7d8",
+              "#8065ad",
+              "#4b2c7f"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "columns": 3,
+            "labelLimit": 175
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "poverty_class_label",
+            "type": "ordinal",
+            "title": "Poverty class"
+          },
+          {
+            "field": "poverty_absolute",
+            "type": "quantitative",
+            "title": "Absolute poverty (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "poverty_relative",
+            "type": "quantitative",
+            "title": "Relative poverty (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ",.0f"
+          }
+        ]
       }
     },
-    "tooltip": [
-      {
-        "field": "state_geo",
-        "type": "nominal",
-        "title": "State"
+    {
+      "data": {
+        "values": [
+          {
+            "state_geo": "Perlis",
+            "lon": 100.2,
+            "lat": 6.45
+          },
+          {
+            "state_geo": "Pulau Pinang",
+            "lon": 100.33,
+            "lat": 5.42
+          },
+          {
+            "state_geo": "Kuala Lumpur",
+            "lon": 101.69,
+            "lat": 3.14
+          },
+          {
+            "state_geo": "Putrajaya",
+            "lon": 101.69,
+            "lat": 2.93
+          },
+          {
+            "state_geo": "Labuan",
+            "lon": 115.24,
+            "lat": 5.28
+          }
+        ]
       },
-      {
-        "field": "poverty_absolute",
-        "type": "quantitative",
-        "title": "Absolute poverty (%)",
-        "format": ".1f"
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 18,
+        "color": "#1f2933",
+        "opacity": 0.75
       },
-      {
-        "field": "poverty_relative",
-        "type": "quantitative",
-        "title": "Relative poverty (%)",
-        "format": ".1f"
-      },
-      {
-        "field": "income_median",
-        "type": "quantitative",
-        "title": "Median income (RM)",
-        "format": ","
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        }
       }
-    ]
-  },
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state_geo": "Perlis",
+            "lon": 100.2,
+            "lat": 6.45
+          },
+          {
+            "state_geo": "Pulau Pinang",
+            "lon": 100.33,
+            "lat": 5.42
+          },
+          {
+            "state_geo": "Kuala Lumpur",
+            "lon": 101.69,
+            "lat": 3.14
+          },
+          {
+            "state_geo": "Putrajaya",
+            "lon": 101.69,
+            "lat": 2.93
+          },
+          {
+            "state_geo": "Labuan",
+            "lon": 115.24,
+            "lat": 5.28
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "dx": 5,
+        "dy": -5,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "state_geo"
+        }
+      }
+    }
+  ],
   "config": {
     "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     "background": "transparent",

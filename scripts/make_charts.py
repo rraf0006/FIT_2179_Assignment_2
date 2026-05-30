@@ -24,10 +24,29 @@ BORDER = "#e6ded3"
 HIGHEST_VULNERABILITY = "#6f4aa2"
 WATCH_CLOSELY = "#d8a21b"
 LOWER_VULNERABILITY = "#4c78a8"
+ORDERED_VULNERABILITY_RANGE = ["#eee9f7", "#b9a7d8", "#5f3c99"]
+INCOME_CLASS_RANGE = ["#eff6ff", "#cfe3f6", "#9fc5e8", "#5f93c5", "#315f9b"]
+POVERTY_CLASS_RANGE = ["#f7f3fb", "#ddd2ec", "#b9a7d8", "#8065ad", "#4b2c7f"]
 SCORECARD_INCOME_RAMP = ["#f7fbff", "#e8f2fb", "#d7e8f6", "#c5ddf0", "#add0e8"]
 SCORECARD_ABS_POVERTY_RAMP = ["#fffdf0", "#fbf3c4", "#f3df8a", "#e8c95a", "#d8a21b"]
 SCORECARD_REL_POVERTY_RAMP = ["#fcfbfd", "#f2eff8", "#e7e0f2", "#d8cdea", "#c6b8e0"]
 VULNERABILITY_RAMP = ["#fbf9ff", "#f0eaf8", "#e4d9f1", "#d7c8ea", "#cab8e3"]
+SMALL_TERRITORY_LABELS = {
+    "values": [
+        {"state_geo": "Perlis", "lon": 100.20, "lat": 6.45},
+        {"state_geo": "Pulau Pinang", "lon": 100.33, "lat": 5.42},
+        {"state_geo": "Kuala Lumpur", "lon": 101.69, "lat": 3.14},
+        {"state_geo": "Putrajaya", "lon": 101.69, "lat": 2.93},
+        {"state_geo": "Labuan", "lon": 115.24, "lat": 5.28}
+    ]
+}
+VULNERABILITY_LABELS = {
+    "values": [
+        {"state_geo": "Sabah", "lon": 117.0, "lat": 5.5},
+        {"state_geo": "Sarawak", "lon": 113.3, "lat": 2.4},
+        {"state_geo": "Kelantan", "lon": 102.2, "lat": 5.7}
+    ]
+}
 
 STATE_OPTIONS = [
     None, "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang",
@@ -141,7 +160,10 @@ write("national_context.vg.json", {
             "height": 260,
             "title": {
                 "text": "Malaysia's median household income has risen over the long term",
-                "subtitle": "National median monthly household income, nominal RM, 1970–2022"
+                "subtitle": [
+                    "Long-term growth is clear.",
+                    "State comparisons begin from 2007."
+                ]
             },
             "layer": [
                 {
@@ -186,7 +208,10 @@ write("national_context.vg.json", {
             "height": 220,
             "title": {
                 "text": "Absolute poverty fell sharply, but the state-level story is uneven",
-                "subtitle": "National absolute poverty rate, percentage of households, 1970–2022"
+                "subtitle": [
+                    "The national decline is steep.",
+                    "Recent state patterns remain uneven."
+                ]
             },
             "layer": [
                 {
@@ -231,32 +256,63 @@ write("map_income_2022.vg.json", {
     "height": 300,
     "title": {
         "text": ["Median household income is highest", "around the Klang Valley"],
-        "subtitle": "Median monthly household income by state, nominal RM, 2022"
+        "subtitle": [
+            "Income is geographically uneven.",
+            "Higher values cluster around urban and administrative centres."
+        ]
     },
     "projection": {"type": "equalEarth"},
     "data": {"url": MAP_URL, "format": {"type": "topojson", "feature": feature_name}},
-    "transform": MAP_LOOKUP_TRANSFORM,
-    "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.9},
-    "encoding": {
-        "color": {
-            "field": "income_median",
-            "type": "quantitative",
-            "title": "Median income (RM/month)",
-            "scale": {"scheme": "blues"},
-            "legend": {
-                "orient": "bottom",
-                "direction": "horizontal",
-                "gradientLength": 230,
-                "format": ",.0f"
+    "transform": MAP_LOOKUP_TRANSFORM + [
+        {
+            "calculate": "datum.income_median < 5000 ? 'Low (< RM5k)' : datum.income_median < 6500 ? 'Lower-middle (RM5k-6.5k)' : datum.income_median < 8500 ? 'Upper-middle (RM6.5k-8.5k)' : datum.income_median < 10000 ? 'High (RM8.5k-10k)' : 'Very high (RM10k+)'",
+            "as": "income_class_label"
+        }
+    ],
+    "layer": [
+        {
+            "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.9},
+            "encoding": {
+                "color": {
+                    "field": "income_class_label",
+                    "type": "ordinal",
+                    "title": "Median income class",
+                    "scale": {
+                        "domain": [
+                            "Low (< RM5k)",
+                            "Lower-middle (RM5k-6.5k)",
+                            "Upper-middle (RM6.5k-8.5k)",
+                            "High (RM8.5k-10k)",
+                            "Very high (RM10k+)"
+                        ],
+                        "range": INCOME_CLASS_RANGE
+                    },
+                    "legend": {"orient": "bottom", "columns": 3, "labelLimit": 190}
+                },
+                "tooltip": [
+                    {"field": "state_geo", "type": "nominal", "title": "State"},
+                    {"field": "income_class_label", "type": "ordinal", "title": "Income class"},
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
+                    {"field": "income_mean", "type": "quantitative", "title": "Mean income (RM)", "format": ",.0f"},
+                    {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}
+                ]
             }
         },
-        "tooltip": [
-            {"field": "state_geo", "type": "nominal", "title": "State"},
-            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
-            {"field": "income_mean", "type": "quantitative", "title": "Mean income (RM)", "format": ","},
-            {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}
-        ]
-    },
+        {
+            "data": SMALL_TERRITORY_LABELS,
+            "mark": {"type": "point", "filled": True, "size": 18, "color": TEXT, "opacity": 0.75},
+            "encoding": {"longitude": {"field": "lon"}, "latitude": {"field": "lat"}}
+        },
+        {
+            "data": SMALL_TERRITORY_LABELS,
+            "mark": {"type": "text", "fontSize": 10, "dx": 5, "dy": -5, "color": TEXT},
+            "encoding": {
+                "longitude": {"field": "lon"},
+                "latitude": {"field": "lat"},
+                "text": {"field": "state_geo"}
+            }
+        }
+    ],
     "config": base_config()
 })
 
@@ -268,32 +324,63 @@ write("map_poverty_2022.vg.json", {
     "height": 300,
     "title": {
         "text": "Absolute poverty remains concentrated in several states",
-        "subtitle": "Absolute poverty rate by state, percentage of households, 2022"
+        "subtitle": [
+            "Poverty is more visible in selected states.",
+            "Income growth has not been evenly shared."
+        ]
     },
     "projection": {"type": "equalEarth"},
     "data": {"url": MAP_URL, "format": {"type": "topojson", "feature": feature_name}},
-    "transform": MAP_LOOKUP_TRANSFORM,
-    "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.9},
-    "encoding": {
-        "color": {
-            "field": "poverty_absolute",
-            "type": "quantitative",
-            "title": "Absolute poverty (%)",
-            "scale": {"scheme": "purples"},
-            "legend": {
-                "orient": "bottom",
-                "direction": "horizontal",
-                "gradientLength": 230,
-                "format": ".1f"
+    "transform": MAP_LOOKUP_TRANSFORM + [
+        {
+            "calculate": "datum.poverty_absolute < 2 ? 'Very low (0-2%)' : datum.poverty_absolute < 5 ? 'Low (2-5%)' : datum.poverty_absolute < 10 ? 'Moderate (5-10%)' : datum.poverty_absolute < 15 ? 'High (10-15%)' : 'Very high (15%+)'",
+            "as": "poverty_class_label"
+        }
+    ],
+    "layer": [
+        {
+            "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.9},
+            "encoding": {
+                "color": {
+                    "field": "poverty_class_label",
+                    "type": "ordinal",
+                    "title": "Absolute poverty class",
+                    "scale": {
+                        "domain": [
+                            "Very low (0-2%)",
+                            "Low (2-5%)",
+                            "Moderate (5-10%)",
+                            "High (10-15%)",
+                            "Very high (15%+)"
+                        ],
+                        "range": POVERTY_CLASS_RANGE
+                    },
+                    "legend": {"orient": "bottom", "columns": 3, "labelLimit": 175}
+                },
+                "tooltip": [
+                    {"field": "state_geo", "type": "nominal", "title": "State"},
+                    {"field": "poverty_class_label", "type": "ordinal", "title": "Poverty class"},
+                    {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
+                    {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"}
+                ]
             }
         },
-        "tooltip": [
-            {"field": "state_geo", "type": "nominal", "title": "State"},
-            {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
-            {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
-            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","}
-        ]
-    },
+        {
+            "data": SMALL_TERRITORY_LABELS,
+            "mark": {"type": "point", "filled": True, "size": 18, "color": TEXT, "opacity": 0.75},
+            "encoding": {"longitude": {"field": "lon"}, "latitude": {"field": "lat"}}
+        },
+        {
+            "data": SMALL_TERRITORY_LABELS,
+            "mark": {"type": "text", "fontSize": 10, "dx": 5, "dy": -5, "color": TEXT},
+            "encoding": {
+                "longitude": {"field": "lon"},
+                "latitude": {"field": "lat"},
+                "text": {"field": "state_geo"}
+            }
+        }
+    ],
     "config": base_config()
 })
 
@@ -305,38 +392,54 @@ write("map_bivariate_2022.vg.json", {
     "height": 430,
     "title": {
         "text": "Vulnerability remains concentrated in Sabah, Sarawak and Kelantan",
-        "subtitle": "Score combines low median income, absolute poverty and relative poverty, 2022"
+        "subtitle": [
+            "Vulnerability is unevenly distributed.",
+            "The score highlights where income and poverty pressures overlap."
+        ]
     },
     "projection": {"type": "equalEarth"},
     "data": {"url": MAP_URL, "format": {"type": "topojson", "feature": feature_name}},
     "transform": MAP_LOOKUP_TRANSFORM,
-    "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
-    "encoding": {
-        "color": {
-            "field": "vulnerability_group",
-            "type": "nominal",
-            "title": "2022 vulnerability group",
-            "scale": {
-                "domain": ["Highest vulnerability", "Watch closely", "Lower vulnerability"],
-                "range": [HIGHEST_VULNERABILITY, WATCH_CLOSELY, LOWER_VULNERABILITY]
-            },
-            "legend": {
-                "orient": "bottom",
-                "direction": "horizontal",
-                "columns": 3,
-                "titleLimit": 260,
-                "labelLimit": 180
+    "layer": [
+        {
+            "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
+            "encoding": {
+                "color": {
+                    "field": "vulnerability_group",
+                    "type": "ordinal",
+                    "title": "2022 vulnerability group",
+                    "scale": {
+                        "domain": ["Lower vulnerability", "Watch closely", "Highest vulnerability"],
+                        "range": ORDERED_VULNERABILITY_RANGE
+                    },
+                    "legend": {
+                        "orient": "bottom",
+                        "direction": "horizontal",
+                        "columns": 3,
+                        "titleLimit": 260,
+                        "labelLimit": 180
+                    }
+                },
+                "tooltip": [
+                    {"field": "state_geo", "type": "nominal", "title": "State"},
+                    {"field": "vulnerability_group", "type": "nominal", "title": "Vulnerability group"},
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
+                    {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
+                    {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
+                    {"field": "vulnerability_score", "type": "quantitative", "title": "Vulnerability score", "format": ".2f"}
+                ]
             }
         },
-        "tooltip": [
-            {"field": "state_geo", "type": "nominal", "title": "State"},
-            {"field": "vulnerability_group", "type": "nominal", "title": "Vulnerability group"},
-            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
-            {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
-            {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
-            {"field": "vulnerability_score", "type": "quantitative", "title": "Vulnerability score", "format": ".2f"}
-        ]
-    },
+        {
+            "data": VULNERABILITY_LABELS,
+            "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "color": TEXT, "dx": 7, "dy": -4},
+            "encoding": {
+                "longitude": {"field": "lon"},
+                "latitude": {"field": "lat"},
+                "text": {"field": "state_geo"}
+            }
+        }
+    ],
     "config": base_config()
 })
 
@@ -348,7 +451,10 @@ write("rank_income_2022.vg.json", {
     "data": {"url": STATE_2022},
     "title": {
         "text": "The 2022 income gap between states is large",
-        "subtitle": "Sorted by median monthly household income, nominal RM"
+        "subtitle": [
+            "Ranking the states makes the income gap clearer",
+            "than the map alone."
+        ]
     },
     "layer": [
         {
@@ -390,7 +496,10 @@ write("rank_poverty_2022.vg.json", {
   },
   "title": {
     "text": "Sabah, Kelantan and Sarawak remain high-poverty outliers",
-    "subtitle": "Sorted by absolute poverty rate, percentage of households, 2022",
+    "subtitle": [
+      "A small number of states account for",
+      "the sharpest poverty differences."
+    ],
     "anchor": "start"
   },
   "layer": [
@@ -478,6 +587,39 @@ write("rank_poverty_2022.vg.json", {
           "format": ".1f"
         }
       }
+    },
+    {
+      "transform": [
+        {
+          "filter": "indexof(['Sabah', 'Kelantan', 'Sarawak', 'Kedah'], datum.state_geo) >= 0"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 34,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "poverty_absolute",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "sort": {
+            "field": "poverty_absolute",
+            "order": "descending"
+          }
+        },
+        "text": {
+          "value": "main outlier"
+        }
+      }
     }
   ],
   "config": {
@@ -525,7 +667,10 @@ write("dumbbell_mean_median_2022.vg.json", {
     "data": {"url": STATE_2022},
     "title": {
         "text": "Mean income sits above median income in every state",
-        "subtitle": "Dumbbell chart of mean and median monthly household income, nominal RM, 2022"
+        "subtitle": [
+            "The gap shows how high-income households",
+            "can pull state averages upward."
+        ]
     },
     "layer": [
         {
@@ -576,8 +721,23 @@ write("scatter_income_poverty_2022.vg.json", {
     "data": {"url": STATE_2022},
     "title": {
         "text": "Lower-income states tend to face higher absolute poverty",
-        "subtitle": "Bubble size shows relative poverty; hover a state for details"
+        "subtitle": [
+            "States in the low-income, high-poverty area",
+            "are the clearest signs of vulnerability."
+        ]
     },
+    "params": [
+        {
+            "name": "Scatter_group_filter",
+            "value": None,
+            "bind": {
+                "input": "select",
+                "options": [None, "Highest vulnerability", "Watch closely", "Lower vulnerability"],
+                "labels": ["Show all", "Highest vulnerability", "Watch closely", "Lower vulnerability"],
+                "name": "Highlight group: "
+            }
+        }
+    ],
     "layer": [
         {
             "mark": {"type": "circle", "filled": True, "stroke": "white", "strokeWidth": 1},
@@ -600,7 +760,10 @@ write("scatter_income_poverty_2022.vg.json", {
                         "range": [HIGHEST_VULNERABILITY, WATCH_CLOSELY, LOWER_VULNERABILITY]
                     }
                 },
-                "opacity": {"value": 0.82},
+                "opacity": {
+                    "condition": {"test": "Scatter_group_filter == null || datum.vulnerability_group == Scatter_group_filter", "value": 0.86},
+                    "value": 0.18
+                },
                 "tooltip": [
                     {"field": "state_geo", "type": "nominal", "title": "State"},
                     {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
@@ -608,6 +771,15 @@ write("scatter_income_poverty_2022.vg.json", {
                     {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
                     {"field": "vulnerability_group", "type": "nominal", "title": "Scorecard group"}
                 ]
+            }
+        },
+        {
+            "data": {"values": [{"income_median": 4200, "poverty_absolute": 17.2, "label": "Low income + high poverty = highest concern"}]},
+            "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "income_median", "type": "quantitative"},
+                "y": {"field": "poverty_absolute", "type": "quantitative"},
+                "text": {"field": "label"}
             }
         },
         {
@@ -633,26 +805,58 @@ write("heatmap_2007_2022.vg.json", {
     "data": {"url": STATE_MAIN},
     "title": {
         "text": "Progress since 2007 has not removed the poverty gap",
-        "subtitle": "Absolute poverty rate by state and survey year; states sorted by 2022 vulnerability"
-    },
-    "mark": {"type": "rect", "stroke": "white", "strokeWidth": 0.5},
-    "encoding": {
-        "x": {"field": "year", "type": "ordinal", "title": "Survey year"},
-        "y": {"field": "state_geo", "type": "nominal", "title": None, "sort": {"field": "vulnerability_order", "op": "min", "order": "ascending"}},
-        "color": {
-            "field": "poverty_absolute",
-            "type": "quantitative",
-            "title": "Absolute poverty (%)",
-            "scale": {"scheme": "purples"}
-        },
-        "tooltip": [
-            {"field": "state_geo", "type": "nominal", "title": "State"},
-            {"field": "year", "type": "ordinal", "title": "Year"},
-            {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
-            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
-            {"field": "vulnerability_group", "type": "nominal", "title": "2022 group"}
+        "subtitle": [
+            "The colour pattern shows whether poverty is",
+            "temporary, improving, or persistent across states."
         ]
     },
+    "params": [
+        {
+            "name": "Heatmap_group_filter",
+            "value": None,
+            "bind": {
+                "input": "select",
+                "options": [None, "Highest vulnerability", "Watch closely", "Lower vulnerability"],
+                "labels": ["Show all", "Highest vulnerability", "Watch closely", "Lower vulnerability"],
+                "name": "Highlight group: "
+            }
+        }
+    ],
+    "layer": [
+        {
+            "mark": {"type": "rect", "stroke": "white", "strokeWidth": 0.5},
+            "encoding": {
+                "x": {"field": "year", "type": "ordinal", "title": "Survey year"},
+                "y": {"field": "state_geo", "type": "nominal", "title": None, "sort": {"field": "vulnerability_order", "op": "min", "order": "ascending"}},
+                "color": {
+                    "field": "poverty_absolute",
+                    "type": "quantitative",
+                    "title": "Absolute poverty (%)",
+                    "scale": {"scheme": "purples"}
+                },
+                "opacity": {
+                    "condition": {"test": "Heatmap_group_filter == null || datum.vulnerability_group == Heatmap_group_filter", "value": 1},
+                    "value": 0.18
+                },
+                "tooltip": [
+                    {"field": "state_geo", "type": "nominal", "title": "State"},
+                    {"field": "year", "type": "ordinal", "title": "Year"},
+                    {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
+                    {"field": "vulnerability_group", "type": "nominal", "title": "2022 group"}
+                ]
+            }
+        },
+        {
+            "data": {"values": [{"year": 2022, "state_geo": "Sabah", "vulnerability_order": 1, "label": "Sabah, Kelantan and Sarawak stay persistently high"}]},
+            "mark": {"type": "text", "align": "right", "baseline": "middle", "dx": -8, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "year", "type": "ordinal"},
+                "y": {"field": "state_geo", "type": "nominal", "sort": {"field": "vulnerability_order", "op": "min", "order": "ascending"}},
+                "text": {"field": "label"}
+            }
+        }
+    ],
     "config": base_config()
 })
 
@@ -664,7 +868,10 @@ write("slope_2007_2022.vg.json", {
     "data": {"url": SLOPE},
     "title": {
         "text": "Every state recorded higher nominal median income than in 2007",
-        "subtitle": "Slope chart of median monthly household income, 2007 and 2022; hover for details"
+        "subtitle": [
+            "Some states improved faster than others,",
+            "widening the contrast between regions."
+        ]
     },
     "layer": [
         {
@@ -721,6 +928,24 @@ write("slope_2007_2022.vg.json", {
             }
         },
         {
+            "data": {"values": [{"year": 2018, "income_median": 11100, "label": "Putrajaya and Kuala Lumpur sit far above the lower-income states"}]},
+            "mark": {"type": "text", "align": "left", "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "year", "type": "quantitative", "scale": {"domain": [2007, 2022]}},
+                "y": {"field": "income_median", "type": "quantitative"},
+                "text": {"field": "label"}
+            }
+        },
+        {
+            "data": {"values": [{"year": 2018, "income_median": 3300, "label": "Sabah and Kelantan remain much lower in 2022"}]},
+            "mark": {"type": "text", "align": "left", "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "year", "type": "quantitative", "scale": {"domain": [2007, 2022]}},
+                "y": {"field": "income_median", "type": "quantitative"},
+                "text": {"field": "label"}
+            }
+        },
+        {
             "transform": [
                 {"filter": "datum.year == 2022 && indexof(['Putrajaya', 'Kuala Lumpur', 'Sabah', 'Kelantan'], datum.state_geo) >= 0"}
             ],
@@ -741,7 +966,10 @@ write("recovery_2019_2022.vg.json", {
     "data": {"url": RECOVERY},
     "title": {
         "text": "Most states recovered by 2022, but the gap remained",
-        "subtitle": "Median income indexed to 2019 = 100; use the dropdown to highlight one state"
+        "subtitle": [
+            "Recovery is not uniform.",
+            "Compare which regions catch up and which remain behind."
+        ]
     },
     "params": [
         {
@@ -820,7 +1048,10 @@ scorecard_spec = {
     "data": {"url": STATE_2022},
     "title": {
         "text": "Final scorecard: highest vulnerability combines lower income and higher poverty",
-        "subtitle": "States sorted by 2022 vulnerability score; higher score means higher vulnerability"
+        "subtitle": [
+            "Combining income and poverty indicators gives",
+            "a clearer summary of where risk is greatest."
+        ]
     },
     "hconcat": [
         {

@@ -7,7 +7,10 @@
   },
   "title": {
     "text": "Sabah, Kelantan and Sarawak remain high-poverty outliers",
-    "subtitle": "Sorted by absolute poverty rate, percentage of households, 2022",
+    "subtitle": [
+      "A small number of states account for",
+      "the sharpest poverty differences."
+    ],
     "anchor": "start"
   },
   "layer": [
@@ -96,6 +99,39 @@
           "field": "poverty_absolute",
           "type": "quantitative",
           "format": ".1f"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "indexof(['Sabah', 'Kelantan', 'Sarawak', 'Kedah'], datum.state_geo) >= 0"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 34,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "poverty_absolute",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "sort": {
+            "field": "poverty_absolute",
+            "order": "descending"
+          }
+        },
+        "text": {
+          "value": "main outlier"
         }
       }
     }

@@ -7,67 +7,142 @@
   },
   "title": {
     "text": "Progress since 2007 has not removed the poverty gap",
-    "subtitle": "Absolute poverty rate by state and survey year; states sorted by 2022 vulnerability"
-  },
-  "mark": {
-    "type": "rect",
-    "stroke": "white",
-    "strokeWidth": 0.5
-  },
-  "encoding": {
-    "x": {
-      "field": "year",
-      "type": "ordinal",
-      "title": "Survey year"
-    },
-    "y": {
-      "field": "state_geo",
-      "type": "nominal",
-      "title": null,
-      "sort": {
-        "field": "vulnerability_order",
-        "op": "min",
-        "order": "ascending"
-      }
-    },
-    "color": {
-      "field": "poverty_absolute",
-      "type": "quantitative",
-      "title": "Absolute poverty (%)",
-      "scale": {
-        "scheme": "purples"
-      }
-    },
-    "tooltip": [
-      {
-        "field": "state_geo",
-        "type": "nominal",
-        "title": "State"
-      },
-      {
-        "field": "year",
-        "type": "ordinal",
-        "title": "Year"
-      },
-      {
-        "field": "poverty_absolute",
-        "type": "quantitative",
-        "title": "Absolute poverty (%)",
-        "format": ".1f"
-      },
-      {
-        "field": "income_median",
-        "type": "quantitative",
-        "title": "Median income (RM)",
-        "format": ","
-      },
-      {
-        "field": "vulnerability_group",
-        "type": "nominal",
-        "title": "2022 group"
-      }
+    "subtitle": [
+      "The colour pattern shows whether poverty is",
+      "temporary, improving, or persistent across states."
     ]
   },
+  "params": [
+    {
+      "name": "Heatmap_group_filter",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Highest vulnerability",
+          "Watch closely",
+          "Lower vulnerability"
+        ],
+        "labels": [
+          "Show all",
+          "Highest vulnerability",
+          "Watch closely",
+          "Lower vulnerability"
+        ],
+        "name": "Highlight group: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Survey year"
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "vulnerability_order",
+            "op": "min",
+            "order": "ascending"
+          }
+        },
+        "color": {
+          "field": "poverty_absolute",
+          "type": "quantitative",
+          "title": "Absolute poverty (%)",
+          "scale": {
+            "scheme": "purples"
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "Heatmap_group_filter == null || datum.vulnerability_group == Heatmap_group_filter",
+            "value": 1
+          },
+          "value": 0.18
+        },
+        "tooltip": [
+          {
+            "field": "state_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "poverty_absolute",
+            "type": "quantitative",
+            "title": "Absolute poverty (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ",.0f"
+          },
+          {
+            "field": "vulnerability_group",
+            "type": "nominal",
+            "title": "2022 group"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2022,
+            "state_geo": "Sabah",
+            "vulnerability_order": 1,
+            "label": "Sabah, Kelantan and Sarawak stay persistently high"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -8,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "state_geo",
+          "type": "nominal",
+          "sort": {
+            "field": "vulnerability_order",
+            "op": "min",
+            "order": "ascending"
+          }
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
   "config": {
     "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     "background": "transparent",

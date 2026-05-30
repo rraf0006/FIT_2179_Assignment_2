@@ -5,7 +5,10 @@
   },
   "title": {
     "text": "Final scorecard: highest vulnerability combines lower income and higher poverty",
-    "subtitle": "States sorted by 2022 vulnerability score; higher score means higher vulnerability"
+    "subtitle": [
+      "Combining income and poverty indicators gives",
+      "a clearer summary of where risk is greatest."
+    ]
   },
   "hconcat": [
     {

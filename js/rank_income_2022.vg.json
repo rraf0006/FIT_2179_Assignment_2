@@ -7,7 +7,10 @@
   },
   "title": {
     "text": "The 2022 income gap between states is large",
-    "subtitle": "Sorted by median monthly household income, nominal RM"
+    "subtitle": [
+      "Ranking the states makes the income gap clearer",
+      "than the map alone."
+    ]
   },
   "layer": [
     {

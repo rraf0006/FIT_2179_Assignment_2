@@ -7,7 +7,10 @@
   },
   "title": {
     "text": "Every state recorded higher nominal median income than in 2007",
-    "subtitle": "Slope chart of median monthly household income, 2007 and 2022; hover for details"
+    "subtitle": [
+      "Some states improved faster than others,",
+      "widening the contrast between regions."
+    ]
   },
   "layer": [
     {
@@ -151,6 +154,80 @@
             "format": ",.0f"
           }
         ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2018,
+            "income_median": 11100,
+            "label": "Putrajaya and Kuala Lumpur sit far above the lower-income states"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2007,
+              2022
+            ]
+          }
+        },
+        "y": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2018,
+            "income_median": 3300,
+            "label": "Sabah and Kelantan remain much lower in 2022"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2007,
+              2022
+            ]
+          }
+        },
+        "y": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
       }
     },
     {
