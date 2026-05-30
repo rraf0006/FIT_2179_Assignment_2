@@ -100,7 +100,7 @@
           },
           "color": {
             "condition": {
-              "test": "State_selection != null && datum.state_geo == State_selection",
+              "test": "State_selection == null || datum.state_geo == State_selection",
               "value": "#1f4e79"
             },
             "value": "#cbd5e1"
@@ -179,7 +179,7 @@
           },
           "color": {
             "condition": {
-              "test": "State_selection != null && datum.state_geo == State_selection",
+              "test": "State_selection == null || datum.state_geo == State_selection",
               "value": "#1f4e79"
             },
             "value": "#cbd5e1"

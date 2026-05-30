@@ -4,8 +4,8 @@
     "type": "pad",
     "contains": "padding"
   },
-  "width": 500,
-  "height": 360,
+  "width": 520,
+  "height": 300,
   "title": {
     "text": "Highest incomes cluster around the Klang Valley",
     "subtitle": "Urban centres anchor Malaysia’s income divide."
@@ -16,10 +16,10 @@
       109.5,
       4
     ],
-    "scale": 1450,
+    "scale": 1550,
     "translate": [
-      250,
-      170
+      260,
+      145
     ]
   },
   "data": {

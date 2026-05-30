@@ -40,8 +40,8 @@ GROUP_RANGE_LEGEND = [LOWER_VULNERABILITY, MODERATE_VULNERABILITY, HIGH_VULNERAB
 MALAYSIA_PROJECTION = {
     "type": "mercator",
     "center": [109.5, 4],
-    "scale": 1450,
-    "translate": [250, 170]
+    "scale": 1550,
+    "translate": [260, 145]
 }
 STATE_NAME_FIX = {
     "W.P. Kuala Lumpur": "Kuala Lumpur",
@@ -308,8 +308,8 @@ write("national_context.vg.json", {
 write("map_income_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "autosize": {"type": "pad", "contains": "padding"},
-    "width": 500,
-    "height": 360,
+    "width": 520,
+    "height": 300,
     "title": {
         "text": "Highest incomes cluster around the Klang Valley",
         "subtitle": "Urban centres anchor Malaysia’s income divide."
@@ -373,8 +373,8 @@ write("map_income_2022.vg.json", {
 write("map_poverty_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "autosize": {"type": "pad", "contains": "padding"},
-    "width": 500,
-    "height": 360,
+    "width": 520,
+    "height": 300,
     "title": {
         "text": "Poverty remains concentrated in several states",
         "subtitle": "The highest rates appear outside Malaysia's strongest income centres."
@@ -438,8 +438,8 @@ write("map_poverty_2022.vg.json", {
 write("map_bivariate_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "autosize": {"type": "pad", "contains": "padding"},
-    "width": 760,
-    "height": 460,
+    "width": 620,
+    "height": 340,
     "title": {
         "text": "Vulnerability is unevenly distributed",
         "subtitle": "The combined score highlights where lower income and higher poverty overlap."
@@ -602,7 +602,7 @@ write("rank_poverty_2022.vg.json", {
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "dx": 34,
+        "dx": 8,
         "fontSize": 11,
         "fontWeight": 700,
         "color": TEXT
@@ -933,7 +933,7 @@ write("recovery_2019_2022.vg.json", {
                     "y": {"field": "income_index_2019", "type": "quantitative", "title": "Median income index", "scale": {"zero": False}},
                     "detail": {"field": "state_geo", "type": "nominal"},
                     "color": {
-                        "condition": {"test": "State_selection != null && datum.state_geo == State_selection", "value": PRIMARY},
+                        "condition": {"test": "State_selection == null || datum.state_geo == State_selection", "value": PRIMARY},
                         "value": NEUTRAL_LINE
                     },
                     "opacity": {
@@ -960,7 +960,7 @@ write("recovery_2019_2022.vg.json", {
                     "y": {"field": "income_index_2019", "type": "quantitative", "title": "Median income index", "scale": {"zero": False}},
                     "detail": {"field": "state_geo", "type": "nominal"},
                     "color": {
-                        "condition": {"test": "State_selection != null && datum.state_geo == State_selection", "value": PRIMARY},
+                        "condition": {"test": "State_selection == null || datum.state_geo == State_selection", "value": PRIMARY},
                         "value": NEUTRAL_LINE
                     },
                     "opacity": {

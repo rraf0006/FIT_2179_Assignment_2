@@ -4,8 +4,8 @@
     "type": "pad",
     "contains": "padding"
   },
-  "width": 760,
-  "height": 460,
+  "width": 620,
+  "height": 340,
   "title": {
     "text": "Vulnerability is unevenly distributed",
     "subtitle": "The combined score highlights where lower income and higher poverty overlap."
@@ -16,10 +16,10 @@
       109.5,
       4
     ],
-    "scale": 1450,
+    "scale": 1550,
     "translate": [
-      250,
-      170
+      260,
+      145
     ]
   },
   "data": {
