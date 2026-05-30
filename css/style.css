@@ -152,13 +152,17 @@ h1 {
 .chart-card .vega-embed {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
-.chart-card svg {
+.chart-card .vega-embed > div {
+  width: 100%;
+}
+
+.chart-card svg,
+.chart-card canvas {
   display: block;
   max-width: 100%;
-  height: auto;
 }
 
 .footer {

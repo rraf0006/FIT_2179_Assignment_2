@@ -38,8 +38,10 @@ LEGEND_GROUP_ORDER = ["Lower vulnerability", "Moderate vulnerability", "High vul
 GROUP_RANGE_STORY = [HIGH_VULNERABILITY, MODERATE_VULNERABILITY, LOWER_VULNERABILITY]
 GROUP_RANGE_LEGEND = [LOWER_VULNERABILITY, MODERATE_VULNERABILITY, HIGH_VULNERABILITY]
 MALAYSIA_PROJECTION = {
-    "type": "azimuthalEqualArea",
-    "center": [109.5, 4]
+    "type": "mercator",
+    "center": [109.5, 4],
+    "scale": 1450,
+    "translate": [250, 170]
 }
 STATE_NAME_FIX = {
     "W.P. Kuala Lumpur": "Kuala Lumpur",
@@ -305,12 +307,12 @@ write("national_context.vg.json", {
 # -------------------- Chart 2 --------------------
 write("map_income_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "autosize": {"type": "fit", "contains": "padding", "resize": True},
-    "width": "container",
-    "height": 350,
+    "autosize": {"type": "pad", "contains": "padding"},
+    "width": 500,
+    "height": 360,
     "title": {
         "text": "Highest incomes cluster around the Klang Valley",
-        "subtitle": "Income is geographically uneven, with higher values around urban and administrative centres."
+        "subtitle": "Urban centres anchor Malaysia’s income divide."
     },
     "projection": MALAYSIA_PROJECTION,
     "data": {"url": MAP_URL, "format": {"type": "topojson", "feature": feature_name}},
@@ -370,9 +372,9 @@ write("map_income_2022.vg.json", {
 # -------------------- Chart 3 --------------------
 write("map_poverty_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "autosize": {"type": "fit", "contains": "padding", "resize": True},
-    "width": "container",
-    "height": 350,
+    "autosize": {"type": "pad", "contains": "padding"},
+    "width": 500,
+    "height": 360,
     "title": {
         "text": "Poverty remains concentrated in several states",
         "subtitle": "The highest rates appear outside Malaysia's strongest income centres."
@@ -435,9 +437,9 @@ write("map_poverty_2022.vg.json", {
 # -------------------- Chart 4 --------------------
 write("map_bivariate_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "autosize": {"type": "fit", "contains": "padding", "resize": True},
-    "width": "container",
-    "height": 430,
+    "autosize": {"type": "pad", "contains": "padding"},
+    "width": 760,
+    "height": 460,
     "title": {
         "text": "Vulnerability is unevenly distributed",
         "subtitle": "The combined score highlights where lower income and higher poverty overlap."
@@ -921,31 +923,49 @@ write("recovery_2019_2022.vg.json", {
         }
     },
     "spec": {
-        "width": 260,
-        "height": 260,
+        "width": 330,
+        "height": 280,
         "layer": [
             {
-                "mark": {"type": "line", "point": True},
+                "mark": {"type": "line"},
                 "encoding": {
                     "x": {"field": "year", "type": "ordinal", "title": "Year"},
                     "y": {"field": "income_index_2019", "type": "quantitative", "title": "Median income index", "scale": {"zero": False}},
                     "detail": {"field": "state_geo", "type": "nominal"},
                     "color": {
-                        "field": "vulnerability_group",
-                        "type": "nominal",
-                        "scale": {
-                            "domain": STORY_GROUP_ORDER,
-                            "range": GROUP_RANGE_STORY
-                        },
-                        "legend": None
+                        "condition": {"test": "State_selection != null && datum.state_geo == State_selection", "value": PRIMARY},
+                        "value": NEUTRAL_LINE
                     },
                     "opacity": {
                         "condition": {"test": "State_selection == null || datum.state_geo == State_selection", "value": 0.95},
-                        "value": 0.18
+                        "value": 0.35
                     },
                     "strokeWidth": {
-                        "condition": {"test": "State_selection != null && datum.state_geo == State_selection", "value": 3.3},
-                        "value": 1.4
+                        "condition": {"test": "State_selection != null && datum.state_geo == State_selection", "value": 3.4},
+                        "value": 1.3
+                    },
+                    "tooltip": [
+                        {"field": "state_geo", "type": "nominal", "title": "State"},
+                        {"field": "year", "type": "ordinal", "title": "Year"},
+                        {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
+                        {"field": "income_index_2019", "type": "quantitative", "title": "Index, 2019=100", "format": ".1f"},
+                        {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}
+                    ]
+                }
+            },
+            {
+                "mark": {"type": "circle", "filled": True, "size": 45, "stroke": "white", "strokeWidth": 0.9},
+                "encoding": {
+                    "x": {"field": "year", "type": "ordinal", "title": "Year"},
+                    "y": {"field": "income_index_2019", "type": "quantitative", "title": "Median income index", "scale": {"zero": False}},
+                    "detail": {"field": "state_geo", "type": "nominal"},
+                    "color": {
+                        "condition": {"test": "State_selection != null && datum.state_geo == State_selection", "value": PRIMARY},
+                        "value": NEUTRAL_LINE
+                    },
+                    "opacity": {
+                        "condition": {"test": "State_selection == null || datum.state_geo == State_selection", "value": 0.95},
+                        "value": 0.35
                     },
                     "tooltip": [
                         {"field": "state_geo", "type": "nominal", "title": "State"},
@@ -962,92 +982,8 @@ write("recovery_2019_2022.vg.json", {
             }
         ]
     },
+    "spacing": 28,
     "resolve": {"scale": {"y": "shared"}},
-    "config": base_config()
-})
-
-# -------------------- Chart 12 --------------------
-write("vulnerability_rank_2022.vg.json", {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": "container",
-    "height": 470,
-    "data": {"url": STATE_2022},
-    "title": {
-        "text": "High vulnerability is concentrated in a small group of states",
-        "subtitle": "The final score combines lower median income, absolute poverty and relative poverty."
-    },
-    "layer": [
-        {
-            "mark": {"type": "rule", "strokeWidth": 2.5},
-            "encoding": {
-                "x": {"datum": 0},
-                "x2": {"field": "vulnerability_score"},
-                "y": {
-                    "field": "state_geo",
-                    "type": "nominal",
-                    "title": None,
-                    "sort": {"field": "vulnerability_score", "order": "descending"}
-                },
-                "color": {
-                    "field": "vulnerability_group",
-                    "type": "nominal",
-                    "title": "Vulnerability group",
-                    "scale": {"domain": LEGEND_GROUP_ORDER, "range": GROUP_RANGE_LEGEND},
-                    "legend": {"orient": "bottom", "direction": "horizontal", "columns": 3}
-                },
-                "opacity": {"value": 0.45}
-            }
-        },
-        {
-            "mark": {"type": "circle", "filled": True, "size": 110, "stroke": "white", "strokeWidth": 1.4},
-            "encoding": {
-                "x": {
-                    "field": "vulnerability_score",
-                    "type": "quantitative",
-                    "title": "Vulnerability score",
-                    "axis": {"format": ".1f"}
-                },
-                "y": {
-                    "field": "state_geo",
-                    "type": "nominal",
-                    "sort": {"field": "vulnerability_score", "order": "descending"}
-                },
-                "color": {
-                    "field": "vulnerability_group",
-                    "type": "nominal",
-                    "scale": {"domain": LEGEND_GROUP_ORDER, "range": GROUP_RANGE_LEGEND},
-                    "legend": None
-                },
-                "tooltip": [
-                    {"field": "vulnerability_rank", "type": "quantitative", "title": "Rank"},
-                    {"field": "state_geo", "type": "nominal", "title": "State"},
-                    {"field": "vulnerability_group", "type": "nominal", "title": "Vulnerability group"},
-                    {"field": "vulnerability_score", "type": "quantitative", "title": "Vulnerability score", "format": ".2f"},
-                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
-                    {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
-                    {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"}
-                ]
-            }
-        },
-        {
-            "transform": [{"filter": "datum.vulnerability_rank <= 5"}],
-            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "fontSize": 12, "fontWeight": 600, "color": TEXT},
-            "encoding": {
-                "x": {"field": "vulnerability_score", "type": "quantitative"},
-                "y": {"field": "state_geo", "type": "nominal", "sort": {"field": "vulnerability_score", "order": "descending"}},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "data": {"values": [{"vulnerability_score": 1.15, "state_geo": "Perak", "label": "Score combines lower median income, absolute poverty and relative poverty"}]},
-            "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 13, "fontWeight": 600, "color": MUTED},
-            "encoding": {
-                "x": {"field": "vulnerability_score", "type": "quantitative"},
-                "y": {"field": "state_geo", "type": "nominal", "sort": {"field": "vulnerability_score", "order": "descending"}},
-                "text": {"field": "label"}
-            }
-        }
-    ],
     "config": base_config()
 })
 

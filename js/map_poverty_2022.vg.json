@@ -1,21 +1,25 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "autosize": {
-    "type": "fit",
-    "contains": "padding",
-    "resize": true
+    "type": "pad",
+    "contains": "padding"
   },
-  "width": "container",
-  "height": 350,
+  "width": 500,
+  "height": 360,
   "title": {
     "text": "Poverty remains concentrated in several states",
     "subtitle": "The highest rates appear outside Malaysia's strongest income centres."
   },
   "projection": {
-    "type": "azimuthalEqualArea",
+    "type": "mercator",
     "center": [
       109.5,
       4
+    ],
+    "scale": 1450,
+    "translate": [
+      250,
+      170
     ]
   },
   "data": {

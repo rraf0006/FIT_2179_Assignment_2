@@ -1,21 +1,25 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "autosize": {
-    "type": "fit",
-    "contains": "padding",
-    "resize": true
+    "type": "pad",
+    "contains": "padding"
   },
-  "width": "container",
-  "height": 350,
+  "width": 500,
+  "height": 360,
   "title": {
     "text": "Highest incomes cluster around the Klang Valley",
-    "subtitle": "Income is geographically uneven, with higher values around urban and administrative centres."
+    "subtitle": "Urban centres anchor Malaysia’s income divide."
   },
   "projection": {
-    "type": "azimuthalEqualArea",
+    "type": "mercator",
     "center": [
       109.5,
       4
+    ],
+    "scale": 1450,
+    "translate": [
+      250,
+      170
     ]
   },
   "data": {
