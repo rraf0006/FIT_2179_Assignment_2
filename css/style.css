@@ -83,7 +83,7 @@ h1 {
 .chart-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 18px;
   margin-bottom: 20px;
   box-shadow: 0 10px 30px rgba(31, 41, 51, 0.06);
@@ -91,6 +91,15 @@ h1 {
 
 .chart-card > div {
   width: 100%;
+}
+
+.chart-card .vega-embed {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chart-card svg {
+  max-width: 100%;
 }
 
 .footer {

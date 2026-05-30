@@ -21,6 +21,10 @@ MUTED = "#6b7280"
 ACCENT = "#8a4b2a"
 LIGHT = "#d8c7b2"
 BORDER = "#e6ded3"
+HIGHEST_VULNERABILITY = "#7b3294"
+WATCH_CLOSELY = "#d8a21b"
+LOWER_VULNERABILITY = "#1f78b4"
+VULNERABILITY_RAMP = ["#f7f7fb", "#dadaeb", "#bcbddc", "#807dba", "#4a1486"]
 
 STATE_OPTIONS = [
     None, "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang",
@@ -69,10 +73,13 @@ def base_config():
 
 
 def write(name: str, spec: dict):
-    with (JS / name).open("w", encoding="utf-8") as f:
-        json.dump(spec, f, indent=2, ensure_ascii=False)
-        f.write("\n")
-    print("wrote", JS / name)
+    path = JS / name
+    rendered = json.dumps(spec, indent=2, ensure_ascii=False) + "\n"
+    if path.exists() and path.read_text(encoding="utf-8") == rendered:
+        print("unchanged", path)
+        return
+    path.write_text(rendered, encoding="utf-8")
+    print("wrote", path)
 
 
 def detect_topojson_details():
@@ -119,6 +126,7 @@ MAP_LOOKUP_TRANSFORM = [
 # -------------------- Chart 1 --------------------
 write("national_context.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "autosize": {"type": "fit-x", "contains": "padding", "resize": True},
     "data": {"url": NATIONAL},
     "vconcat": [
         {
@@ -211,8 +219,9 @@ write("national_context.vg.json", {
 # -------------------- Chart 2 --------------------
 write("map_income_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "autosize": {"type": "fit", "contains": "padding", "resize": True},
     "width": "container",
-    "height": 430,
+    "height": 300,
     "title": {
         "text": "Median household income is highest around the Klang Valley",
         "subtitle": "Median monthly household income by state, nominal RM, 2022"
@@ -227,7 +236,12 @@ write("map_income_2022.vg.json", {
             "type": "quantitative",
             "title": "Median income (RM/month)",
             "scale": {"scheme": "blues"},
-            "legend": {"labelExpr": "format(datum.value, ',.0f')"}
+            "legend": {
+                "orient": "bottom",
+                "direction": "horizontal",
+                "gradientLength": 230,
+                "labelExpr": "format(datum.value, ',.0f')"
+            }
         },
         "tooltip": [
             {"field": "state_geo", "type": "nominal", "title": "State"},
@@ -242,8 +256,9 @@ write("map_income_2022.vg.json", {
 # -------------------- Chart 3 --------------------
 write("map_poverty_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "autosize": {"type": "fit", "contains": "padding", "resize": True},
     "width": "container",
-    "height": 430,
+    "height": 300,
     "title": {
         "text": "Absolute poverty remains concentrated in several states",
         "subtitle": "Absolute poverty rate by state, percentage of households, 2022"
@@ -258,7 +273,12 @@ write("map_poverty_2022.vg.json", {
             "type": "quantitative",
             "title": "Absolute poverty (%)",
             "scale": {"scheme": "oranges"},
-            "legend": {"format": ".1f"}
+            "legend": {
+                "orient": "bottom",
+                "direction": "horizontal",
+                "gradientLength": 230,
+                "format": ".1f"
+            }
         },
         "tooltip": [
             {"field": "state_geo", "type": "nominal", "title": "State"},
@@ -277,14 +297,15 @@ bivariate_domain = [
     "High income + Low poverty", "High income + Middle poverty", "High income + High poverty"
 ]
 bivariate_range = [
-    "#e8e1d4", "#d5a373", "#9c5a2e",
-    "#c6d8c4", "#c79a74", "#8f3f2b",
-    "#6fb08a", "#9d7b64", "#6f2e23"
+    "#e8e8e8", "#dfb0d6", "#be64ac",
+    "#ace4e4", "#a5add3", "#8c62aa",
+    "#5ac8c8", "#5698b9", "#3b4994"
 ]
 write("map_bivariate_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "autosize": {"type": "fit", "contains": "padding", "resize": True},
     "width": "container",
-    "height": 470,
+    "height": 360,
     "title": {
         "text": "Low income and high poverty combine into a vulnerability pattern",
         "subtitle": "Bivariate classes combine 2022 median income tertiles and absolute poverty tertiles"
@@ -299,7 +320,7 @@ write("map_bivariate_2022.vg.json", {
             "type": "nominal",
             "title": "Income + poverty class",
             "scale": {"domain": bivariate_domain, "range": bivariate_range},
-            "legend": {"columns": 1}
+            "legend": {"orient": "bottom", "columns": 3, "labelLimit": 190}
         },
         "tooltip": [
             {"field": "state_geo", "type": "nominal", "title": "State"},
@@ -343,7 +364,7 @@ write("rank_income_2022.vg.json", {
         {
             "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 4, "fontSize": 11, "color": TEXT},
             "encoding": {
-                "x": {"field": "income_median", "type": "quantitative"},
+                "x": {"field": "income_median", "type": "quantitative", "axis": {"labelExpr": "format(datum.value, ',.0f')", "tickCount": 6}},
                 "y": {"field": "state_geo", "type": "nominal", "sort": {"field": "income_median", "order": "descending"}},
                 "text": {"field": "income_median", "type": "quantitative", "format": ","}
             }
@@ -517,7 +538,7 @@ write("dumbbell_mean_median_2022.vg.json", {
             ],
             "mark": {"type": "circle", "filled": True, "size": 95, "stroke": "white", "strokeWidth": 1},
             "encoding": {
-                "x": {"field": "income_value", "type": "quantitative"},
+                "x": {"field": "income_value", "type": "quantitative", "title": "Monthly household income (RM)", "axis": {"labelExpr": "format(datum.value, ',.0f')", "tickCount": 7}},
                 "y": {"field": "state_geo", "type": "nominal", "sort": {"field": "income_median", "order": "descending"}},
                 "color": {
                     "field": "Income measure",
@@ -544,11 +565,8 @@ write("scatter_income_poverty_2022.vg.json", {
     "data": {"url": STATE_2022},
     "title": {
         "text": "Lower-income states tend to face higher absolute poverty",
-        "subtitle": "Bubble size shows relative poverty; hover to highlight a state"
+        "subtitle": "Bubble size shows relative poverty; hover a state for details"
     },
-    "params": [
-        {"name": "hover_state", "select": {"type": "point", "fields": ["state_geo"], "on": "pointerover", "clear": "pointerout"}}
-    ],
     "layer": [
         {
             "mark": {"type": "circle", "filled": True, "stroke": "white", "strokeWidth": 1},
@@ -562,13 +580,10 @@ write("scatter_income_poverty_2022.vg.json", {
                     "title": "2022 scorecard group",
                     "scale": {
                         "domain": ["Highest vulnerability", "Watch closely", "Lower vulnerability"],
-                        "range": ["#b45309", "#d7a46a", "#4f9f7a"]
+                        "range": [HIGHEST_VULNERABILITY, WATCH_CLOSELY, LOWER_VULNERABILITY]
                     }
                 },
-                "opacity": {
-                    "condition": {"param": "hover_state", "empty": False, "value": 1},
-                    "value": 0.82
-                },
+                "opacity": {"value": 0.82},
                 "tooltip": [
                     {"field": "state_geo", "type": "nominal", "title": "State"},
                     {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
@@ -630,11 +645,8 @@ write("slope_2007_2022.vg.json", {
     "data": {"url": SLOPE},
     "title": {
         "text": "Every state recorded higher nominal median income than in 2007",
-        "subtitle": "Slope chart of median monthly household income, 2007 and 2022; hover a line for details"
+        "subtitle": "Slope chart of median monthly household income, 2007 and 2022; hover for details"
     },
-    "params": [
-        {"name": "hover_state", "select": {"type": "point", "fields": ["state_geo"], "on": "pointerover", "clear": "pointerout"}}
-    ],
     "layer": [
         {
             "mark": {"type": "line", "point": False},
@@ -647,14 +659,11 @@ write("slope_2007_2022.vg.json", {
                     "value": "#cfc6ba"
                 },
                 "opacity": {
-                    "condition": [
-                        {"param": "hover_state", "empty": False, "value": 1},
-                        {"test": "datum.highlight_slope", "value": 0.9}
-                    ],
+                    "condition": {"test": "datum.highlight_slope", "value": 0.9},
                     "value": 0.35
                 },
                 "strokeWidth": {
-                    "condition": {"param": "hover_state", "empty": False, "value": 3.5},
+                    "condition": {"test": "datum.highlight_slope", "value": 2.6},
                     "value": 1.4
                 },
                 "tooltip": [
@@ -676,10 +685,7 @@ write("slope_2007_2022.vg.json", {
                     "value": "#cfc6ba"
                 },
                 "opacity": {
-                    "condition": [
-                        {"param": "hover_state", "empty": False, "value": 1},
-                        {"test": "datum.highlight_slope", "value": 0.9}
-                    ],
+                    "condition": {"test": "datum.highlight_slope", "value": 0.9},
                     "value": 0.35
                 },
                 "tooltip": [
@@ -732,7 +738,7 @@ write("recovery_2019_2022.vg.json", {
         }
     },
     "spec": {
-        "width": 250,
+        "width": 330,
         "height": 260,
         "layer": [
             {
@@ -783,7 +789,7 @@ scorecard_spec = {
     },
     "hconcat": [
         {
-            "width": 150,
+            "width": 190,
             "height": {"step": 24},
             "title": "State",
             "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 11, "fontWeight": 600, "color": TEXT},
@@ -794,7 +800,7 @@ scorecard_spec = {
             }
         },
         {
-            "width": 115,
+            "width": 145,
             "height": {"step": 24},
             "title": "Median income",
             "layer": [
@@ -808,7 +814,7 @@ scorecard_spec = {
                 {
                     "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "color": TEXT},
                     "encoding": {
-                        "x": {"value": 58},
+                        "x": {"value": 72},
                         "y": y_hidden,
                         "text": {"field": "income_median", "type": "quantitative", "format": ","},
                         "tooltip": [{"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","}]
@@ -817,7 +823,7 @@ scorecard_spec = {
             ]
         },
         {
-            "width": 105,
+            "width": 135,
             "height": {"step": 24},
             "title": "Abs. poverty",
             "layer": [
@@ -831,7 +837,7 @@ scorecard_spec = {
                 {
                     "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "color": TEXT},
                     "encoding": {
-                        "x": {"value": 52},
+                        "x": {"value": 68},
                         "y": y_hidden,
                         "text": {"field": "poverty_absolute", "type": "quantitative", "format": ".1f"},
                         "tooltip": [{"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}]
@@ -840,7 +846,7 @@ scorecard_spec = {
             ]
         },
         {
-            "width": 105,
+            "width": 135,
             "height": {"step": 24},
             "title": "Rel. poverty",
             "layer": [
@@ -854,7 +860,7 @@ scorecard_spec = {
                 {
                     "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "color": TEXT},
                     "encoding": {
-                        "x": {"value": 52},
+                        "x": {"value": 68},
                         "y": y_hidden,
                         "text": {"field": "poverty_relative", "type": "quantitative", "format": ".1f"},
                         "tooltip": [{"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"}]
@@ -863,7 +869,7 @@ scorecard_spec = {
             ]
         },
         {
-            "width": 120,
+            "width": 145,
             "height": {"step": 24},
             "title": "Vulnerability",
             "layer": [
@@ -874,7 +880,7 @@ scorecard_spec = {
                         "color": {
                             "field": "vulnerability_score",
                             "type": "quantitative",
-                            "scale": {"domainMid": 0, "scheme": "redyellowgreen", "reverse": True},
+                            "scale": {"range": VULNERABILITY_RAMP},
                             "legend": None
                         }
                     }
@@ -882,7 +888,7 @@ scorecard_spec = {
                 {
                     "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "fontWeight": 700, "color": TEXT},
                     "encoding": {
-                        "x": {"value": 60},
+                        "x": {"value": 72},
                         "y": y_hidden,
                         "text": {"field": "vulnerability_score", "type": "quantitative", "format": ".2f"},
                         "tooltip": [
@@ -894,7 +900,7 @@ scorecard_spec = {
             ]
         },
         {
-            "width": 170,
+            "width": 230,
             "height": {"step": 24},
             "title": "Category",
             "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 11, "fontWeight": 600},
@@ -907,7 +913,7 @@ scorecard_spec = {
                     "type": "nominal",
                     "scale": {
                         "domain": ["Highest vulnerability", "Watch closely", "Lower vulnerability"],
-                        "range": ["#b45309", "#9a6a2d", "#2f7d59"]
+                        "range": [HIGHEST_VULNERABILITY, WATCH_CLOSELY, LOWER_VULNERABILITY]
                     },
                     "legend": None
                 },

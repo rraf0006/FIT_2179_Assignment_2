@@ -1,7 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
   "width": "container",
-  "height": 430,
+  "height": 300,
   "title": {
     "text": "Absolute poverty remains concentrated in several states",
     "subtitle": "Absolute poverty rate by state, percentage of households, 2022"
@@ -55,6 +60,9 @@
         "scheme": "oranges"
       },
       "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "gradientLength": 230,
         "format": ".1f"
       }
     },

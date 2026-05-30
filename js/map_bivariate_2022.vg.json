@@ -1,7 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
   "width": "container",
-  "height": 470,
+  "height": 360,
   "title": {
     "text": "Low income and high poverty combine into a vulnerability pattern",
     "subtitle": "Bivariate classes combine 2022 median income tertiles and absolute poverty tertiles"
@@ -64,19 +69,21 @@
           "High income + High poverty"
         ],
         "range": [
-          "#e8e1d4",
-          "#d5a373",
-          "#9c5a2e",
-          "#c6d8c4",
-          "#c79a74",
-          "#8f3f2b",
-          "#6fb08a",
-          "#9d7b64",
-          "#6f2e23"
+          "#e8e8e8",
+          "#dfb0d6",
+          "#be64ac",
+          "#ace4e4",
+          "#a5add3",
+          "#8c62aa",
+          "#5ac8c8",
+          "#5698b9",
+          "#3b4994"
         ]
       },
       "legend": {
-        "columns": 1
+        "orient": "bottom",
+        "columns": 3,
+        "labelLimit": 190
       }
     },
     "tooltip": [

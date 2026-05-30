@@ -9,7 +9,7 @@
   },
   "hconcat": [
     {
-      "width": 150,
+      "width": 190,
       "height": {
         "step": 24
       },
@@ -49,7 +49,7 @@
       }
     },
     {
-      "width": 115,
+      "width": 145,
       "height": {
         "step": 24
       },
@@ -90,7 +90,7 @@
           },
           "encoding": {
             "x": {
-              "value": 58
+              "value": 72
             },
             "y": {
               "field": "state_geo",
@@ -119,7 +119,7 @@
       ]
     },
     {
-      "width": 105,
+      "width": 135,
       "height": {
         "step": 24
       },
@@ -160,7 +160,7 @@
           },
           "encoding": {
             "x": {
-              "value": 52
+              "value": 68
             },
             "y": {
               "field": "state_geo",
@@ -189,7 +189,7 @@
       ]
     },
     {
-      "width": 105,
+      "width": 135,
       "height": {
         "step": 24
       },
@@ -230,7 +230,7 @@
           },
           "encoding": {
             "x": {
-              "value": 52
+              "value": 68
             },
             "y": {
               "field": "state_geo",
@@ -259,7 +259,7 @@
       ]
     },
     {
-      "width": 120,
+      "width": 145,
       "height": {
         "step": 24
       },
@@ -284,9 +284,13 @@
               "field": "vulnerability_score",
               "type": "quantitative",
               "scale": {
-                "domainMid": 0,
-                "scheme": "redyellowgreen",
-                "reverse": true
+                "range": [
+                  "#f7f7fb",
+                  "#dadaeb",
+                  "#bcbddc",
+                  "#807dba",
+                  "#4a1486"
+                ]
               },
               "legend": null
             }
@@ -303,7 +307,7 @@
           },
           "encoding": {
             "x": {
-              "value": 60
+              "value": 72
             },
             "y": {
               "field": "state_geo",
@@ -337,7 +341,7 @@
       ]
     },
     {
-      "width": 170,
+      "width": 230,
       "height": {
         "step": 24
       },
@@ -376,9 +380,9 @@
               "Lower vulnerability"
             ],
             "range": [
-              "#b45309",
-              "#9a6a2d",
-              "#2f7d59"
+              "#7b3294",
+              "#d8a21b",
+              "#1f78b4"
             ]
           },
           "legend": null

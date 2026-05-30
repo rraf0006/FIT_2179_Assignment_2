@@ -7,21 +7,8 @@
   },
   "title": {
     "text": "Lower-income states tend to face higher absolute poverty",
-    "subtitle": "Bubble size shows relative poverty; hover to highlight a state"
+    "subtitle": "Bubble size shows relative poverty; hover a state for details"
   },
-  "params": [
-    {
-      "name": "hover_state",
-      "select": {
-        "type": "point",
-        "fields": [
-          "state_geo"
-        ],
-        "on": "pointerover",
-        "clear": "pointerout"
-      }
-    }
-  ],
   "layer": [
     {
       "mark": {
@@ -69,18 +56,13 @@
               "Lower vulnerability"
             ],
             "range": [
-              "#b45309",
-              "#d7a46a",
-              "#4f9f7a"
+              "#7b3294",
+              "#d8a21b",
+              "#1f78b4"
             ]
           }
         },
         "opacity": {
-          "condition": {
-            "param": "hover_state",
-            "empty": false,
-            "value": 1
-          },
           "value": 0.82
         },
         "tooltip": [

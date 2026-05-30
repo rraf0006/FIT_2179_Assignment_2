@@ -7,21 +7,8 @@
   },
   "title": {
     "text": "Every state recorded higher nominal median income than in 2007",
-    "subtitle": "Slope chart of median monthly household income, 2007 and 2022; hover a line for details"
+    "subtitle": "Slope chart of median monthly household income, 2007 and 2022; hover for details"
   },
-  "params": [
-    {
-      "name": "hover_state",
-      "select": {
-        "type": "point",
-        "fields": [
-          "state_geo"
-        ],
-        "on": "pointerover",
-        "clear": "pointerout"
-      }
-    }
-  ],
   "layer": [
     {
       "mark": {
@@ -54,24 +41,16 @@
           "value": "#cfc6ba"
         },
         "opacity": {
-          "condition": [
-            {
-              "param": "hover_state",
-              "empty": false,
-              "value": 1
-            },
-            {
-              "test": "datum.highlight_slope",
-              "value": 0.9
-            }
-          ],
+          "condition": {
+            "test": "datum.highlight_slope",
+            "value": 0.9
+          },
           "value": 0.35
         },
         "strokeWidth": {
           "condition": {
-            "param": "hover_state",
-            "empty": false,
-            "value": 3.5
+            "test": "datum.highlight_slope",
+            "value": 2.6
           },
           "value": 1.4
         },
@@ -128,17 +107,10 @@
           "value": "#cfc6ba"
         },
         "opacity": {
-          "condition": [
-            {
-              "param": "hover_state",
-              "empty": false,
-              "value": 1
-            },
-            {
-              "test": "datum.highlight_slope",
-              "value": 0.9
-            }
-          ],
+          "condition": {
+            "test": "datum.highlight_slope",
+            "value": 0.9
+          },
           "value": 0.35
         },
         "tooltip": [

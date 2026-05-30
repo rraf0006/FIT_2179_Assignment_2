@@ -95,8 +95,9 @@
           "type": "quantitative",
           "title": "Monthly household income (RM)",
           "axis": {
-          "labelExpr": "format(datum.value, ',.0f')",
-          "tickCount": 7}
+            "labelExpr": "format(datum.value, ',.0f')",
+            "tickCount": 7
+          }
         },
         "y": {
           "field": "state_geo",
