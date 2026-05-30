@@ -35,7 +35,7 @@
       "type": "quantitative",
       "title": "Absolute poverty (%)",
       "scale": {
-        "scheme": "oranges"
+        "scheme": "purples"
       }
     },
     "tooltip": [

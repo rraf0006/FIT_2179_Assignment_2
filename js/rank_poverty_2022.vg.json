@@ -40,9 +40,9 @@
         "color": {
           "condition": {
             "test": "indexof(['Sabah', 'Kelantan', 'Sarawak', 'Kedah'], datum.state_geo) >= 0",
-            "value": "#b45309"
+            "value": "#6f4aa2"
           },
-          "value": "#dccfc0"
+          "value": "#d8cfea"
         },
         "tooltip": [
           {

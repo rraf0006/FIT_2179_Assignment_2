@@ -37,9 +37,9 @@
         "color": {
           "condition": {
             "test": "datum.highlight_income",
-            "value": "#8a4b2a"
+            "value": "#6f4aa2"
           },
-          "value": "#d8c7b2"
+          "value": "#d8cfea"
         },
         "tooltip": [
           {

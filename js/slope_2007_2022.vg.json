@@ -18,8 +18,22 @@
       "encoding": {
         "x": {
           "field": "year",
-          "type": "ordinal",
-          "title": null
+          "type": "quantitative",
+          "title": null,
+          "scale": {
+            "domain": [
+              2007,
+              2022
+            ]
+          },
+          "axis": {
+            "format": "d",
+            "values": [
+              2007,
+              2022
+            ],
+            "tickMinStep": 1
+          }
         },
         "y": {
           "field": "income_median",
@@ -36,7 +50,7 @@
         "color": {
           "condition": {
             "test": "datum.highlight_slope",
-            "value": "#8a4b2a"
+            "value": "#6f4aa2"
           },
           "value": "#cfc6ba"
         },
@@ -89,7 +103,13 @@
       "encoding": {
         "x": {
           "field": "year",
-          "type": "ordinal"
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2007,
+              2022
+            ]
+          }
         },
         "y": {
           "field": "income_median",
@@ -102,7 +122,7 @@
         "color": {
           "condition": {
             "test": "datum.highlight_slope",
-            "value": "#8a4b2a"
+            "value": "#6f4aa2"
           },
           "value": "#cfc6ba"
         },
@@ -149,7 +169,13 @@
       "encoding": {
         "x": {
           "field": "year",
-          "type": "ordinal"
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2007,
+              2022
+            ]
+          }
         },
         "y": {
           "field": "income_median",

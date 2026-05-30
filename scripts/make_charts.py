@@ -18,14 +18,14 @@ RECOVERY = "data/processed/recovery_2019_2022.csv"
 FONT = "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
 TEXT = "#1f2933"
 MUTED = "#6b7280"
-ACCENT = "#8a4b2a"
-LIGHT = "#d8c7b2"
+ACCENT = "#6f4aa2"
+LIGHT = "#d8cfea"
 BORDER = "#e6ded3"
-HIGHEST_VULNERABILITY = "#7b3294"
+HIGHEST_VULNERABILITY = "#6f4aa2"
 WATCH_CLOSELY = "#d8a21b"
-LOWER_VULNERABILITY = "#1f78b4"
+LOWER_VULNERABILITY = "#4c78a8"
 SCORECARD_INCOME_RAMP = ["#f7fbff", "#e8f2fb", "#d7e8f6", "#c5ddf0", "#add0e8"]
-SCORECARD_ABS_POVERTY_RAMP = ["#fff7ed", "#feedde", "#fde2c2", "#fbd3a3", "#f8c184"]
+SCORECARD_ABS_POVERTY_RAMP = ["#fffdf0", "#fbf3c4", "#f3df8a", "#e8c95a", "#d8a21b"]
 SCORECARD_REL_POVERTY_RAMP = ["#fcfbfd", "#f2eff8", "#e7e0f2", "#d8cdea", "#c6b8e0"]
 VULNERABILITY_RAMP = ["#fbf9ff", "#f0eaf8", "#e4d9f1", "#d7c8ea", "#cab8e3"]
 
@@ -190,7 +190,7 @@ write("national_context.vg.json", {
             },
             "layer": [
                 {
-                    "mark": {"type": "line", "strokeWidth": 3, "color": "#b45309"},
+                    "mark": {"type": "line", "strokeWidth": 3, "color": WATCH_CLOSELY},
                     "encoding": {
                         "x": {"field": "year", "type": "quantitative", "axis": {"title": "Year", "format": "d", "tickMinStep": 1}},
                         "y": {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "scale": {"zero": True}},
@@ -202,7 +202,7 @@ write("national_context.vg.json", {
                     }
                 },
                 {
-                    "mark": {"type": "point", "filled": True, "size": 45, "color": "#b45309"},
+                    "mark": {"type": "point", "filled": True, "size": 45, "color": WATCH_CLOSELY},
                     "encoding": {
                         "x": {"field": "year", "type": "quantitative"},
                         "y": {"field": "poverty_absolute", "type": "quantitative"},
@@ -279,7 +279,7 @@ write("map_poverty_2022.vg.json", {
             "field": "poverty_absolute",
             "type": "quantitative",
             "title": "Absolute poverty (%)",
-            "scale": {"scheme": "oranges"},
+            "scale": {"scheme": "purples"},
             "legend": {
                 "orient": "bottom",
                 "direction": "horizontal",
@@ -318,7 +318,7 @@ write("map_bivariate_2022.vg.json", {
             "title": "2022 vulnerability group",
             "scale": {
                 "domain": ["Highest vulnerability", "Watch closely", "Lower vulnerability"],
-                "range": ["#8a4b2a", "#d8a25e", "#5fa8a3"]
+                "range": [HIGHEST_VULNERABILITY, WATCH_CLOSELY, LOWER_VULNERABILITY]
             },
             "legend": {
                 "orient": "bottom",
@@ -420,9 +420,9 @@ write("rank_poverty_2022.vg.json", {
         "color": {
           "condition": {
             "test": "indexof(['Sabah', 'Kelantan', 'Sarawak', 'Kedah'], datum.state_geo) >= 0",
-            "value": "#b45309"
+            "value": HIGHEST_VULNERABILITY
           },
-          "value": "#dccfc0"
+          "value": "#d8cfea"
         },
         "tooltip": [
           {
@@ -554,7 +554,7 @@ write("dumbbell_mean_median_2022.vg.json", {
                 "color": {
                     "field": "Income measure",
                     "type": "nominal",
-                    "scale": {"domain": ["Median", "Mean"], "range": ["#1f78b4", "#b45309"]},
+                    "scale": {"domain": ["Median", "Mean"], "range": [LOWER_VULNERABILITY, WATCH_CLOSELY]},
                     "title": "Measure"
                 },
                 "tooltip": [
@@ -643,7 +643,7 @@ write("heatmap_2007_2022.vg.json", {
             "field": "poverty_absolute",
             "type": "quantitative",
             "title": "Absolute poverty (%)",
-            "scale": {"scheme": "oranges"}
+            "scale": {"scheme": "purples"}
         },
         "tooltip": [
             {"field": "state_geo", "type": "nominal", "title": "State"},
@@ -670,7 +670,13 @@ write("slope_2007_2022.vg.json", {
         {
             "mark": {"type": "line", "point": False},
             "encoding": {
-                "x": {"field": "year", "type": "ordinal", "title": None},
+                "x": {
+                    "field": "year",
+                    "type": "quantitative",
+                    "title": None,
+                    "scale": {"domain": [2007, 2022]},
+                    "axis": {"format": "d", "values": [2007, 2022], "tickMinStep": 1}
+                },
                 "y": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "axis": {"format": ",.0f"}},
                 "detail": {"field": "state_geo", "type": "nominal"},
                 "color": {
@@ -696,7 +702,7 @@ write("slope_2007_2022.vg.json", {
         {
             "mark": {"type": "circle", "filled": True, "size": 55},
             "encoding": {
-                "x": {"field": "year", "type": "ordinal"},
+                "x": {"field": "year", "type": "quantitative", "scale": {"domain": [2007, 2022]}},
                 "y": {"field": "income_median", "type": "quantitative"},
                 "detail": {"field": "state_geo", "type": "nominal"},
                 "color": {
@@ -720,7 +726,7 @@ write("slope_2007_2022.vg.json", {
             ],
             "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11, "color": TEXT},
             "encoding": {
-                "x": {"field": "year", "type": "ordinal"},
+                "x": {"field": "year", "type": "quantitative", "scale": {"domain": [2007, 2022]}},
                 "y": {"field": "income_median", "type": "quantitative"},
                 "text": {"field": "state_geo", "type": "nominal"}
             }
@@ -768,7 +774,15 @@ write("recovery_2019_2022.vg.json", {
                     "x": {"field": "year", "type": "ordinal", "title": "Year"},
                     "y": {"field": "income_index_2019", "type": "quantitative", "title": "Median income index", "scale": {"zero": False}},
                     "detail": {"field": "state_geo", "type": "nominal"},
-                    "color": {"field": "state_geo", "type": "nominal", "legend": None},
+                    "color": {
+                        "field": "vulnerability_group",
+                        "type": "nominal",
+                        "scale": {
+                            "domain": ["Highest vulnerability", "Watch closely", "Lower vulnerability"],
+                            "range": [HIGHEST_VULNERABILITY, WATCH_CLOSELY, LOWER_VULNERABILITY]
+                        },
+                        "legend": None
+                    },
                     "opacity": {
                         "condition": {"test": "State_selection == null || datum.state_geo == State_selection", "value": 0.95},
                         "value": 0.18

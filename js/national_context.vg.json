@@ -21,7 +21,7 @@
           "mark": {
             "type": "line",
             "strokeWidth": 3,
-            "color": "#8a4b2a"
+            "color": "#6f4aa2"
           },
           "encoding": {
             "x": {
@@ -68,7 +68,7 @@
             "type": "point",
             "filled": true,
             "size": 45,
-            "color": "#8a4b2a"
+            "color": "#6f4aa2"
           },
           "encoding": {
             "x": {
@@ -147,7 +147,7 @@
           "mark": {
             "type": "line",
             "strokeWidth": 3,
-            "color": "#b45309"
+            "color": "#d8a21b"
           },
           "encoding": {
             "x": {
@@ -194,7 +194,7 @@
             "type": "point",
             "filled": true,
             "size": 45,
-            "color": "#b45309"
+            "color": "#d8a21b"
           },
           "encoding": {
             "x": {

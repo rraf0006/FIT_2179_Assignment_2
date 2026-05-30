@@ -151,11 +151,11 @@
               "type": "quantitative",
               "scale": {
                 "range": [
-                  "#fff7ed",
-                  "#feedde",
-                  "#fde2c2",
-                  "#fbd3a3",
-                  "#f8c184"
+                  "#fffdf0",
+                  "#fbf3c4",
+                  "#f3df8a",
+                  "#e8c95a",
+                  "#d8a21b"
                 ]
               },
               "legend": null
@@ -398,9 +398,9 @@
               "Lower vulnerability"
             ],
             "range": [
-              "#7b3294",
+              "#6f4aa2",
               "#d8a21b",
-              "#1f78b4"
+              "#4c78a8"
             ]
           },
           "legend": null

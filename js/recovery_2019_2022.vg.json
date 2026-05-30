@@ -100,8 +100,20 @@
             "type": "nominal"
           },
           "color": {
-            "field": "state_geo",
+            "field": "vulnerability_group",
             "type": "nominal",
+            "scale": {
+              "domain": [
+                "Highest vulnerability",
+                "Watch closely",
+                "Lower vulnerability"
+              ],
+              "range": [
+                "#6f4aa2",
+                "#d8a21b",
+                "#4c78a8"
+              ]
+            },
             "legend": null
           },
           "opacity": {
