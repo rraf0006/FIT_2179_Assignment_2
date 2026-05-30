@@ -8,7 +8,10 @@
   "width": "container",
   "height": 300,
   "title": {
-    "text": "Median household income is highest around the Klang Valley",
+    "text": [
+      "Median household income is highest",
+      "around the Klang Valley"
+    ],
     "subtitle": "Median monthly household income by state, nominal RM, 2022"
   },
   "projection": {
@@ -63,7 +66,7 @@
         "orient": "bottom",
         "direction": "horizontal",
         "gradientLength": 230,
-        "labelExpr": "format(datum.value, ',.0f')"
+        "format": ",.0f"
       }
     },
     "tooltip": [

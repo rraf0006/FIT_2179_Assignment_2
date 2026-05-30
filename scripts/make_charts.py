@@ -230,7 +230,7 @@ write("map_income_2022.vg.json", {
     "width": "container",
     "height": 300,
     "title": {
-        "text": "Median household income is highest around the Klang Valley",
+        "text": ["Median household income is highest", "around the Klang Valley"],
         "subtitle": "Median monthly household income by state, nominal RM, 2022"
     },
     "projection": {"type": "equalEarth"},
@@ -247,7 +247,7 @@ write("map_income_2022.vg.json", {
                 "orient": "bottom",
                 "direction": "horizontal",
                 "gradientLength": 230,
-                "labelExpr": "format(datum.value, ',.0f')"
+                "format": ",.0f"
             }
         },
         "tooltip": [
@@ -582,9 +582,15 @@ write("scatter_income_poverty_2022.vg.json", {
         {
             "mark": {"type": "circle", "filled": True, "stroke": "white", "strokeWidth": 1},
             "encoding": {
-                "x": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "axis": {"format": ","}},
+                "x": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "axis": {"format": ",.0f"}},
                 "y": {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "scale": {"zero": True}},
-                "size": {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "scale": {"range": [80, 800]}},
+                "size": {
+                    "field": "poverty_relative",
+                    "type": "quantitative",
+                    "title": "Relative poverty (%)",
+                    "scale": {"range": [80, 800]},
+                    "legend": {"format": ".1f"}
+                },
                 "color": {
                     "field": "vulnerability_group",
                     "type": "nominal",
@@ -597,7 +603,7 @@ write("scatter_income_poverty_2022.vg.json", {
                 "opacity": {"value": 0.82},
                 "tooltip": [
                     {"field": "state_geo", "type": "nominal", "title": "State"},
-                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
                     {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
                     {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
                     {"field": "vulnerability_group", "type": "nominal", "title": "Scorecard group"}
@@ -606,46 +612,9 @@ write("scatter_income_poverty_2022.vg.json", {
         },
         {
             "transform": [
-                {"filter": "datum.label_scatter"},
-                {"filter": "indexof(['Selangor', 'Kuala Lumpur', 'Putrajaya', 'Sarawak'], datum.state_geo) < 0"}
+                {"filter": "indexof(['Sabah', 'Kelantan', 'Sarawak'], datum.state_geo) >= 0"}
             ],
-            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "income_median", "type": "quantitative"},
-                "y": {"field": "poverty_absolute", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.state_geo == 'Sarawak'"}],
-            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "dy": 10, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "income_median", "type": "quantitative"},
-                "y": {"field": "poverty_absolute", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.state_geo == 'Selangor'"}],
-            "mark": {"type": "text", "align": "right", "baseline": "middle", "dx": -12, "dy": 8, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "income_median", "type": "quantitative"},
-                "y": {"field": "poverty_absolute", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.state_geo == 'Kuala Lumpur'"}],
-            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "dy": -16, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "income_median", "type": "quantitative"},
-                "y": {"field": "poverty_absolute", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.state_geo == 'Putrajaya'"}],
-            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "dy": 18, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 9, "fontSize": 11, "color": TEXT},
             "encoding": {
                 "x": {"field": "income_median", "type": "quantitative"},
                 "y": {"field": "poverty_absolute", "type": "quantitative"},
@@ -702,7 +671,7 @@ write("slope_2007_2022.vg.json", {
             "mark": {"type": "line", "point": False},
             "encoding": {
                 "x": {"field": "year", "type": "ordinal", "title": None},
-                "y": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "axis": {"format": ","}},
+                "y": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "axis": {"format": ",.0f"}},
                 "detail": {"field": "state_geo", "type": "nominal"},
                 "color": {
                     "condition": {"test": "datum.highlight_slope", "value": ACCENT},
@@ -719,7 +688,7 @@ write("slope_2007_2022.vg.json", {
                 "tooltip": [
                     {"field": "state_geo", "type": "nominal", "title": "State"},
                     {"field": "year", "type": "ordinal", "title": "Year"},
-                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
                     {"field": "income_change_pct_2007_2022", "type": "quantitative", "title": "2007-2022 change (%)", "format": ".1f"}
                 ]
             }
@@ -741,61 +710,15 @@ write("slope_2007_2022.vg.json", {
                 "tooltip": [
                     {"field": "state_geo", "type": "nominal", "title": "State"},
                     {"field": "year", "type": "ordinal", "title": "Year"},
-                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","}
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"}
                 ]
             }
         },
         {
             "transform": [
-                {"filter": "datum.year == 2022 && datum.highlight_slope"},
-                {"filter": "indexof(['Selangor', 'Kuala Lumpur', 'Putrajaya', 'Sabah', 'Kelantan'], datum.state_geo) < 0"}
+                {"filter": "datum.year == 2022 && indexof(['Putrajaya', 'Kuala Lumpur', 'Sabah', 'Kelantan'], datum.state_geo) >= 0"}
             ],
-            "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "year", "type": "ordinal"},
-                "y": {"field": "income_median", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Kelantan'"}],
-            "mark": {"type": "text", "align": "left", "dx": 10, "dy": -14, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "year", "type": "ordinal"},
-                "y": {"field": "income_median", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Sabah'"}],
-            "mark": {"type": "text", "align": "left", "dx": 10, "dy": 18, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "year", "type": "ordinal"},
-                "y": {"field": "income_median", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Selangor'"}],
-            "mark": {"type": "text", "align": "right", "dx": -14, "dy": 26, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "year", "type": "ordinal"},
-                "y": {"field": "income_median", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Kuala Lumpur'"}],
-            "mark": {"type": "text", "align": "left", "dx": 10, "dy": 0, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "year", "type": "ordinal"},
-                "y": {"field": "income_median", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
-            }
-        },
-        {
-            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Putrajaya'"}],
-            "mark": {"type": "text", "align": "left", "dx": 10, "dy": -28, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11, "color": TEXT},
             "encoding": {
                 "x": {"field": "year", "type": "ordinal"},
                 "y": {"field": "income_median", "type": "quantitative"},

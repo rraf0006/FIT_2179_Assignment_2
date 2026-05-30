@@ -23,7 +23,7 @@
           "type": "quantitative",
           "title": "Median income (RM/month)",
           "axis": {
-            "format": ","
+            "format": ",.0f"
           }
         },
         "y": {
@@ -43,6 +43,9 @@
               80,
               800
             ]
+          },
+          "legend": {
+            "format": ".1f"
           }
         },
         "color": {
@@ -75,7 +78,7 @@
             "field": "income_median",
             "type": "quantitative",
             "title": "Median income (RM)",
-            "format": ","
+            "format": ",.0f"
           },
           {
             "field": "poverty_absolute",
@@ -100,143 +103,15 @@
     {
       "transform": [
         {
-          "filter": "datum.label_scatter"
-        },
-        {
-          "filter": "indexof(['Selangor', 'Kuala Lumpur', 'Putrajaya', 'Sarawak'], datum.state_geo) < 0"
+          "filter": "indexof(['Sabah', 'Kelantan', 'Sarawak'], datum.state_geo) >= 0"
         }
       ],
       "mark": {
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "dx": 10,
-        "fontSize": 12,
-        "fontWeight": 700,
-        "color": "#1f2933"
-      },
-      "encoding": {
-        "x": {
-          "field": "income_median",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "poverty_absolute",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "state_geo",
-          "type": "nominal"
-        }
-      }
-    },
-    {
-      "transform": [
-        {
-          "filter": "datum.state_geo == 'Sarawak'"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 10,
-        "dy": 10,
-        "fontSize": 12,
-        "fontWeight": 700,
-        "color": "#1f2933"
-      },
-      "encoding": {
-        "x": {
-          "field": "income_median",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "poverty_absolute",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "state_geo",
-          "type": "nominal"
-        }
-      }
-    },
-    {
-      "transform": [
-        {
-          "filter": "datum.state_geo == 'Selangor'"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "align": "right",
-        "baseline": "middle",
-        "dx": -12,
-        "dy": 8,
-        "fontSize": 12,
-        "fontWeight": 700,
-        "color": "#1f2933"
-      },
-      "encoding": {
-        "x": {
-          "field": "income_median",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "poverty_absolute",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "state_geo",
-          "type": "nominal"
-        }
-      }
-    },
-    {
-      "transform": [
-        {
-          "filter": "datum.state_geo == 'Kuala Lumpur'"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 10,
-        "dy": -16,
-        "fontSize": 12,
-        "fontWeight": 700,
-        "color": "#1f2933"
-      },
-      "encoding": {
-        "x": {
-          "field": "income_median",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "poverty_absolute",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "state_geo",
-          "type": "nominal"
-        }
-      }
-    },
-    {
-      "transform": [
-        {
-          "filter": "datum.state_geo == 'Putrajaya'"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 10,
-        "dy": 18,
-        "fontSize": 12,
-        "fontWeight": 700,
+        "dx": 9,
+        "fontSize": 11,
         "color": "#1f2933"
       },
       "encoding": {
