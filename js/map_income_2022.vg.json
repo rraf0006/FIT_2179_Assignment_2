@@ -97,11 +97,15 @@
     "background": "transparent",
     "title": {
       "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "fontSize": 17,
+      "fontSize": 19,
       "fontWeight": 700,
+      "lineHeight": 23,
       "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "subtitleFontSize": 12,
+      "subtitleFontSize": 13,
       "subtitleColor": "#6b7280",
+      "subtitleLineHeight": 18,
+      "subtitlePadding": 7,
+      "offset": 18,
       "anchor": "start",
       "color": "#1f2933"
     },

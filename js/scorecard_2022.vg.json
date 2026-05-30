@@ -74,7 +74,13 @@
               "field": "income_median",
               "type": "quantitative",
               "scale": {
-                "scheme": "blues"
+                "range": [
+                  "#f7fbff",
+                  "#e8f2fb",
+                  "#d7e8f6",
+                  "#c5ddf0",
+                  "#add0e8"
+                ]
               },
               "legend": null
             }
@@ -144,7 +150,13 @@
               "field": "poverty_absolute",
               "type": "quantitative",
               "scale": {
-                "scheme": "oranges"
+                "range": [
+                  "#fff7ed",
+                  "#feedde",
+                  "#fde2c2",
+                  "#fbd3a3",
+                  "#f8c184"
+                ]
               },
               "legend": null
             }
@@ -214,7 +226,13 @@
               "field": "poverty_relative",
               "type": "quantitative",
               "scale": {
-                "scheme": "purples"
+                "range": [
+                  "#fcfbfd",
+                  "#f2eff8",
+                  "#e7e0f2",
+                  "#d8cdea",
+                  "#c6b8e0"
+                ]
               },
               "legend": null
             }
@@ -285,11 +303,11 @@
               "type": "quantitative",
               "scale": {
                 "range": [
-                  "#f7f7fb",
-                  "#dadaeb",
-                  "#bcbddc",
-                  "#807dba",
-                  "#4a1486"
+                  "#fbf9ff",
+                  "#f0eaf8",
+                  "#e4d9f1",
+                  "#d7c8ea",
+                  "#cab8e3"
                 ]
               },
               "legend": null
@@ -408,11 +426,15 @@
     "background": "transparent",
     "title": {
       "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "fontSize": 17,
+      "fontSize": 19,
       "fontWeight": 700,
+      "lineHeight": 23,
       "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "subtitleFontSize": 12,
+      "subtitleFontSize": 13,
       "subtitleColor": "#6b7280",
+      "subtitleLineHeight": 18,
+      "subtitlePadding": 7,
+      "offset": 18,
       "anchor": "start",
       "color": "#1f2933"
     },

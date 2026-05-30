@@ -24,7 +24,10 @@ BORDER = "#e6ded3"
 HIGHEST_VULNERABILITY = "#7b3294"
 WATCH_CLOSELY = "#d8a21b"
 LOWER_VULNERABILITY = "#1f78b4"
-VULNERABILITY_RAMP = ["#f7f7fb", "#dadaeb", "#bcbddc", "#807dba", "#4a1486"]
+SCORECARD_INCOME_RAMP = ["#f7fbff", "#e8f2fb", "#d7e8f6", "#c5ddf0", "#add0e8"]
+SCORECARD_ABS_POVERTY_RAMP = ["#fff7ed", "#feedde", "#fde2c2", "#fbd3a3", "#f8c184"]
+SCORECARD_REL_POVERTY_RAMP = ["#fcfbfd", "#f2eff8", "#e7e0f2", "#d8cdea", "#c6b8e0"]
+VULNERABILITY_RAMP = ["#fbf9ff", "#f0eaf8", "#e4d9f1", "#d7c8ea", "#cab8e3"]
 
 STATE_OPTIONS = [
     None, "Johor", "Kedah", "Kelantan", "Melaka", "Negeri Sembilan", "Pahang",
@@ -40,11 +43,15 @@ def base_config():
         "background": "transparent",
         "title": {
             "font": FONT,
-            "fontSize": 17,
+            "fontSize": 19,
             "fontWeight": 700,
+            "lineHeight": 23,
             "subtitleFont": FONT,
-            "subtitleFontSize": 12,
+            "subtitleFontSize": 13,
             "subtitleColor": MUTED,
+            "subtitleLineHeight": 18,
+            "subtitlePadding": 7,
+            "offset": 18,
             "anchor": "start",
             "color": TEXT
         },
@@ -478,11 +485,15 @@ write("rank_poverty_2022.vg.json", {
     "background": "transparent",
     "title": {
       "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "fontSize": 17,
+      "fontSize": 19,
       "fontWeight": 700,
+      "lineHeight": 23,
       "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "subtitleFontSize": 12,
+      "subtitleFontSize": 13,
       "subtitleColor": "#6b7280",
+      "subtitleLineHeight": 18,
+      "subtitlePadding": 7,
+      "offset": 18,
       "anchor": "start",
       "color": "#1f2933"
     },
@@ -594,8 +605,47 @@ write("scatter_income_poverty_2022.vg.json", {
             }
         },
         {
-            "transform": [{"filter": "datum.label_scatter"}],
-            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 9, "fontSize": 11, "fontWeight": 600, "color": TEXT},
+            "transform": [
+                {"filter": "datum.label_scatter"},
+                {"filter": "indexof(['Selangor', 'Kuala Lumpur', 'Putrajaya', 'Sarawak'], datum.state_geo) < 0"}
+            ],
+            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "income_median", "type": "quantitative"},
+                "y": {"field": "poverty_absolute", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.state_geo == 'Sarawak'"}],
+            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "dy": 10, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "income_median", "type": "quantitative"},
+                "y": {"field": "poverty_absolute", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.state_geo == 'Selangor'"}],
+            "mark": {"type": "text", "align": "right", "baseline": "middle", "dx": -12, "dy": 8, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "income_median", "type": "quantitative"},
+                "y": {"field": "poverty_absolute", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.state_geo == 'Kuala Lumpur'"}],
+            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "dy": -16, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "income_median", "type": "quantitative"},
+                "y": {"field": "poverty_absolute", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.state_geo == 'Putrajaya'"}],
+            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 10, "dy": 18, "fontSize": 12, "fontWeight": 700, "color": TEXT},
             "encoding": {
                 "x": {"field": "income_median", "type": "quantitative"},
                 "y": {"field": "poverty_absolute", "type": "quantitative"},
@@ -696,8 +746,56 @@ write("slope_2007_2022.vg.json", {
             }
         },
         {
-            "transform": [{"filter": "datum.year == 2022 && datum.highlight_slope"}],
-            "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11, "fontWeight": 600, "color": TEXT},
+            "transform": [
+                {"filter": "datum.year == 2022 && datum.highlight_slope"},
+                {"filter": "indexof(['Selangor', 'Kuala Lumpur', 'Putrajaya', 'Sabah', 'Kelantan'], datum.state_geo) < 0"}
+            ],
+            "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "year", "type": "ordinal"},
+                "y": {"field": "income_median", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Kelantan'"}],
+            "mark": {"type": "text", "align": "left", "dx": 10, "dy": -14, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "year", "type": "ordinal"},
+                "y": {"field": "income_median", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Sabah'"}],
+            "mark": {"type": "text", "align": "left", "dx": 10, "dy": 18, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "year", "type": "ordinal"},
+                "y": {"field": "income_median", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Selangor'"}],
+            "mark": {"type": "text", "align": "right", "dx": -14, "dy": 26, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "year", "type": "ordinal"},
+                "y": {"field": "income_median", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Kuala Lumpur'"}],
+            "mark": {"type": "text", "align": "left", "dx": 10, "dy": 0, "fontSize": 12, "fontWeight": 700, "color": TEXT},
+            "encoding": {
+                "x": {"field": "year", "type": "ordinal"},
+                "y": {"field": "income_median", "type": "quantitative"},
+                "text": {"field": "state_geo", "type": "nominal"}
+            }
+        },
+        {
+            "transform": [{"filter": "datum.year == 2022 && datum.state_geo == 'Putrajaya'"}],
+            "mark": {"type": "text", "align": "left", "dx": 10, "dy": -28, "fontSize": 12, "fontWeight": 700, "color": TEXT},
             "encoding": {
                 "x": {"field": "year", "type": "ordinal"},
                 "y": {"field": "income_median", "type": "quantitative"},
@@ -808,7 +906,7 @@ scorecard_spec = {
                     "mark": {"type": "rect", "height": 20},
                     "encoding": {
                         "y": y_hidden,
-                        "color": {"field": "income_median", "type": "quantitative", "scale": {"scheme": "blues"}, "legend": None}
+                        "color": {"field": "income_median", "type": "quantitative", "scale": {"range": SCORECARD_INCOME_RAMP}, "legend": None}
                     }
                 },
                 {
@@ -831,7 +929,7 @@ scorecard_spec = {
                     "mark": {"type": "rect", "height": 20},
                     "encoding": {
                         "y": y_hidden,
-                        "color": {"field": "poverty_absolute", "type": "quantitative", "scale": {"scheme": "oranges"}, "legend": None}
+                        "color": {"field": "poverty_absolute", "type": "quantitative", "scale": {"range": SCORECARD_ABS_POVERTY_RAMP}, "legend": None}
                     }
                 },
                 {
@@ -854,7 +952,7 @@ scorecard_spec = {
                     "mark": {"type": "rect", "height": 20},
                     "encoding": {
                         "y": y_hidden,
-                        "color": {"field": "poverty_relative", "type": "quantitative", "scale": {"scheme": "purples"}, "legend": None}
+                        "color": {"field": "poverty_relative", "type": "quantitative", "scale": {"range": SCORECARD_REL_POVERTY_RAMP}, "legend": None}
                     }
                 },
                 {

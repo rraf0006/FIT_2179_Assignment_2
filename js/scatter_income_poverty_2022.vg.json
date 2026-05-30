@@ -101,15 +101,142 @@
       "transform": [
         {
           "filter": "datum.label_scatter"
+        },
+        {
+          "filter": "indexof(['Selangor', 'Kuala Lumpur', 'Putrajaya', 'Sarawak'], datum.state_geo) < 0"
         }
       ],
       "mark": {
         "type": "text",
         "align": "left",
         "baseline": "middle",
-        "dx": 9,
-        "fontSize": 11,
-        "fontWeight": 600,
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state_geo",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.state_geo == 'Sarawak'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "dy": 10,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state_geo",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.state_geo == 'Selangor'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "dy": 8,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state_geo",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.state_geo == 'Kuala Lumpur'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "dy": -16,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#1f2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state_geo",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.state_geo == 'Putrajaya'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "dy": 18,
+        "fontSize": 12,
+        "fontWeight": 700,
         "color": "#1f2933"
       },
       "encoding": {
@@ -133,11 +260,15 @@
     "background": "transparent",
     "title": {
       "font": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "fontSize": 17,
+      "fontSize": 19,
       "fontWeight": 700,
+      "lineHeight": 23,
       "subtitleFont": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      "subtitleFontSize": 12,
+      "subtitleFontSize": 13,
       "subtitleColor": "#6b7280",
+      "subtitleLineHeight": 18,
+      "subtitlePadding": 7,
+      "offset": 18,
       "anchor": "start",
       "color": "#1f2933"
     },
