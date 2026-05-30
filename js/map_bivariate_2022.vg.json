@@ -6,10 +6,10 @@
     "resize": true
   },
   "width": "container",
-  "height": 360,
+  "height": 430,
   "title": {
-    "text": "Low income and high poverty combine into a vulnerability pattern",
-    "subtitle": "Bivariate classes combine 2022 median income tertiles and absolute poverty tertiles"
+    "text": "Vulnerability remains concentrated in Sabah, Sarawak and Kelantan",
+    "subtitle": "Score combines low median income, absolute poverty and relative poverty, 2022"
   },
   "projection": {
     "type": "equalEarth"
@@ -49,41 +49,31 @@
   "mark": {
     "type": "geoshape",
     "stroke": "white",
-    "strokeWidth": 0.9
+    "strokeWidth": 1
   },
   "encoding": {
     "color": {
-      "field": "bivariate_class",
+      "field": "vulnerability_group",
       "type": "nominal",
-      "title": "Income + poverty class",
+      "title": "2022 vulnerability group",
       "scale": {
         "domain": [
-          "Low income + Low poverty",
-          "Low income + Middle poverty",
-          "Low income + High poverty",
-          "Middle income + Low poverty",
-          "Middle income + Middle poverty",
-          "Middle income + High poverty",
-          "High income + Low poverty",
-          "High income + Middle poverty",
-          "High income + High poverty"
+          "Highest vulnerability",
+          "Watch closely",
+          "Lower vulnerability"
         ],
         "range": [
-          "#e8e8e8",
-          "#dfb0d6",
-          "#be64ac",
-          "#ace4e4",
-          "#a5add3",
-          "#8c62aa",
-          "#5ac8c8",
-          "#5698b9",
-          "#3b4994"
+          "#8a4b2a",
+          "#d8a25e",
+          "#5fa8a3"
         ]
       },
       "legend": {
         "orient": "bottom",
+        "direction": "horizontal",
         "columns": 3,
-        "labelLimit": 190
+        "titleLimit": 260,
+        "labelLimit": 180
       }
     },
     "tooltip": [
@@ -93,15 +83,15 @@
         "title": "State"
       },
       {
-        "field": "bivariate_class",
+        "field": "vulnerability_group",
         "type": "nominal",
-        "title": "Class"
+        "title": "Vulnerability group"
       },
       {
         "field": "income_median",
         "type": "quantitative",
         "title": "Median income (RM)",
-        "format": ","
+        "format": ",.0f"
       },
       {
         "field": "poverty_absolute",
@@ -110,9 +100,16 @@
         "format": ".1f"
       },
       {
-        "field": "vulnerability_group",
-        "type": "nominal",
-        "title": "Scorecard group"
+        "field": "poverty_relative",
+        "type": "quantitative",
+        "title": "Relative poverty (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "vulnerability_score",
+        "type": "quantitative",
+        "title": "Vulnerability score",
+        "format": ".2f"
       }
     ]
   },

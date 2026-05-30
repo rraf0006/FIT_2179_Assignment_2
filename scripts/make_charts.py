@@ -298,43 +298,43 @@ write("map_poverty_2022.vg.json", {
 })
 
 # -------------------- Chart 4 --------------------
-bivariate_domain = [
-    "Low income + Low poverty", "Low income + Middle poverty", "Low income + High poverty",
-    "Middle income + Low poverty", "Middle income + Middle poverty", "Middle income + High poverty",
-    "High income + Low poverty", "High income + Middle poverty", "High income + High poverty"
-]
-bivariate_range = [
-    "#e8e8e8", "#dfb0d6", "#be64ac",
-    "#ace4e4", "#a5add3", "#8c62aa",
-    "#5ac8c8", "#5698b9", "#3b4994"
-]
 write("map_bivariate_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "autosize": {"type": "fit", "contains": "padding", "resize": True},
     "width": "container",
-    "height": 360,
+    "height": 430,
     "title": {
-        "text": "Low income and high poverty combine into a vulnerability pattern",
-        "subtitle": "Bivariate classes combine 2022 median income tertiles and absolute poverty tertiles"
+        "text": "Vulnerability remains concentrated in Sabah, Sarawak and Kelantan",
+        "subtitle": "Score combines low median income, absolute poverty and relative poverty, 2022"
     },
     "projection": {"type": "equalEarth"},
     "data": {"url": MAP_URL, "format": {"type": "topojson", "feature": feature_name}},
     "transform": MAP_LOOKUP_TRANSFORM,
-    "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.9},
+    "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
     "encoding": {
         "color": {
-            "field": "bivariate_class",
+            "field": "vulnerability_group",
             "type": "nominal",
-            "title": "Income + poverty class",
-            "scale": {"domain": bivariate_domain, "range": bivariate_range},
-            "legend": {"orient": "bottom", "columns": 3, "labelLimit": 190}
+            "title": "2022 vulnerability group",
+            "scale": {
+                "domain": ["Highest vulnerability", "Watch closely", "Lower vulnerability"],
+                "range": ["#8a4b2a", "#d8a25e", "#5fa8a3"]
+            },
+            "legend": {
+                "orient": "bottom",
+                "direction": "horizontal",
+                "columns": 3,
+                "titleLimit": 260,
+                "labelLimit": 180
+            }
         },
         "tooltip": [
             {"field": "state_geo", "type": "nominal", "title": "State"},
-            {"field": "bivariate_class", "type": "nominal", "title": "Class"},
-            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
+            {"field": "vulnerability_group", "type": "nominal", "title": "Vulnerability group"},
+            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
             {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
-            {"field": "vulnerability_group", "type": "nominal", "title": "Scorecard group"}
+            {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
+            {"field": "vulnerability_score", "type": "quantitative", "title": "Vulnerability score", "format": ".2f"}
         ]
     },
     "config": base_config()
