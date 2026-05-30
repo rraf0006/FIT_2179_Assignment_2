@@ -8,10 +8,7 @@
   "width": "container",
   "height": 300,
   "title": {
-    "text": [
-      "Median household income is highest",
-      "around the Klang Valley"
-    ],
+    "text": "Highest incomes cluster around the Klang Valley",
     "subtitle": [
       "Income is geographically uneven.",
       "Higher values cluster around urban and administrative centres."
@@ -126,29 +123,9 @@
       "data": {
         "values": [
           {
-            "state_geo": "Perlis",
-            "lon": 100.2,
-            "lat": 6.45
-          },
-          {
-            "state_geo": "Pulau Pinang",
-            "lon": 100.33,
-            "lat": 5.42
-          },
-          {
             "state_geo": "Kuala Lumpur",
             "lon": 101.69,
             "lat": 3.14
-          },
-          {
-            "state_geo": "Putrajaya",
-            "lon": 101.69,
-            "lat": 2.93
-          },
-          {
-            "state_geo": "Labuan",
-            "lon": 115.24,
-            "lat": 5.28
           }
         ]
       },
@@ -172,29 +149,9 @@
       "data": {
         "values": [
           {
-            "state_geo": "Perlis",
-            "lon": 100.2,
-            "lat": 6.45
-          },
-          {
-            "state_geo": "Pulau Pinang",
-            "lon": 100.33,
-            "lat": 5.42
-          },
-          {
             "state_geo": "Kuala Lumpur",
             "lon": 101.69,
             "lat": 3.14
-          },
-          {
-            "state_geo": "Putrajaya",
-            "lon": 101.69,
-            "lat": 2.93
-          },
-          {
-            "state_geo": "Labuan",
-            "lon": 115.24,
-            "lat": 5.28
           }
         ]
       },

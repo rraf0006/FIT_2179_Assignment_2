@@ -6,7 +6,7 @@
     "url": "data/processed/state_2022.csv"
   },
   "title": {
-    "text": "Sabah, Kelantan and Sarawak remain high-poverty outliers",
+    "text": "Poverty is concentrated in a few states",
     "subtitle": [
       "A small number of states account for",
       "the sharpest poverty differences."
@@ -71,35 +71,6 @@
             "format": ","
           }
         ]
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 5,
-        "fontSize": 11,
-        "color": "#1f2933"
-      },
-      "encoding": {
-        "x": {
-          "field": "poverty_absolute",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "state_geo",
-          "type": "nominal",
-          "sort": {
-            "field": "poverty_absolute",
-            "order": "descending"
-          }
-        },
-        "text": {
-          "field": "poverty_absolute",
-          "type": "quantitative",
-          "format": ".1f"
-        }
       }
     },
     {

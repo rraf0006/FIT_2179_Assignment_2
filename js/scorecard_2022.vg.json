@@ -12,7 +12,7 @@
   },
   "hconcat": [
     {
-      "width": 190,
+      "width": 155,
       "height": {
         "step": 24
       },
@@ -33,10 +33,7 @@
             "field": "vulnerability_score",
             "order": "descending"
           },
-          "axis": {
-            "title": null,
-            "labelLimit": 140
-          }
+          "axis": null
         },
         "text": {
           "field": "state_geo",
@@ -52,7 +49,7 @@
       }
     },
     {
-      "width": 145,
+      "width": 120,
       "height": {
         "step": 24
       },
@@ -99,7 +96,7 @@
           },
           "encoding": {
             "x": {
-              "value": 72
+              "value": 60
             },
             "y": {
               "field": "state_geo",
@@ -128,7 +125,7 @@
       ]
     },
     {
-      "width": 135,
+      "width": 110,
       "height": {
         "step": 24
       },
@@ -175,7 +172,7 @@
           },
           "encoding": {
             "x": {
-              "value": 68
+              "value": 55
             },
             "y": {
               "field": "state_geo",
@@ -204,7 +201,7 @@
       ]
     },
     {
-      "width": 135,
+      "width": 110,
       "height": {
         "step": 24
       },
@@ -251,7 +248,7 @@
           },
           "encoding": {
             "x": {
-              "value": 68
+              "value": 55
             },
             "y": {
               "field": "state_geo",
@@ -280,7 +277,7 @@
       ]
     },
     {
-      "width": 145,
+      "width": 120,
       "height": {
         "step": 24
       },
@@ -328,7 +325,7 @@
           },
           "encoding": {
             "x": {
-              "value": 72
+              "value": 60
             },
             "y": {
               "field": "state_geo",
@@ -362,7 +359,7 @@
       ]
     },
     {
-      "width": 230,
+      "width": 185,
       "height": {
         "step": 24
       },

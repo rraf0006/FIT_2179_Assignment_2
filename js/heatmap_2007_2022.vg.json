@@ -12,28 +12,6 @@
       "temporary, improving, or persistent across states."
     ]
   },
-  "params": [
-    {
-      "name": "Heatmap_group_filter",
-      "value": null,
-      "bind": {
-        "input": "select",
-        "options": [
-          null,
-          "Highest vulnerability",
-          "Watch closely",
-          "Lower vulnerability"
-        ],
-        "labels": [
-          "Show all",
-          "Highest vulnerability",
-          "Watch closely",
-          "Lower vulnerability"
-        ],
-        "name": "Highlight group: "
-      }
-    }
-  ],
   "layer": [
     {
       "mark": {
@@ -65,13 +43,6 @@
             "scheme": "purples"
           }
         },
-        "opacity": {
-          "condition": {
-            "test": "Heatmap_group_filter == null || datum.vulnerability_group == Heatmap_group_filter",
-            "value": 1
-          },
-          "value": 0.18
-        },
         "tooltip": [
           {
             "field": "state_geo",
@@ -101,45 +72,6 @@
             "title": "2022 group"
           }
         ]
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "year": 2022,
-            "state_geo": "Sabah",
-            "vulnerability_order": 1,
-            "label": "Sabah, Kelantan and Sarawak stay persistently high"
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "align": "right",
-        "baseline": "middle",
-        "dx": -8,
-        "fontSize": 12,
-        "fontWeight": 700,
-        "color": "#1f2933"
-      },
-      "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        },
-        "y": {
-          "field": "state_geo",
-          "type": "nominal",
-          "sort": {
-            "field": "vulnerability_order",
-            "op": "min",
-            "order": "ascending"
-          }
-        },
-        "text": {
-          "field": "label"
-        }
       }
     }
   ],

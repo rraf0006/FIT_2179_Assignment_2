@@ -40,6 +40,11 @@ SMALL_TERRITORY_LABELS = {
         {"state_geo": "Labuan", "lon": 115.24, "lat": 5.28}
     ]
 }
+KUALA_LUMPUR_LABEL = {
+    "values": [
+        {"state_geo": "Kuala Lumpur", "lon": 101.69, "lat": 3.14}
+    ]
+}
 VULNERABILITY_LABELS = {
     "values": [
         {"state_geo": "Sabah", "lon": 117.0, "lat": 5.5},
@@ -255,7 +260,7 @@ write("map_income_2022.vg.json", {
     "width": "container",
     "height": 300,
     "title": {
-        "text": ["Median household income is highest", "around the Klang Valley"],
+        "text": "Highest incomes cluster around the Klang Valley",
         "subtitle": [
             "Income is geographically uneven.",
             "Higher values cluster around urban and administrative centres."
@@ -299,12 +304,12 @@ write("map_income_2022.vg.json", {
             }
         },
         {
-            "data": SMALL_TERRITORY_LABELS,
+            "data": KUALA_LUMPUR_LABEL,
             "mark": {"type": "point", "filled": True, "size": 18, "color": TEXT, "opacity": 0.75},
             "encoding": {"longitude": {"field": "lon"}, "latitude": {"field": "lat"}}
         },
         {
-            "data": SMALL_TERRITORY_LABELS,
+            "data": KUALA_LUMPUR_LABEL,
             "mark": {"type": "text", "fontSize": 10, "dx": 5, "dy": -5, "color": TEXT},
             "encoding": {
                 "longitude": {"field": "lon"},
@@ -367,12 +372,12 @@ write("map_poverty_2022.vg.json", {
             }
         },
         {
-            "data": SMALL_TERRITORY_LABELS,
+            "data": KUALA_LUMPUR_LABEL,
             "mark": {"type": "point", "filled": True, "size": 18, "color": TEXT, "opacity": 0.75},
             "encoding": {"longitude": {"field": "lon"}, "latitude": {"field": "lat"}}
         },
         {
-            "data": SMALL_TERRITORY_LABELS,
+            "data": KUALA_LUMPUR_LABEL,
             "mark": {"type": "text", "fontSize": 10, "dx": 5, "dy": -5, "color": TEXT},
             "encoding": {
                 "longitude": {"field": "lon"},
@@ -391,7 +396,7 @@ write("map_bivariate_2022.vg.json", {
     "width": "container",
     "height": 430,
     "title": {
-        "text": "Vulnerability remains concentrated in Sabah, Sarawak and Kelantan",
+        "text": "Vulnerability is unevenly distributed across Malaysian states",
         "subtitle": [
             "Vulnerability is unevenly distributed.",
             "The score highlights where income and poverty pressures overlap."
@@ -473,14 +478,6 @@ write("rank_income_2022.vg.json", {
                     {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}
                 ]
             }
-        },
-        {
-            "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 4, "fontSize": 11, "color": TEXT},
-            "encoding": {
-                "x": {"field": "income_median", "type": "quantitative", "axis": {"labelExpr": "format(datum.value, ',.0f')", "tickCount": 6}},
-                "y": {"field": "state_geo", "type": "nominal", "sort": {"field": "income_median", "order": "descending"}},
-                "text": {"field": "income_median", "type": "quantitative", "format": ","}
-            }
         }
     ],
     "config": base_config()
@@ -495,7 +492,7 @@ write("rank_poverty_2022.vg.json", {
     "url": "data/processed/state_2022.csv"
   },
   "title": {
-    "text": "Sabah, Kelantan and Sarawak remain high-poverty outliers",
+    "text": "Poverty is concentrated in a few states",
     "subtitle": [
       "A small number of states account for",
       "the sharpest poverty differences."
@@ -557,35 +554,6 @@ write("rank_poverty_2022.vg.json", {
             "format": ","
           }
         ]
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 5,
-        "fontSize": 11,
-        "color": "#1f2933"
-      },
-      "encoding": {
-        "x": {
-          "field": "poverty_absolute",
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "state_geo",
-          "type": "nominal",
-          "sort": {
-            "field": "poverty_absolute",
-            "order": "descending"
-          }
-        },
-        "text": {
-          "field": "poverty_absolute",
-          "type": "quantitative",
-          "format": ".1f"
-        }
       }
     },
     {
@@ -810,18 +778,6 @@ write("heatmap_2007_2022.vg.json", {
             "temporary, improving, or persistent across states."
         ]
     },
-    "params": [
-        {
-            "name": "Heatmap_group_filter",
-            "value": None,
-            "bind": {
-                "input": "select",
-                "options": [None, "Highest vulnerability", "Watch closely", "Lower vulnerability"],
-                "labels": ["Show all", "Highest vulnerability", "Watch closely", "Lower vulnerability"],
-                "name": "Highlight group: "
-            }
-        }
-    ],
     "layer": [
         {
             "mark": {"type": "rect", "stroke": "white", "strokeWidth": 0.5},
@@ -834,10 +790,6 @@ write("heatmap_2007_2022.vg.json", {
                     "title": "Absolute poverty (%)",
                     "scale": {"scheme": "purples"}
                 },
-                "opacity": {
-                    "condition": {"test": "Heatmap_group_filter == null || datum.vulnerability_group == Heatmap_group_filter", "value": 1},
-                    "value": 0.18
-                },
                 "tooltip": [
                     {"field": "state_geo", "type": "nominal", "title": "State"},
                     {"field": "year", "type": "ordinal", "title": "Year"},
@@ -845,15 +797,6 @@ write("heatmap_2007_2022.vg.json", {
                     {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
                     {"field": "vulnerability_group", "type": "nominal", "title": "2022 group"}
                 ]
-            }
-        },
-        {
-            "data": {"values": [{"year": 2022, "state_geo": "Sabah", "vulnerability_order": 1, "label": "Sabah, Kelantan and Sarawak stay persistently high"}]},
-            "mark": {"type": "text", "align": "right", "baseline": "middle", "dx": -8, "fontSize": 12, "fontWeight": 700, "color": TEXT},
-            "encoding": {
-                "x": {"field": "year", "type": "ordinal"},
-                "y": {"field": "state_geo", "type": "nominal", "sort": {"field": "vulnerability_order", "op": "min", "order": "ascending"}},
-                "text": {"field": "label"}
             }
         }
     ],
@@ -937,7 +880,7 @@ write("slope_2007_2022.vg.json", {
             }
         },
         {
-            "data": {"values": [{"year": 2018, "income_median": 3300, "label": "Sabah and Kelantan remain much lower in 2022"}]},
+            "data": {"values": [{"year": 2018, "income_median": 2700, "label": "Sabah and Kelantan remain much lower in 2022"}]},
             "mark": {"type": "text", "align": "left", "fontSize": 12, "fontWeight": 700, "color": TEXT},
             "encoding": {
                 "x": {"field": "year", "type": "quantitative", "scale": {"domain": [2007, 2022]}},
@@ -1041,7 +984,7 @@ write("recovery_2019_2022.vg.json", {
 # -------------------- Chart 12 --------------------
 y_sort = {"field": "vulnerability_score", "order": "descending"}
 y_hidden = {"field": "state_geo", "type": "nominal", "sort": y_sort, "axis": None}
-y_axis = {"field": "state_geo", "type": "nominal", "sort": y_sort, "axis": {"title": None, "labelLimit": 140}}
+y_axis = {"field": "state_geo", "type": "nominal", "sort": y_sort, "axis": None}
 
 scorecard_spec = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -1055,7 +998,7 @@ scorecard_spec = {
     },
     "hconcat": [
         {
-            "width": 190,
+            "width": 155,
             "height": {"step": 24},
             "title": "State",
             "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 11, "fontWeight": 600, "color": TEXT},
@@ -1066,7 +1009,7 @@ scorecard_spec = {
             }
         },
         {
-            "width": 145,
+            "width": 120,
             "height": {"step": 24},
             "title": "Median income",
             "layer": [
@@ -1080,7 +1023,7 @@ scorecard_spec = {
                 {
                     "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "color": TEXT},
                     "encoding": {
-                        "x": {"value": 72},
+                        "x": {"value": 60},
                         "y": y_hidden,
                         "text": {"field": "income_median", "type": "quantitative", "format": ","},
                         "tooltip": [{"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","}]
@@ -1089,7 +1032,7 @@ scorecard_spec = {
             ]
         },
         {
-            "width": 135,
+            "width": 110,
             "height": {"step": 24},
             "title": "Abs. poverty",
             "layer": [
@@ -1103,7 +1046,7 @@ scorecard_spec = {
                 {
                     "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "color": TEXT},
                     "encoding": {
-                        "x": {"value": 68},
+                        "x": {"value": 55},
                         "y": y_hidden,
                         "text": {"field": "poverty_absolute", "type": "quantitative", "format": ".1f"},
                         "tooltip": [{"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}]
@@ -1112,7 +1055,7 @@ scorecard_spec = {
             ]
         },
         {
-            "width": 135,
+            "width": 110,
             "height": {"step": 24},
             "title": "Rel. poverty",
             "layer": [
@@ -1126,7 +1069,7 @@ scorecard_spec = {
                 {
                     "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "color": TEXT},
                     "encoding": {
-                        "x": {"value": 68},
+                        "x": {"value": 55},
                         "y": y_hidden,
                         "text": {"field": "poverty_relative", "type": "quantitative", "format": ".1f"},
                         "tooltip": [{"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"}]
@@ -1135,7 +1078,7 @@ scorecard_spec = {
             ]
         },
         {
-            "width": 145,
+            "width": 120,
             "height": {"step": 24},
             "title": "Vulnerability",
             "layer": [
@@ -1154,7 +1097,7 @@ scorecard_spec = {
                 {
                     "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 11, "fontWeight": 700, "color": TEXT},
                     "encoding": {
-                        "x": {"value": 72},
+                        "x": {"value": 60},
                         "y": y_hidden,
                         "text": {"field": "vulnerability_score", "type": "quantitative", "format": ".2f"},
                         "tooltip": [
@@ -1166,7 +1109,7 @@ scorecard_spec = {
             ]
         },
         {
-            "width": 230,
+            "width": 185,
             "height": {"step": 24},
             "title": "Category",
             "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 11, "fontWeight": 600},

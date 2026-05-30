@@ -69,39 +69,6 @@
           }
         ]
       }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 4,
-        "fontSize": 11,
-        "color": "#1f2933"
-      },
-      "encoding": {
-        "x": {
-          "field": "income_median",
-          "type": "quantitative",
-          "axis": {
-            "labelExpr": "format(datum.value, ',.0f')",
-            "tickCount": 6
-          }
-        },
-        "y": {
-          "field": "state_geo",
-          "type": "nominal",
-          "sort": {
-            "field": "income_median",
-            "order": "descending"
-          }
-        },
-        "text": {
-          "field": "income_median",
-          "type": "quantitative",
-          "format": ","
-        }
-      }
     }
   ],
   "config": {
