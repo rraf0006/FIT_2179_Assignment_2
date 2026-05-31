@@ -516,8 +516,13 @@ write("map_bivariate_2022.vg.json", {
                 {
                     "mark": {"type": "rule", "strokeWidth": 2.2},
                     "encoding": {
-                        "x": {"datum": 0},
-                        "x2": {"field": "vulnerability_score"},
+                        "x": {
+                            "field": "vulnerability_score",
+                            "type": "quantitative",
+                            "title": "Vulnerability score",
+                            "axis": {"format": ".1f", "tickCount": 4}
+                        },
+                        "x2": {"datum": 0},
                         "y": {
                             "field": "state_geo",
                             "type": "nominal",

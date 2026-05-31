@@ -225,10 +225,16 @@
           },
           "encoding": {
             "x": {
-              "datum": 0
+              "field": "vulnerability_score",
+              "type": "quantitative",
+              "title": "Vulnerability score",
+              "axis": {
+                "format": ".1f",
+                "tickCount": 4
+              }
             },
             "x2": {
-              "field": "vulnerability_score"
+              "datum": 0
             },
             "y": {
               "field": "state_geo",
