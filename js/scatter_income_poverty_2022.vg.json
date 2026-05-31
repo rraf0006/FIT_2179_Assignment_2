@@ -36,8 +36,9 @@
       "mark": {
         "type": "circle",
         "filled": true,
-        "stroke": "white",
-        "strokeWidth": 1
+        "stroke": "#475569",
+        "strokeWidth": 0.75,
+        "strokeOpacity": 0.35
       },
       "encoding": {
         "x": {
@@ -82,17 +83,17 @@
             ],
             "range": [
               "#1f4e79",
-              "#8da9bf",
-              "#e4edf3"
+              "#6f95b0",
+              "#c4d4df"
             ]
           }
         },
         "opacity": {
           "condition": {
             "test": "Scatter_group_filter == null || datum.vulnerability_group == Scatter_group_filter",
-            "value": 0.86
+            "value": 0.92
           },
-          "value": 0.18
+          "value": 0.28
         },
         "tooltip": [
           {
@@ -184,6 +185,13 @@
         "text": {
           "field": "state_geo",
           "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "Scatter_group_filter == null || Scatter_group_filter == 'High vulnerability'",
+            "value": 1
+          },
+          "value": 0.15
         }
       }
     }

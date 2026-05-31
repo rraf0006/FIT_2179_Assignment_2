@@ -26,13 +26,13 @@ PRIMARY_LIGHT = "#dceaf5"
 POVERTY = "#7a3e64"
 POVERTY_LIGHT = "#ead8e4"
 HIGH_VULNERABILITY = "#1f4e79"
-MODERATE_VULNERABILITY = "#8da9bf"
-LOWER_VULNERABILITY = "#e4edf3"
+MODERATE_VULNERABILITY = "#6f95b0"
+LOWER_VULNERABILITY = "#c4d4df"
 NEUTRAL_BAR = "#d8dee8"
 NEUTRAL_LINE = "#cbd5e1"
 INCOME_CLASS_RANGE = ["#eaf2fb", "#cfe3f4", "#94bde1", "#4e88b9", "#175c8e"]
 POVERTY_CLASS_RANGE = ["#f8f2f6", "#ead8e4", "#c99ab7", "#96557b", "#5e2549"]
-VULNERABILITY_RANGE = ["#e4edf3", "#8da9bf", "#1f4e79"]
+VULNERABILITY_RANGE = ["#c4d4df", "#6f95b0", "#1f4e79"]
 STORY_GROUP_ORDER = ["High vulnerability", "Moderate vulnerability", "Lower vulnerability"]
 LEGEND_GROUP_ORDER = ["Lower vulnerability", "Moderate vulnerability", "High vulnerability"]
 GROUP_RANGE_STORY = [HIGH_VULNERABILITY, MODERATE_VULNERABILITY, LOWER_VULNERABILITY]
@@ -273,7 +273,10 @@ write("national_context.vg.json", {
             "height": 220,
             "title": {
                 "text": "Absolute poverty fell sharply nationwide",
-                "subtitle": "The national decline is clear, but state-level outcomes remain uneven."
+                "subtitle": "The national decline is clear, but state-level outcomes remain uneven.",
+                "anchor": "start",
+                "align": "left",
+                "dx": -22
             },
             "layer": [
                 {
@@ -791,7 +794,13 @@ write("scatter_income_poverty_2022.vg.json", {
     ],
     "layer": [
         {
-            "mark": {"type": "circle", "filled": True, "stroke": "white", "strokeWidth": 1},
+            "mark": {
+                "type": "circle",
+                "filled": True,
+                "stroke": "#475569",
+                "strokeWidth": 0.75,
+                "strokeOpacity": 0.35
+            },
             "encoding": {
                 "x": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "axis": {"format": ",.0f"}},
                 "y": {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "scale": {"zero": True}},
@@ -812,8 +821,8 @@ write("scatter_income_poverty_2022.vg.json", {
                     }
                 },
                 "opacity": {
-                    "condition": {"test": "Scatter_group_filter == null || datum.vulnerability_group == Scatter_group_filter", "value": 0.86},
-                    "value": 0.18
+                    "condition": {"test": "Scatter_group_filter == null || datum.vulnerability_group == Scatter_group_filter", "value": 0.92},
+                    "value": 0.28
                 },
                 "tooltip": [
                     {"field": "state_geo", "type": "nominal", "title": "State"},
@@ -841,7 +850,11 @@ write("scatter_income_poverty_2022.vg.json", {
             "encoding": {
                 "x": {"field": "income_median", "type": "quantitative"},
                 "y": {"field": "poverty_absolute", "type": "quantitative"},
-                "text": {"field": "state_geo", "type": "nominal"}
+                "text": {"field": "state_geo", "type": "nominal"},
+                "opacity": {
+                    "condition": {"test": "Scatter_group_filter == null || Scatter_group_filter == 'High vulnerability'", "value": 1},
+                    "value": 0.15
+                }
             }
         }
     ],

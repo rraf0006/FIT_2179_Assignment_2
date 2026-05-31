@@ -140,7 +140,10 @@
       "height": 220,
       "title": {
         "text": "Absolute poverty fell sharply nationwide",
-        "subtitle": "The national decline is clear, but state-level outcomes remain uneven."
+        "subtitle": "The national decline is clear, but state-level outcomes remain uneven.",
+        "anchor": "start",
+        "align": "left",
+        "dx": -22
       },
       "layer": [
         {
