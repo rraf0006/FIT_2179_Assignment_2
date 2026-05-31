@@ -47,7 +47,7 @@ VULNERABILITY_MAP_PROJECTION = {
     "type": "mercator",
     "center": [109.5, 4],
     "scale": 1600,
-    "translate": [520, 150]
+    "translate": [330, 165]
 }
 STATE_NAME_FIX = {
     "W.P. Kuala Lumpur": "Kuala Lumpur",
@@ -444,55 +444,131 @@ write("map_poverty_2022.vg.json", {
 write("map_bivariate_2022.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "autosize": {"type": "pad", "contains": "padding"},
-    "width": 1040,
-    "height": 330,
     "title": {
         "text": "Vulnerability is unevenly distributed",
         "subtitle": "The combined score highlights where lower income and higher poverty overlap."
     },
-    "projection": VULNERABILITY_MAP_PROJECTION,
-    "data": {"url": MAP_URL, "format": {"type": "topojson", "feature": feature_name}},
-    "transform": MAP_LOOKUP_TRANSFORM,
-    "layer": [
+    "hconcat": [
         {
-            "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
-            "encoding": {
-                "color": {
-                    "field": "vulnerability_group",
-                    "type": "ordinal",
-                    "title": "2022 vulnerability group",
-                    "scale": {
-                        "domain": LEGEND_GROUP_ORDER,
-                        "range": GROUP_RANGE_LEGEND
-                    },
-                    "legend": {
-                        "orient": "bottom",
-                        "direction": "horizontal",
-                        "columns": 3,
-                        "titleLimit": 260,
-                        "labelLimit": 180
+            "width": 660,
+            "height": 360,
+            "projection": VULNERABILITY_MAP_PROJECTION,
+            "data": {"url": MAP_URL, "format": {"type": "topojson", "feature": feature_name}},
+            "transform": MAP_LOOKUP_TRANSFORM,
+            "layer": [
+                {
+                    "data": {"graticule": {"step": [5, 5]}},
+                    "mark": {"type": "geoshape", "stroke": "#e5edf4", "strokeWidth": 0.5, "opacity": 0.45}
+                },
+                {
+                    "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
+                    "encoding": {
+                        "color": {
+                            "field": "vulnerability_group",
+                            "type": "ordinal",
+                            "title": "2022 vulnerability group",
+                            "scale": {
+                                "domain": LEGEND_GROUP_ORDER,
+                                "range": GROUP_RANGE_LEGEND
+                            },
+                            "legend": {
+                                "orient": "bottom",
+                                "direction": "horizontal",
+                                "columns": 3,
+                                "titleLimit": 260,
+                                "labelLimit": 180
+                            }
+                        },
+                        "tooltip": [
+                            {"field": "state_geo", "type": "nominal", "title": "State"},
+                            {"field": "vulnerability_group", "type": "nominal", "title": "Vulnerability group"},
+                            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
+                            {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
+                            {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
+                            {"field": "vulnerability_score", "type": "quantitative", "title": "Vulnerability score", "format": ".2f"}
+                        ]
                     }
                 },
-                "tooltip": [
-                    {"field": "state_geo", "type": "nominal", "title": "State"},
-                    {"field": "vulnerability_group", "type": "nominal", "title": "Vulnerability group"},
-                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
-                    {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
-                    {"field": "poverty_relative", "type": "quantitative", "title": "Relative poverty (%)", "format": ".1f"},
-                    {"field": "vulnerability_score", "type": "quantitative", "title": "Vulnerability score", "format": ".2f"}
-                ]
-            }
+                {
+                    "data": VULNERABILITY_LABELS,
+                    "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "color": TEXT, "dx": 7, "dy": -4},
+                    "encoding": {
+                        "longitude": {"field": "lon"},
+                        "latitude": {"field": "lat"},
+                        "text": {"field": "state_geo"}
+                    }
+                }
+            ]
         },
         {
-            "data": VULNERABILITY_LABELS,
-            "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "color": TEXT, "dx": 7, "dy": -4},
-            "encoding": {
-                "longitude": {"field": "lon"},
-                "latitude": {"field": "lat"},
-                "text": {"field": "state_geo"}
-            }
+            "width": 240,
+            "height": 260,
+            "title": {"text": "Highest vulnerability scores", "anchor": "start"},
+            "data": {"url": STATE_2022},
+            "transform": [
+                {
+                    "window": [{"op": "rank", "as": "top_vulnerability_rank"}],
+                    "sort": [{"field": "vulnerability_score", "order": "descending"}]
+                },
+                {"filter": "datum.top_vulnerability_rank <= 5"}
+            ],
+            "layer": [
+                {
+                    "mark": {"type": "rule", "strokeWidth": 2.2},
+                    "encoding": {
+                        "x": {"datum": 0},
+                        "x2": {"field": "vulnerability_score"},
+                        "y": {
+                            "field": "state_geo",
+                            "type": "nominal",
+                            "title": None,
+                            "sort": {"field": "vulnerability_score", "order": "descending"}
+                        },
+                        "color": {
+                            "field": "vulnerability_group",
+                            "type": "nominal",
+                            "scale": {"domain": LEGEND_GROUP_ORDER, "range": GROUP_RANGE_LEGEND},
+                            "legend": None
+                        },
+                        "opacity": {"value": 0.5}
+                    }
+                },
+                {
+                    "mark": {"type": "circle", "filled": True, "size": 95, "stroke": "white", "strokeWidth": 1.2},
+                    "encoding": {
+                        "x": {
+                            "field": "vulnerability_score",
+                            "type": "quantitative",
+                            "title": "Vulnerability score",
+                            "axis": {"format": ".1f", "tickCount": 4}
+                        },
+                        "y": {
+                            "field": "state_geo",
+                            "type": "nominal",
+                            "title": None,
+                            "sort": {"field": "vulnerability_score", "order": "descending"},
+                            "axis": {"labelFontWeight": 600, "labelLimit": 120}
+                        },
+                        "color": {
+                            "field": "vulnerability_group",
+                            "type": "nominal",
+                            "scale": {"domain": LEGEND_GROUP_ORDER, "range": GROUP_RANGE_LEGEND},
+                            "legend": None
+                        },
+                        "tooltip": [
+                            {"field": "top_vulnerability_rank", "type": "quantitative", "title": "Rank"},
+                            {"field": "state_geo", "type": "nominal", "title": "State"},
+                            {"field": "vulnerability_group", "type": "nominal", "title": "Vulnerability group"},
+                            {"field": "vulnerability_score", "type": "quantitative", "title": "Vulnerability score", "format": ".2f"},
+                            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ",.0f"},
+                            {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}
+                        ]
+                    }
+                }
+            ]
         }
     ],
+    "spacing": 28,
     "config": base_config()
 })
 

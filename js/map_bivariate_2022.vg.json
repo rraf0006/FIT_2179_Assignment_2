@@ -4,171 +4,352 @@
     "type": "pad",
     "contains": "padding"
   },
-  "width": 1040,
-  "height": 330,
   "title": {
     "text": "Vulnerability is unevenly distributed",
     "subtitle": "The combined score highlights where lower income and higher poverty overlap."
   },
-  "projection": {
-    "type": "mercator",
-    "center": [
-      109.5,
-      4
-    ],
-    "scale": 1600,
-    "translate": [
-      520,
-      150
-    ]
-  },
-  "data": {
-    "url": "data/maps/malaysia-states.topojson",
-    "format": {
-      "type": "topojson",
-      "feature": "states"
-    }
-  },
-  "transform": [
+  "hconcat": [
     {
-      "calculate": "datum.properties.Name == 'Pulau Pinang' ? 'Pulau Pinang' : datum.properties.Name == 'Penang' ? 'Pulau Pinang' : datum.properties.Name == 'Wilayah Persekutuan Labuan' ? 'Labuan' : datum.properties.Name == 'W.P. Labuan' ? 'Labuan' : datum.properties.Name == 'Wilayah Persekutuan Putrajaya' ? 'Putrajaya' : datum.properties.Name == 'W.P. Putrajaya' ? 'Putrajaya' : datum.properties.Name == 'Wilayah Persekutuan Kuala Lumpur' ? 'Kuala Lumpur' : datum.properties.Name == 'W.P. Kuala Lumpur' ? 'Kuala Lumpur' : datum.properties.Name",
-      "as": "map_state_geo"
-    },
-    {
-      "lookup": "map_state_geo",
-      "from": {
-        "data": {
-          "url": "data/processed/state_2022.csv"
-        },
-        "key": "state_geo",
-        "fields": [
-          "state",
-          "state_geo",
-          "income_median",
-          "income_mean",
-          "poverty_absolute",
-          "poverty_hardcore",
-          "poverty_relative",
-          "bivariate_class",
-          "vulnerability_score",
-          "vulnerability_group",
-          "income_rank",
-          "poverty_rank"
+      "width": 660,
+      "height": 360,
+      "projection": {
+        "type": "mercator",
+        "center": [
+          109.5,
+          4
+        ],
+        "scale": 1600,
+        "translate": [
+          330,
+          165
         ]
-      }
-    }
-  ],
-  "layer": [
-    {
-      "mark": {
-        "type": "geoshape",
-        "stroke": "white",
-        "strokeWidth": 1
       },
-      "encoding": {
-        "color": {
-          "field": "vulnerability_group",
-          "type": "ordinal",
-          "title": "2022 vulnerability group",
-          "scale": {
-            "domain": [
-              "Lower vulnerability",
-              "Moderate vulnerability",
-              "High vulnerability"
-            ],
-            "range": [
-              "#e4edf3",
-              "#8da9bf",
-              "#1f4e79"
+      "data": {
+        "url": "data/maps/malaysia-states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.Name == 'Pulau Pinang' ? 'Pulau Pinang' : datum.properties.Name == 'Penang' ? 'Pulau Pinang' : datum.properties.Name == 'Wilayah Persekutuan Labuan' ? 'Labuan' : datum.properties.Name == 'W.P. Labuan' ? 'Labuan' : datum.properties.Name == 'Wilayah Persekutuan Putrajaya' ? 'Putrajaya' : datum.properties.Name == 'W.P. Putrajaya' ? 'Putrajaya' : datum.properties.Name == 'Wilayah Persekutuan Kuala Lumpur' ? 'Kuala Lumpur' : datum.properties.Name == 'W.P. Kuala Lumpur' ? 'Kuala Lumpur' : datum.properties.Name",
+          "as": "map_state_geo"
+        },
+        {
+          "lookup": "map_state_geo",
+          "from": {
+            "data": {
+              "url": "data/processed/state_2022.csv"
+            },
+            "key": "state_geo",
+            "fields": [
+              "state",
+              "state_geo",
+              "income_median",
+              "income_mean",
+              "poverty_absolute",
+              "poverty_hardcore",
+              "poverty_relative",
+              "bivariate_class",
+              "vulnerability_score",
+              "vulnerability_group",
+              "income_rank",
+              "poverty_rank"
+            ]
+          }
+        }
+      ],
+      "layer": [
+        {
+          "data": {
+            "graticule": {
+              "step": [
+                5,
+                5
+              ]
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#e5edf4",
+            "strokeWidth": 0.5,
+            "opacity": 0.45
+          }
+        },
+        {
+          "mark": {
+            "type": "geoshape",
+            "stroke": "white",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "color": {
+              "field": "vulnerability_group",
+              "type": "ordinal",
+              "title": "2022 vulnerability group",
+              "scale": {
+                "domain": [
+                  "Lower vulnerability",
+                  "Moderate vulnerability",
+                  "High vulnerability"
+                ],
+                "range": [
+                  "#e4edf3",
+                  "#8da9bf",
+                  "#1f4e79"
+                ]
+              },
+              "legend": {
+                "orient": "bottom",
+                "direction": "horizontal",
+                "columns": 3,
+                "titleLimit": 260,
+                "labelLimit": 180
+              }
+            },
+            "tooltip": [
+              {
+                "field": "state_geo",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "vulnerability_group",
+                "type": "nominal",
+                "title": "Vulnerability group"
+              },
+              {
+                "field": "income_median",
+                "type": "quantitative",
+                "title": "Median income (RM)",
+                "format": ",.0f"
+              },
+              {
+                "field": "poverty_absolute",
+                "type": "quantitative",
+                "title": "Absolute poverty (%)",
+                "format": ".1f"
+              },
+              {
+                "field": "poverty_relative",
+                "type": "quantitative",
+                "title": "Relative poverty (%)",
+                "format": ".1f"
+              },
+              {
+                "field": "vulnerability_score",
+                "type": "quantitative",
+                "title": "Vulnerability score",
+                "format": ".2f"
+              }
+            ]
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "state_geo": "Sabah",
+                "lon": 117.0,
+                "lat": 5.5
+              },
+              {
+                "state_geo": "Sarawak",
+                "lon": 113.3,
+                "lat": 2.4
+              },
+              {
+                "state_geo": "Kelantan",
+                "lon": 102.2,
+                "lat": 5.7
+              }
             ]
           },
-          "legend": {
-            "orient": "bottom",
-            "direction": "horizontal",
-            "columns": 3,
-            "titleLimit": 260,
-            "labelLimit": 180
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "color": "#111827",
+            "dx": 7,
+            "dy": -4
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon"
+            },
+            "latitude": {
+              "field": "lat"
+            },
+            "text": {
+              "field": "state_geo"
+            }
           }
-        },
-        "tooltip": [
-          {
-            "field": "state_geo",
-            "type": "nominal",
-            "title": "State"
-          },
-          {
-            "field": "vulnerability_group",
-            "type": "nominal",
-            "title": "Vulnerability group"
-          },
-          {
-            "field": "income_median",
-            "type": "quantitative",
-            "title": "Median income (RM)",
-            "format": ",.0f"
-          },
-          {
-            "field": "poverty_absolute",
-            "type": "quantitative",
-            "title": "Absolute poverty (%)",
-            "format": ".1f"
-          },
-          {
-            "field": "poverty_relative",
-            "type": "quantitative",
-            "title": "Relative poverty (%)",
-            "format": ".1f"
-          },
-          {
-            "field": "vulnerability_score",
-            "type": "quantitative",
-            "title": "Vulnerability score",
-            "format": ".2f"
-          }
-        ]
-      }
+        }
+      ]
     },
     {
+      "width": 240,
+      "height": 260,
+      "title": {
+        "text": "Highest vulnerability scores",
+        "anchor": "start"
+      },
       "data": {
-        "values": [
-          {
-            "state_geo": "Sabah",
-            "lon": 117.0,
-            "lat": 5.5
-          },
-          {
-            "state_geo": "Sarawak",
-            "lon": 113.3,
-            "lat": 2.4
-          },
-          {
-            "state_geo": "Kelantan",
-            "lon": 102.2,
-            "lat": 5.7
-          }
-        ]
+        "url": "data/processed/state_2022.csv"
       },
-      "mark": {
-        "type": "text",
-        "fontSize": 12,
-        "fontWeight": 700,
-        "color": "#111827",
-        "dx": 7,
-        "dy": -4
-      },
-      "encoding": {
-        "longitude": {
-          "field": "lon"
+      "transform": [
+        {
+          "window": [
+            {
+              "op": "rank",
+              "as": "top_vulnerability_rank"
+            }
+          ],
+          "sort": [
+            {
+              "field": "vulnerability_score",
+              "order": "descending"
+            }
+          ]
         },
-        "latitude": {
-          "field": "lat"
-        },
-        "text": {
-          "field": "state_geo"
+        {
+          "filter": "datum.top_vulnerability_rank <= 5"
         }
-      }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeWidth": 2.2
+          },
+          "encoding": {
+            "x": {
+              "datum": 0
+            },
+            "x2": {
+              "field": "vulnerability_score"
+            },
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "title": null,
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              }
+            },
+            "color": {
+              "field": "vulnerability_group",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Lower vulnerability",
+                  "Moderate vulnerability",
+                  "High vulnerability"
+                ],
+                "range": [
+                  "#e4edf3",
+                  "#8da9bf",
+                  "#1f4e79"
+                ]
+              },
+              "legend": null
+            },
+            "opacity": {
+              "value": 0.5
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "filled": true,
+            "size": 95,
+            "stroke": "white",
+            "strokeWidth": 1.2
+          },
+          "encoding": {
+            "x": {
+              "field": "vulnerability_score",
+              "type": "quantitative",
+              "title": "Vulnerability score",
+              "axis": {
+                "format": ".1f",
+                "tickCount": 4
+              }
+            },
+            "y": {
+              "field": "state_geo",
+              "type": "nominal",
+              "title": null,
+              "sort": {
+                "field": "vulnerability_score",
+                "order": "descending"
+              },
+              "axis": {
+                "labelFontWeight": 600,
+                "labelLimit": 120
+              }
+            },
+            "color": {
+              "field": "vulnerability_group",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Lower vulnerability",
+                  "Moderate vulnerability",
+                  "High vulnerability"
+                ],
+                "range": [
+                  "#e4edf3",
+                  "#8da9bf",
+                  "#1f4e79"
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "top_vulnerability_rank",
+                "type": "quantitative",
+                "title": "Rank"
+              },
+              {
+                "field": "state_geo",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "vulnerability_group",
+                "type": "nominal",
+                "title": "Vulnerability group"
+              },
+              {
+                "field": "vulnerability_score",
+                "type": "quantitative",
+                "title": "Vulnerability score",
+                "format": ".2f"
+              },
+              {
+                "field": "income_median",
+                "type": "quantitative",
+                "title": "Median income (RM)",
+                "format": ",.0f"
+              },
+              {
+                "field": "poverty_absolute",
+                "type": "quantitative",
+                "title": "Absolute poverty (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
+  "spacing": 28,
   "config": {
     "font": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     "background": "transparent",
