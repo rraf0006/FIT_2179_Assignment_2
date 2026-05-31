@@ -165,6 +165,34 @@ h1 {
   max-width: 100%;
 }
 
+.chart-title-block {
+  margin: 0 0 14px;
+  padding: 0;
+}
+
+.chart-title-block-spaced {
+  margin-top: 34px;
+}
+
+.chart-title-block h3 {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 1.22rem;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.chart-title-block p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.national-card .vega-embed {
+  margin: 0;
+}
+
 .footer {
   margin-top: 34px;
   padding: 18px 0 0;

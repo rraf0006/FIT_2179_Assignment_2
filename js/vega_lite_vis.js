@@ -1,5 +1,6 @@
 const charts = [
-  ["#national_context", "js/national_context.vg.json"],
+  ["#national_income_context", "js/national_income_context.vg.json"],
+  ["#national_poverty_context", "js/national_poverty_context.vg.json"],
   ["#map_income_2022", "js/map_income_2022.vg.json"],
   ["#map_poverty_2022", "js/map_poverty_2022.vg.json"],
   ["#map_bivariate_2022", "js/map_bivariate_2022.vg.json"],

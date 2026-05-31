@@ -218,98 +218,87 @@ MAP_LOOKUP_TRANSFORM = [
 ]
 
 # -------------------- Chart 1 --------------------
-write("national_context.vg.json", {
+write("national_income_context.vg.json", {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "autosize": {"type": "fit-x", "contains": "padding", "resize": True},
     "data": {"url": NATIONAL},
-    "vconcat": [
+    "width": "container",
+    "height": 260,
+    "layer": [
         {
-            "width": "container",
-            "height": 260,
-            "title": {
-                "text": "National income rose over the long term",
-                "subtitle": "The national trend sets the context before comparing states from 2007 onward."
-            },
-            "layer": [
-                {
-                    "mark": {"type": "line", "strokeWidth": 3, "color": PRIMARY},
-                    "encoding": {
-                        "x": {"field": "year", "type": "quantitative", "axis": {"title": None, "format": "d", "tickMinStep": 1}},
-                        "y": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "scale": {"zero": True}},
-                        "tooltip": [
-                            {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
-                            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
-                            {"field": "income_mean", "type": "quantitative", "title": "Mean income (RM)", "format": ","}
-                        ]
-                    }
-                },
-                {
-                    "mark": {"type": "point", "filled": True, "size": 45, "color": PRIMARY},
-                    "encoding": {
-                        "x": {"field": "year", "type": "quantitative"},
-                        "y": {"field": "income_median", "type": "quantitative"},
-                        "tooltip": [
-                            {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
-                            {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","}
-                        ]
-                    }
-                },
-                {
-                    "mark": {"type": "rule", "color": MUTED, "strokeDash": [5, 5], "strokeWidth": 1.2},
-                    "encoding": {"x": {"datum": 2007}}
-                },
-                {
-                    "mark": {"type": "text", "align": "left", "baseline": "top", "dx": 6, "dy": 6, "fontSize": 12, "color": MUTED},
-                    "encoding": {
-                        "x": {"datum": 2007},
-                        "y": {"datum": 6500},
-                        "text": {"value": "State comparison begins in 2007"}
-                    }
-                }
-            ]
+            "mark": {"type": "line", "strokeWidth": 3, "color": PRIMARY},
+            "encoding": {
+                "x": {"field": "year", "type": "quantitative", "axis": {"title": None, "format": "d", "tickMinStep": 1}},
+                "y": {"field": "income_median", "type": "quantitative", "title": "Median income (RM/month)", "scale": {"zero": True}},
+                "tooltip": [
+                    {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","},
+                    {"field": "income_mean", "type": "quantitative", "title": "Mean income (RM)", "format": ","}
+                ]
+            }
         },
         {
-            "width": "container",
-            "height": 220,
-            "title": {
-                "text": "Absolute poverty fell sharply nationwide",
-                "subtitle": "The national decline is clear, but state-level outcomes remain uneven.",
-                "anchor": "start",
-                "align": "left",
-                "dx": -22
-            },
-            "layer": [
-                {
-                    "mark": {"type": "line", "strokeWidth": 3, "color": POVERTY},
-                    "encoding": {
-                        "x": {"field": "year", "type": "quantitative", "axis": {"title": "Year", "format": "d", "tickMinStep": 1}},
-                        "y": {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "scale": {"zero": True}},
-                        "tooltip": [
-                            {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
-                            {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
-                            {"field": "poverty_hardcore", "type": "quantitative", "title": "Hardcore poverty (%)", "format": ".1f"}
-                        ]
-                    }
-                },
-                {
-                    "mark": {"type": "point", "filled": True, "size": 45, "color": POVERTY},
-                    "encoding": {
-                        "x": {"field": "year", "type": "quantitative"},
-                        "y": {"field": "poverty_absolute", "type": "quantitative"},
-                        "tooltip": [
-                            {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
-                            {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}
-                        ]
-                    }
-                },
-                {
-                    "mark": {"type": "rule", "color": MUTED, "strokeDash": [5, 5], "strokeWidth": 1.2},
-                    "encoding": {"x": {"datum": 2007}}
-                }
-            ]
+            "mark": {"type": "point", "filled": True, "size": 45, "color": PRIMARY},
+            "encoding": {
+                "x": {"field": "year", "type": "quantitative"},
+                "y": {"field": "income_median", "type": "quantitative"},
+                "tooltip": [
+                    {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
+                    {"field": "income_median", "type": "quantitative", "title": "Median income (RM)", "format": ","}
+                ]
+            }
+        },
+        {
+            "mark": {"type": "rule", "color": MUTED, "strokeDash": [5, 5], "strokeWidth": 1.2},
+            "encoding": {"x": {"datum": 2007}}
+        },
+        {
+            "mark": {"type": "text", "align": "left", "baseline": "top", "dx": 6, "dy": 6, "fontSize": 12, "color": MUTED},
+            "encoding": {
+                "x": {"datum": 2007},
+                "y": {"datum": 6500},
+                "text": {"value": "State comparison begins in 2007"}
+            }
         }
     ],
-    "resolve": {"scale": {"y": "independent"}},
+    "config": base_config()
+})
+
+write("national_poverty_context.vg.json", {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "autosize": {"type": "fit-x", "contains": "padding", "resize": True},
+    "data": {"url": NATIONAL},
+    "width": "container",
+    "height": 260,
+    "layer": [
+        {
+            "mark": {"type": "line", "strokeWidth": 3, "color": POVERTY},
+            "encoding": {
+                "x": {"field": "year", "type": "quantitative", "axis": {"title": "Year", "format": "d", "tickMinStep": 1}},
+                "y": {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "scale": {"zero": True}},
+                "tooltip": [
+                    {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
+                    {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"},
+                    {"field": "poverty_hardcore", "type": "quantitative", "title": "Hardcore poverty (%)", "format": ".1f"}
+                ]
+            }
+        },
+        {
+            "mark": {"type": "point", "filled": True, "size": 45, "color": POVERTY},
+            "encoding": {
+                "x": {"field": "year", "type": "quantitative"},
+                "y": {"field": "poverty_absolute", "type": "quantitative"},
+                "tooltip": [
+                    {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
+                    {"field": "poverty_absolute", "type": "quantitative", "title": "Absolute poverty (%)", "format": ".1f"}
+                ]
+            }
+        },
+        {
+            "mark": {"type": "rule", "color": MUTED, "strokeDash": [5, 5], "strokeWidth": 1.2},
+            "encoding": {"x": {"datum": 2007}}
+        }
+    ],
     "config": base_config()
 })
 

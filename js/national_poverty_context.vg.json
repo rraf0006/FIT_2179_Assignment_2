@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/processed/national_context.csv"
+  },
+  "width": "container",
+  "height": 260,
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "color": "#7a3e64"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "axis": {
+            "title": "Year",
+            "format": "d",
+            "tickMinStep": 1
+          }
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative",
+          "title": "Absolute poverty (%)",
+          "scale": {
+            "zero": true
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "poverty_absolute",
+            "type": "quantitative",
+            "title": "Absolute poverty (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "poverty_hardcore",
+            "type": "quantitative",
+            "title": "Hardcore poverty (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 45,
+        "color": "#7a3e64"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "poverty_absolute",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "poverty_absolute",
+            "type": "quantitative",
+            "title": "Absolute poverty (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#5b6472",
+        "strokeDash": [
+          5,
+          5
+        ],
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "x": {
+          "datum": 2007
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "lineHeight": 23,
+      "subtitleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#5b6472",
+      "subtitleLineHeight": 19,
+      "subtitlePadding": 8,
+      "offset": 20,
+      "anchor": "start",
+      "color": "#111827"
+    },
+    "axis": {
+      "labelFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#111827",
+      "titleColor": "#111827",
+      "gridColor": "#eef2f6",
+      "domainColor": "#e5e7eb",
+      "tickColor": "#e5e7eb"
+    },
+    "legend": {
+      "labelFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#111827",
+      "titleColor": "#111827",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}

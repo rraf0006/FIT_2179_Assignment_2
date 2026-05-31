@@ -1,0 +1,172 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "data": {
+    "url": "data/processed/national_context.csv"
+  },
+  "width": "container",
+  "height": 260,
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "color": "#1f4e79"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "axis": {
+            "title": null,
+            "format": "d",
+            "tickMinStep": 1
+          }
+        },
+        "y": {
+          "field": "income_median",
+          "type": "quantitative",
+          "title": "Median income (RM/month)",
+          "scale": {
+            "zero": true
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ","
+          },
+          {
+            "field": "income_mean",
+            "type": "quantitative",
+            "title": "Mean income (RM)",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 45,
+        "color": "#1f4e79"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "income_median",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "income_median",
+            "type": "quantitative",
+            "title": "Median income (RM)",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#5b6472",
+        "strokeDash": [
+          5,
+          5
+        ],
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "x": {
+          "datum": 2007
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 6,
+        "dy": 6,
+        "fontSize": 12,
+        "color": "#5b6472"
+      },
+      "encoding": {
+        "x": {
+          "datum": 2007
+        },
+        "y": {
+          "datum": 6500
+        },
+        "text": {
+          "value": "State comparison begins in 2007"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "background": "transparent",
+    "title": {
+      "font": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "lineHeight": 23,
+      "subtitleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#5b6472",
+      "subtitleLineHeight": 19,
+      "subtitlePadding": 8,
+      "offset": 20,
+      "anchor": "start",
+      "color": "#111827"
+    },
+    "axis": {
+      "labelFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#111827",
+      "titleColor": "#111827",
+      "gridColor": "#eef2f6",
+      "domainColor": "#e5e7eb",
+      "tickColor": "#e5e7eb"
+    },
+    "legend": {
+      "labelFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "titleFont": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#111827",
+      "titleColor": "#111827",
+      "orient": "right"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}
